@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Light theme colors -->
+    <color name="primary">#FF23C6EB</color>
+    <color name="primary_variant">#FF00677E</color>
+    <color name="on_primary">#FF003542</color>
+    <color name="secondary">#FFEB4823</color>
+    <color name="secondary_variant">#FFC43416</color>
+    <color name="on_secondary">#FFFFFFFF</color>
+    <color name="background">#FFFAFCFD</color>
+    <color name="on_background">#FF03DAC5</color>
+
+    <!-- Dark theme colors -->
+    <color name="primary_dark">#FF86E4F9</color>
+    <color name="primary_variant_dark">#FF00677E</color>
+    <color name="on_primary_dark">#FF003542</color>
+    <color name="secondary_dark">#FFFFAB95</color>
+    <color name="secondary_variant_dark">#FFFFAB95</color>
+    <color name="on_secondary_dark">#FFC43416</color>
+    <color name="background_dark">#FF191C1D</color>
+    <color name="on_background_dark">#FFE1E3E4</color>
+</resources>
