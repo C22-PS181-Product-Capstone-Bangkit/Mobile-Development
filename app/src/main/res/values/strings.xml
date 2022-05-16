@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Cemil</string>
+    <string name="find_nearby_restaurants_from_your_location">Find nearby restaurants from your location</string>
+    <string name="next">Next</string>
+    <string name="get_your_best_food_recommendations">Get your best food recommendations</string>
+    <string name="get_started">Get Started</string>
+    <string name="obtain_latest_reviews_from_the_customers">Obtain latest reviews from the customers</string>
 </resources>
