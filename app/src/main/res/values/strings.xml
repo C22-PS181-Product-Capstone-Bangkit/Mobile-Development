@@ -16,4 +16,6 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="name">Name</string>
     <string name="forgot_password">Forgot password?</string>
+    <string name="congratulations_your_account_is_created_successfully">Congratulations!\nYour account is created successfully</string>
+    <string name="continue_registersuccess">Continue</string>
 </resources>
