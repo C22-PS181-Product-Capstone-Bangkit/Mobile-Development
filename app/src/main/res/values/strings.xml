@@ -8,4 +8,15 @@
     <string name="illustration">Illustration</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="create_account">Create Account</string>
+    <string name="register">Register</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="name">Name</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="congratulations_your_account_is_created_successfully">Congratulations!\nYour account is created successfully</string>
+    <string name="continue_registersuccess">Continue</string>
 </resources>
