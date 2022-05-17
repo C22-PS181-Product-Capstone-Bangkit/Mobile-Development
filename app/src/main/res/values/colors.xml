@@ -9,6 +9,7 @@
     <color name="on_secondary">#FFFFFFFF</color>
     <color name="background">#FFFAFCFD</color>
     <color name="on_background">#FF03DAC5</color>
+    <color name="edittext">#FFF4F4F4</color>
 
     <!-- Dark theme colors -->
     <color name="primary_dark">#FF86E4F9</color>
@@ -19,4 +20,5 @@
     <color name="on_secondary_dark">#FFC43416</color>
     <color name="background_dark">#FF191C1D</color>
     <color name="on_background_dark">#FFE1E3E4</color>
+    <color name="edittext_dark">#FFF4F4F4</color>
 </resources>

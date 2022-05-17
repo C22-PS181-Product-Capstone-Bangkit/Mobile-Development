@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#23C6EB"
+    tools:context=".LoginFragment">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvLogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="189dp"
+        app:cardBackgroundColor="#FAFCFD"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="1dp" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/etLoginEmail"
+                style="@style/Widget.AppCompat.AutoCompleteTextView"
+                android:layout_width="340dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="71dp"
+                android:background="@drawable/custom_edittext"
+                android:ems="10"
+                android:fontFamily="@font/nunito_semibold"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:paddingStart="26dp"
+                android:paddingEnd="26dp"
+                android:singleLine="true"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/etLoginPassword"
+                style="@style/Widget.AppCompat.AutoCompleteTextView"
+                android:layout_width="340dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="51dp"
+                android:background="@drawable/custom_edittext"
+                android:ems="10"
+                android:fontFamily="@font/nunito_semibold"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:paddingStart="26dp"
+                android:paddingEnd="26dp"
+                android:singleLine="true"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.492"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etLoginEmail" />
+
+            <Button
+                android:id="@+id/btnLogin"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="350sp"
+                android:layout_height="48sp"
+                android:layout_marginTop="66dp"
+                android:fontFamily="@font/nunito_extrabold"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/login"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:cornerRadius="32sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etLoginPassword" />
+
+            <Button
+                android:id="@+id/btnLoginGoogle"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="350sp"
+                android:layout_height="48sp"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="#BF2300"
+                android:drawableLeft="@drawable/ic_googlelogin"
+                android:fontFamily="@font/nunito_extrabold"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="55dp"
+                android:text="@string/continue_with_google"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:cornerRadius="32sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.491"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
+            <Button
+                android:id="@+id/btnLoginRegister"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="350sp"
+                android:layout_height="48sp"
+                android:layout_marginBottom="35dp"
+                android:backgroundTint="@color/secondary"
+                android:fontFamily="@font/nunito_extrabold"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/create_account"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:cornerRadius="32sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.508"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <View
+                android:layout_width="318dp"
+                android:layout_height="0.6dp"
+                android:background="#848484"
+                app:layout_constraintBottom_toTopOf="@+id/btnLoginRegister"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnLoginGoogle" />
+
+            <TextView
+                android:id="@+id/tvForgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:fontFamily="@font/nunito_semibold"
+                android:letterSpacing="0"
+                android:text="@string/forgot_password"
+                android:textColor="@color/on_primary"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etLoginPassword" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tvLogin"
+        android:background="edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="78dp"
+        android:layout_marginBottom="50dp"
+        android:fontFamily="@font/nunito_extrabold"
+        android:text="@string/login"
+        android:textColor="#FFFFFF"
+        android:textSize="48sp"
+        app:layout_constraintBottom_toTopOf="@+id/cvLogin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
