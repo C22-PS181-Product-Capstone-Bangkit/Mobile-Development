@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_selected="true">
+        <shape
+            android:innerRadius="0dp"
+            android:shape="ring"
+            android:thickness="6dp"
+            android:useLevel="false">
+            <solid android:color="?colorPrimary"/>
+        </shape>
+    </item>
+
+    <item android:state_selected="false">
+        <shape
+            android:innerRadius="0dp"
+            android:shape="ring"
+            android:thickness="6dp"
+            android:useLevel="false">
+            <solid android:color="?android:strokeColor"/>
+        </shape>
+    </item>
+
+</selector>

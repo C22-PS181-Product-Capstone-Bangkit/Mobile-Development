@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Cemil"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".LandingActivity"
             android:theme="@style/Theme.Cemil.SplashScreen"
             android:exported="true">
             <intent-filter>
