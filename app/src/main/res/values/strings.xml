@@ -19,4 +19,7 @@
     <string name="forgot_password">Forgot password?</string>
     <string name="congratulations_your_account_is_created_successfully">Congratulations!\nYour account is created successfully</string>
     <string name="continue_registersuccess">Continue</string>
+    <string name="forgot_your_password">Forgot your Password?</string>
+    <string name="enter_your_email_below_so_we_can">Enter your email below so we can send further instructions to reset your password.</string>
+    <string name="enter_your_email_here">Enter your email here</string>
 </resources>
