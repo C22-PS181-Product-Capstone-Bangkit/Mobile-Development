@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.bangkit.cemil.databinding.ActivityLandingBinding
+import com.bangkit.cemil.home.MainActivity
 import com.google.android.material.tabs.TabLayoutMediator
 
 class LandingActivity : AppCompatActivity() {

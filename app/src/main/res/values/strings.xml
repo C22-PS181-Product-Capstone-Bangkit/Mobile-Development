@@ -26,4 +26,5 @@
     <string name="search">Search</string>
     <string name="profile">Profile</string>
     <string name="history">History</string>
+    <string name="foods_restaurants_users_reviews_etc">Foods, restaurants, users, reviews, etc</string>
 </resources>
