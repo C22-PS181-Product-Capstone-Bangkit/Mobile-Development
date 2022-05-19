@@ -49,4 +49,9 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="Theme.Cemil.BottomNavigationLabel">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/nunito_medium</item>
+    </style>
+
 </resources>
