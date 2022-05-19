@@ -22,4 +22,8 @@
     <string name="forgot_your_password">Forgot your Password?</string>
     <string name="enter_your_email_below_so_we_can">Enter your email below so we can send further instructions to reset your password.</string>
     <string name="enter_your_email_here">Enter your email here</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="profile">Profile</string>
+    <string name="history">History</string>
 </resources>
