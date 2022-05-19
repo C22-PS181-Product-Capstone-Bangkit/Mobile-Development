@@ -40,4 +40,13 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <style name="Theme.Cemil.EditText">
+        <item name="android:fontFamily">@font/nunito_semibold</item>
+        <item name="android:background">@drawable/custom_edittext</item>
+        <item name="android:paddingStart">26dp</item>
+        <item name="android:paddingEnd">26dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>
