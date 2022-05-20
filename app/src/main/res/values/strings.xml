@@ -33,4 +33,7 @@
     <string name="frequently_visited">Frequently Visited</string>
     <string name="popular_restos">Popular Restos</string>
     <string name="home_banner">Home Banner</string>
+    <string name="restaurant_name">Restaurant Name</string>
+    <string name="x_km_x_ratings">x km x ratings</string>
+    <string name="nearby_restos">Nearby Restos</string>
 </resources>
