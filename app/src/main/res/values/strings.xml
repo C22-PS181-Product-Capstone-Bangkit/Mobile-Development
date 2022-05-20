@@ -27,4 +27,10 @@
     <string name="profile">Profile</string>
     <string name="history">History</string>
     <string name="foods_restaurants_users_reviews_etc">Foods, restaurants, users, reviews, etc</string>
+    <string name="current_location">Current Location</string>
+    <string name="your_location">Your Location</string>
+    <string name="find_me_food">Find Me Food!</string>
+    <string name="frequently_visited">Frequently Visited</string>
+    <string name="popular_restos">Popular Restos</string>
+    <string name="home_banner">Home Banner</string>
 </resources>
