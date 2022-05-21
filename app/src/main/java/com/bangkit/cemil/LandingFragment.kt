@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 
 class LandingFragment : Fragment() {
 
@@ -25,6 +27,10 @@ class LandingFragment : Fragment() {
             2 -> inflater.inflate(R.layout.fragment_third_landing, container, false)
             else -> inflater.inflate(R.layout.fragment_first_landing, container, false)
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
     companion object {

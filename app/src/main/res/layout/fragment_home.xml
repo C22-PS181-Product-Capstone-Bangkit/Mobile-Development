@@ -1,14 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/home" />
+        android:layout_height="wrap_content"
+        tools:context=".home.HomeFragment">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/imgHomeBanner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/homebanner"
+            android:contentDescription="@string/home_banner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/homebanner" />
+
+        <TextView
+            android:id="@+id/tvCurrentLocationLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/nunito_semibold"
+            android:text="@string/current_location"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCurrentLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_extrabold"
+            android:text="@string/your_location"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/tvCurrentLocationLabel"
+            app:layout_constraintTop_toBottomOf="@+id/tvCurrentLocationLabel" />
+
+        <Button
+            android:id="@+id/btnFindMeFood"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginStart="68dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="68dp"
+            android:elevation="2dp"
+            android:fontFamily="@font/nunito_extrabold"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:stateListAnimator="@null"
+            android:text="@string/find_me_food"
+            android:textSize="24sp"
+            android:translationZ="2dp"
+            app:cornerRadius="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgHomeBanner" />
+
+        <TextView
+            android:id="@+id/tvFrequentlyVisited"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/frequently_visited"
+            android:textColor="@color/on_background"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnFindMeFood" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFrequentlyVisited"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="6dp"
+            android:clipChildren="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvFrequentlyVisited"
+            tools:itemCount="5"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_row_home_resto"
+            tools:orientation="horizontal" />
+
+        <TextView
+            android:id="@+id/tvPopularRestos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="152dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/popular_restos"
+            android:textColor="@color/on_background"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="@+id/tvFrequentlyVisited"
+            app:layout_constraintTop_toBottomOf="@+id/tvFrequentlyVisited" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPopularRestos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="6dp"
+            android:clipChildren="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPopularRestos"
+            tools:itemCount="5"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_row_home_resto"
+            tools:orientation="horizontal" />
+
+        <TextView
+            android:id="@+id/tvNearbyRestos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="152dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/nearby_restos"
+            android:textColor="@color/on_background"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="@+id/tvPopularRestos"
+            app:layout_constraintTop_toBottomOf="@+id/tvPopularRestos" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvNearbyRestos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="6dp"
+            android:clipChildren="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvNearbyRestos"
+            tools:itemCount="5"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_row_home_resto"
+            tools:orientation="horizontal" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
