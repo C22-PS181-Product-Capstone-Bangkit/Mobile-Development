@@ -124,7 +124,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/btnLoginGoogle" />
 
             <View
-                android:id="@+id/view3"
+                android:id="@+id/divider"
                 android:layout_width="318dp"
                 android:layout_height="0.6dp"
                 android:background="#848484"

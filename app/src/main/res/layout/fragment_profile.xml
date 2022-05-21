@@ -1,19 +1,415 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".home.ProfileFragment">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/profile"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:context=".home.ProfileFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tvProfileTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="33dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/nunito_extrabold"
+            android:text="@string/profile"
+            android:textColor="@color/on_background"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvProfileAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="105dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/account"
+            android:textColor="@color/on_background"
+            android:textSize="22sp"
+            app:layout_constraintStart_toStartOf="@+id/tvProfileTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvProfileTitle" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="11dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProfileTitle"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:srcCompat="@drawable/ic_profile_filled"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tvProfileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito_extrabold"
+            android:text="@string/name"
+            android:textColor="@color/on_background"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@+id/imgProfile"
+            app:layout_constraintTop_toTopOf="@+id/imgProfile" />
+
+        <TextView
+            android:id="@+id/tvProfileEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_medium"
+            android:text="@string/email"
+            android:textColor="@color/on_background"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/tvProfileName"
+            app:layout_constraintTop_toBottomOf="@+id/tvProfileName" />
+
+        <ImageView
+            android:id="@+id/imgEditProfile"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginEnd="36dp"
+            android:src="@android:drawable/ic_menu_edit"
+            android:contentDescription="@string/edit_profile"
+            app:layout_constraintBottom_toTopOf="@+id/tvProfileEmail"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvProfileName"
+            app:tint="#00BCD4" />
+
+        <RelativeLayout
+            android:id="@+id/menuHistory"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:layout_marginTop="20dp"
+            android:paddingStart="36dp"
+            android:paddingEnd="26dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:layout_constraintTop_toBottomOf="@+id/tvProfileAccount">
+
+            <ImageView
+                android:id="@+id/imgProfileHistory"
+                android:layout_width="22dp"
+                android:layout_height="24dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/history"
+                app:srcCompat="@drawable/ic_history_filled"
+                app:tint="@color/primary" />
+
+            <TextView
+                android:id="@+id/tvProfileHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="12dp"
+                android:layout_toEndOf="@id/imgProfileHistory"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/history"
+                android:textColor="@color/on_background"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="0.6dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:background="@color/primary" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/menuReviews"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:layout_marginTop="30dp"
+            android:paddingStart="36dp"
+            android:paddingEnd="26dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/menuHistory">
+
+            <ImageView
+                android:id="@+id/imgProfileReviews"
+                android:layout_width="22dp"
+                android:layout_height="24dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/my_reviews"
+                app:srcCompat="@drawable/ic_reviews_filled"
+                app:tint="@color/primary" />
+
+            <TextView
+                android:id="@+id/tvProfileReviews"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="12dp"
+                android:layout_toEndOf="@id/imgProfileReviews"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/my_reviews"
+                android:textColor="@color/on_background"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.6dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:background="@color/primary" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/menuRecommendations"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:layout_marginTop="30dp"
+            android:paddingStart="36dp"
+            android:paddingEnd="26dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/menuReviews">
+
+            <ImageView
+                android:id="@+id/imgProfileRecommendations"
+                android:layout_width="22dp"
+                android:layout_height="24dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/recommendations"
+                app:srcCompat="@drawable/ic_recommendations_filled"
+                app:tint="@color/primary" />
+
+            <TextView
+                android:id="@+id/tvProfileRecommendations"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="12dp"
+                android:layout_toEndOf="@id/imgProfileRecommendations"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/recommendations"
+                android:textColor="@color/on_background"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.6dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:background="@color/primary" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/menuAppearances"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:layout_marginTop="30dp"
+            android:paddingStart="36dp"
+            android:paddingEnd="26dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/menuRecommendations">
+
+            <ImageView
+                android:id="@+id/imgProfileAppearances"
+                android:layout_width="22dp"
+                android:layout_height="24dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/profile"
+                app:srcCompat="@drawable/ic_appearances_filled"
+                app:tint="@color/primary" />
+
+            <TextView
+                android:id="@+id/tvProfileAppearances"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="12dp"
+                android:layout_toEndOf="@id/imgProfileAppearances"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/appearances"
+                android:textColor="@color/on_background"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.6dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:background="@color/primary" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/menuLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:layout_marginTop="30dp"
+            android:paddingStart="36dp"
+            android:paddingEnd="26dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/menuAppearances">
+
+            <ImageView
+                android:id="@+id/imgProfileLanguage"
+                android:layout_width="22dp"
+                android:layout_height="24dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/change_language"
+                app:srcCompat="@drawable/ic_language_filled"
+                app:tint="@color/primary" />
+
+            <TextView
+                android:id="@+id/tvProfileLanguage"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="12dp"
+                android:layout_toEndOf="@id/imgProfileLanguage"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/change_language"
+                android:textColor="@color/on_background"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.6dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:background="@color/primary" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/menuAbout"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:layout_marginTop="30dp"
+            android:paddingStart="36dp"
+            android:paddingEnd="26dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/menuLanguage">
+
+            <ImageView
+                android:id="@+id/imgProfileAbout"
+                android:layout_width="22dp"
+                android:layout_height="24dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/about_cemil"
+                app:srcCompat="@drawable/ic_about_filled"
+                app:tint="@color/primary" />
+
+            <TextView
+                android:id="@+id/tvProfileAbout"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="12dp"
+                android:layout_toEndOf="@id/imgProfileAbout"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/about_cemil"
+                android:textColor="@color/on_background"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.6dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:background="@color/primary" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/menuChangePass"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:layout_marginTop="30dp"
+            android:paddingStart="36dp"
+            android:paddingEnd="26dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/menuAbout">
+
+            <ImageView
+                android:id="@+id/imgProfileChangePass"
+                android:layout_width="22dp"
+                android:layout_height="24dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/change_password"
+                app:srcCompat="@drawable/ic_changepass_filled"
+                app:tint="@color/primary" />
+
+            <TextView
+                android:id="@+id/tvProfileChangePass"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="12dp"
+                android:layout_toEndOf="@id/imgProfileChangePass"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/change_password"
+                android:textColor="@color/on_background"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.6dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:background="@color/primary" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/menuLogout"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:layout_marginTop="30dp"
+            android:paddingStart="36dp"
+            android:paddingEnd="26dp"
+            android:layout_marginBottom="30dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/menuChangePass">
+
+            <ImageView
+                android:id="@+id/imgProfileLogout"
+                android:layout_width="22dp"
+                android:layout_height="24dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/logout"
+                app:srcCompat="@drawable/ic_logout_filled"
+                app:tint="@color/primary" />
+
+            <TextView
+                android:id="@+id/tvProfileLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginStart="12dp"
+                android:layout_toEndOf="@id/imgProfileLogout"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/logout"
+                android:textColor="@color/on_background"
+                android:textSize="18sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.6dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:background="@color/primary" />
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
