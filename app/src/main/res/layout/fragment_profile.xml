@@ -86,11 +86,11 @@
         <RelativeLayout
             android:id="@+id/menuHistory"
             android:layout_width="match_parent"
-            android:layout_height="33dp"
+            android:layout_height="36dp"
             android:layout_marginTop="20dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:paddingStart="36dp"
             android:paddingEnd="26dp"
-            android:foreground="?android:attr/selectableItemBackground"
             app:layout_constraintTop_toBottomOf="@+id/tvProfileAccount">
 
             <ImageView
@@ -119,18 +119,18 @@
                 android:layout_height="0.6dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="35dp"
                 android:background="@color/primary" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/menuReviews"
             android:layout_width="match_parent"
-            android:layout_height="33dp"
-            android:layout_marginTop="30dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="28dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:paddingStart="36dp"
             android:paddingEnd="26dp"
-            android:foreground="?android:attr/selectableItemBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/menuHistory">
@@ -160,18 +160,18 @@
                 android:layout_height="0.6dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="35dp"
                 android:background="@color/primary" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/menuRecommendations"
             android:layout_width="match_parent"
-            android:layout_height="33dp"
-            android:layout_marginTop="30dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="28dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:paddingStart="36dp"
             android:paddingEnd="26dp"
-            android:foreground="?android:attr/selectableItemBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/menuReviews">
@@ -201,18 +201,18 @@
                 android:layout_height="0.6dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="35dp"
                 android:background="@color/primary" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/menuAppearances"
             android:layout_width="match_parent"
-            android:layout_height="33dp"
-            android:layout_marginTop="30dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="28dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:paddingStart="36dp"
             android:paddingEnd="26dp"
-            android:foreground="?android:attr/selectableItemBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/menuRecommendations">
@@ -242,18 +242,18 @@
                 android:layout_height="0.6dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="35dp"
                 android:background="@color/primary" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/menuLanguage"
             android:layout_width="match_parent"
-            android:layout_height="33dp"
+            android:layout_height="36dp"
             android:layout_marginTop="30dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:paddingStart="36dp"
             android:paddingEnd="26dp"
-            android:foreground="?android:attr/selectableItemBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/menuAppearances">
@@ -283,18 +283,18 @@
                 android:layout_height="0.6dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="35dp"
                 android:background="@color/primary" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/menuAbout"
             android:layout_width="match_parent"
-            android:layout_height="33dp"
-            android:layout_marginTop="30dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="28dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:paddingStart="36dp"
             android:paddingEnd="26dp"
-            android:foreground="?android:attr/selectableItemBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/menuLanguage">
@@ -324,18 +324,18 @@
                 android:layout_height="0.6dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="35dp"
                 android:background="@color/primary" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/menuChangePass"
             android:layout_width="match_parent"
-            android:layout_height="33dp"
-            android:layout_marginTop="30dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="28dp"
+            android:foreground="?android:attr/selectableItemBackground"
             android:paddingStart="36dp"
             android:paddingEnd="26dp"
-            android:foreground="?android:attr/selectableItemBackground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/menuAbout">
@@ -365,19 +365,19 @@
                 android:layout_height="0.6dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="35dp"
                 android:background="@color/primary" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/menuLogout"
             android:layout_width="match_parent"
-            android:layout_height="33dp"
-            android:layout_marginTop="30dp"
-            android:paddingStart="36dp"
-            android:paddingEnd="26dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="28dp"
             android:layout_marginBottom="30dp"
             android:foreground="?android:attr/selectableItemBackground"
+            android:paddingStart="36dp"
+            android:paddingEnd="26dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -408,7 +408,7 @@
                 android:layout_height="0.6dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="35dp"
                 android:background="@color/primary" />
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

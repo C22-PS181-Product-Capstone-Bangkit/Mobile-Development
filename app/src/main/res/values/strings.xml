@@ -45,4 +45,13 @@
     <string name="logout">Logout</string>
     <string name="change_password">Change Password</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="enter_your_new_name_here">Enter your new name here</string>
+    <string name="enter_your_phone_number_here">Enter your phone number here</string>
+    <string name="save">Save</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="enter_your_current_password_here">Enter your current password here</string>
+    <string name="enter_the_new_password_you_want_here">Enter the new password you want here</string>
+    <string name="confirm_your_new_password_here">Confirm your new password here</string>
+    <string name="clear_fields">Clear Fields</string>
 </resources>
