@@ -1,10 +1,11 @@
-package com.bangkit.cemil
+package com.bangkit.cemil.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.bangkit.cemil.R
 import com.bangkit.cemil.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

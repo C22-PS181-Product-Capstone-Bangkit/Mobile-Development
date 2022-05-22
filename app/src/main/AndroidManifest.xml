@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Cemil"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".home.MainActivity"
             android:exported="false" />
         <activity
             android:name=".LandingActivity"
