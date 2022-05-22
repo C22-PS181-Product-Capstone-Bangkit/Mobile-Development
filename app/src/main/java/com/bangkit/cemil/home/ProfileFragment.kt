@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.bangkit.cemil.R
@@ -26,6 +27,9 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val bottomNavigation : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        binding.imgEditProfile.setOnClickListener {
+            view.findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
+        }
         binding.menuHistory.setOnClickListener {
             NavigationUI.onNavDestinationSelected(bottomNavigation.menu.findItem(R.id.historyFragment),it.findNavController())
         }
@@ -45,7 +49,7 @@ class ProfileFragment : Fragment() {
 
         }
         binding.menuChangePass.setOnClickListener {
-
+            view.findNavController().navigate(R.id.action_profileFragment_to_changePasswordFragment)
         }
         binding.menuLogout.setOnClickListener {
 

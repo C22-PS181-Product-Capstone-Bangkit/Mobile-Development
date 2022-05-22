@@ -6,7 +6,7 @@
             <stroke
                 android:width="0.5dp"
                 android:color="@color/primary" />
-            <solid android:color="@color/edittext" />
+            <solid android:color="@color/background" />
             <corners android:radius="32dp" />
         </shape>
     </item>
@@ -16,7 +16,7 @@
             <stroke
                 android:width="0.5dp"
                 android:color="@color/primary_variant" />
-            <solid android:color="@color/edittext" />
+            <solid android:color="@color/background" />
             <corners android:radius="32dp" />
         </shape>
     </item>
