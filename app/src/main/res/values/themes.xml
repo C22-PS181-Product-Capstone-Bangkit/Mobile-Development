@@ -54,4 +54,9 @@
         <item name="fontFamily">@font/nunito_medium</item>
     </style>
 
+    <style name="circleImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>

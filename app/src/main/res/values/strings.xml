@@ -36,4 +36,13 @@
     <string name="restaurant_name">Restaurant Name</string>
     <string name="x_km_x_ratings">x km x ratings</string>
     <string name="nearby_restos">Nearby Restos</string>
+    <string name="account">Account</string>
+    <string name="my_reviews">My Reviews</string>
+    <string name="recommendations">Recommendations</string>
+    <string name="appearances">Appearances</string>
+    <string name="change_language">Change Language</string>
+    <string name="about_cemil">About Cemil</string>
+    <string name="logout">Logout</string>
+    <string name="change_password">Change Password</string>
+    <string name="edit_profile">Edit Profile</string>
 </resources>
