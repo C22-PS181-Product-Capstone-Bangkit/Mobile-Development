@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.bangkit.cemil.R
 import com.bangkit.cemil.databinding.FragmentProfileBinding
+import com.bangkit.cemil.profile.LogoutDialogFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ProfileFragment : Fragment() {
@@ -52,7 +53,7 @@ class ProfileFragment : Fragment() {
             view.findNavController().navigate(R.id.action_profileFragment_to_changePasswordFragment)
         }
         binding.menuLogout.setOnClickListener {
-
+            LogoutDialogFragment().show(parentFragmentManager, LogoutDialogFragment.TAG)
         }
     }
 }
