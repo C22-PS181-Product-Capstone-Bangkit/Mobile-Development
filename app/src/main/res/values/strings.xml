@@ -55,4 +55,9 @@
     <string name="confirm_your_new_password_here">Confirm your new password here</string>
     <string name="clear_fields">Clear Fields</string>
     <string name="are_you_sure_to_logout">Are you sure to logout?</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="theme">Theme</string>
+    <string name="light">Light</string>
+    <string name="dark">Dark</string>
+    <string name="system_default">System Default</string>
 </resources>

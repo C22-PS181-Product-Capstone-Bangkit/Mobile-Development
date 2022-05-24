@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile.AppearanceFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/materialToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@drawable/curved_toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="16dp">
+            <TextView
+                android:id="@+id/tvFragmentAppearance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/appearances"
+                android:textColor="@color/on_background"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <TextView
+        android:id="@+id/tvDarkMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/nunito_bold"
+        android:text="@string/theme"
+        android:textColor="@color/on_background"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
+
+    <RadioGroup
+        android:id="@+id/themeRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="20dp"
+        android:checkedButton="@id/btnLight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDarkMode">
+
+        <RadioButton
+            android:id="@+id/btnLight"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="?android:selectableItemBackground"
+            android:backgroundTintMode="screen"
+            android:button="@null"
+            android:buttonTintMode="add"
+            android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+            android:theme="@style/Theme.Cemil.RadioButtonDrawable"
+            android:fontFamily="@font/nunito_medium"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/light"
+            android:textAlignment="textStart"
+            android:textColor="@color/on_background"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/btnDark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:background="?android:selectableItemBackground"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+            android:theme="@style/Theme.Cemil.RadioButtonDrawable"
+            android:fontFamily="@font/nunito_medium"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/dark"
+            android:textAlignment="textStart"
+            android:textColor="@color/on_background"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/btnSystemDefault"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:background="?android:selectableItemBackground"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorSingle"
+            android:theme="@style/Theme.Cemil.RadioButtonDrawable"
+            android:fontFamily="@font/nunito_medium"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:text="@string/system_default"
+            android:textAlignment="textStart"
+            android:textColor="@color/on_background"
+            android:textSize="16sp" />
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
