@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.findNavController
@@ -91,9 +92,6 @@ class ProfileFragment : Fragment() {
             rvSettingList.visibility = View.VISIBLE
         }
 
-        binding.menuLogout.setOnClickListener {
-            LogoutDialogFragment().show(parentFragmentManager, LogoutDialogFragment.TAG)
-
         val settingAdapter = SettingAdapter(listSetting)
         binding.rvSettingList.apply {
             setHasFixedSize(true)
@@ -118,7 +116,8 @@ class ProfileFragment : Fragment() {
                         requireView().findNavController().navigate(toChangePasswordFragment)
                     }
                     resources.getString(R.string.appearance) -> {
-                        // Navigate to Change Appearance Fragment
+                        val toAppearanceFragment = ProfileFragmentDirections.actionProfileFragmentToAppearanceFragment()
+                        requireView().findNavController().navigate(toAppearanceFragment)
                     }
                     resources.getString(R.string.language) -> {
                         // Navigate to Change Language Fragment
@@ -127,7 +126,7 @@ class ProfileFragment : Fragment() {
                         // Navigate to About Cemil Fragment
                     }
                     resources.getString(R.string.logout) -> {
-                        // Show Alert Dialog
+                        LogoutDialogFragment().show(parentFragmentManager, LogoutDialogFragment.TAG)
                     }
                 }
             }

@@ -20,6 +20,7 @@ class HistoryFragment : Fragment() {
         binding = FragmentHistoryBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity).apply{
             setSupportActionBar(binding.materialToolbar)
+            supportActionBar?.setDisplayShowTitleEnabled(false)
         }
         return binding.root
     }

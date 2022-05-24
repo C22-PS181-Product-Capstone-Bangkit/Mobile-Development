@@ -31,7 +31,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/nunito_semibold"
             android:text="@string/current_location"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/background"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_extrabold"
             android:text="@string/your_location"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/background"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="@+id/tvCurrentLocationLabel"
             app:layout_constraintTop_toBottomOf="@+id/tvCurrentLocationLabel" />
@@ -76,7 +76,7 @@
             android:layout_marginTop="24dp"
             android:fontFamily="@font/nunito_bold"
             android:text="@string/frequently_visited"
-            android:textColor="@color/on_background"
+            android:textColor="?colorOnBackground"
             android:textSize="22sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnFindMeFood" />
@@ -102,7 +102,7 @@
             android:layout_marginTop="152dp"
             android:fontFamily="@font/nunito_bold"
             android:text="@string/popular_restos"
-            android:textColor="@color/on_background"
+            android:textColor="?colorOnBackground"
             android:textSize="22sp"
             app:layout_constraintStart_toStartOf="@+id/tvFrequentlyVisited"
             app:layout_constraintTop_toBottomOf="@+id/tvFrequentlyVisited" />
@@ -128,7 +128,7 @@
             android:layout_marginTop="152dp"
             android:fontFamily="@font/nunito_bold"
             android:text="@string/nearby_restos"
-            android:textColor="@color/on_background"
+            android:textColor="?colorOnBackground"
             android:textSize="22sp"
             app:layout_constraintStart_toStartOf="@+id/tvPopularRestos"
             app:layout_constraintTop_toBottomOf="@+id/tvPopularRestos" />

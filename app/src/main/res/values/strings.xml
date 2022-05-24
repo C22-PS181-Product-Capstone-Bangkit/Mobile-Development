@@ -80,7 +80,7 @@
         <item>Appearance</item>
         <item>Language</item>
         <item>About Cemil</item>
-        <item>Log out</item>
+        <item>Logout</item>
     </string-array>
 
     <integer-array name="setting_icons">
