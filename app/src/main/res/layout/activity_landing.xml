@@ -32,7 +32,7 @@
     <Button
         android:id="@+id/landingNextButton"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="40dp"
         style="@style/Theme.Cemil.ButtonText"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
