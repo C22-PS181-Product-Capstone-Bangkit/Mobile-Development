@@ -25,14 +25,23 @@ class LandingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLandingBinding
     private var themeMode: Boolean? = null
+    private var firstTimeLanding: Boolean? = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setThemeMode()
+        val pref = SettingPreferences.getInstance(dataStore)
+        setThemeMode(pref)
         installSplashScreen()
         binding = ActivityLandingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
+        lifecycleScope.launch{
+            firstTimeLanding = pref.getPreferences()[SettingPreferences.LANDING_KEY]
+            if(firstTimeLanding == false){
+                startMainActivity()
+            }
+        }
+
         val viewPagerAdapter = LandingScreenAdapter(this)
         binding.landingViewPager.adapter = viewPagerAdapter
 
@@ -45,9 +54,10 @@ class LandingActivity : AppCompatActivity() {
         }
 
         binding.landingGetStartedButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            lifecycleScope.launch{
+                pref.saveFirstTimeLanding(false)
+            }
+            startMainActivity()
         }
 
         binding.landingViewPager.registerOnPageChangeCallback(object :
@@ -78,14 +88,20 @@ class LandingActivity : AppCompatActivity() {
         }
     }
 
-    private fun setThemeMode(){
+    private fun setThemeMode(pref: SettingPreferences){
         lifecycleScope.launch{
-            themeMode = dataStore.data.first()[SettingPreferences.THEME_KEY]
+            themeMode = pref.getPreferences()[SettingPreferences.THEME_KEY]
             when(themeMode){
                 true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 else -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             }
         }
+    }
+
+    private fun startMainActivity(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
