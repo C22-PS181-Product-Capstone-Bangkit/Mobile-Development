@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/curved_dialog">
+
+    <TextView
+        android:id="@+id/tvLogoutDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/nunito_medium"
+        android:text="@string/are_you_sure_to_logout"
+        android:textColor="@color/on_background"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/imgLogoutDialog"
+        app:layout_constraintStart_toStartOf="@+id/imgLogoutDialog"
+        app:layout_constraintTop_toBottomOf="@+id/imgLogoutDialog" />
+
+    <TextView
+        android:id="@+id/tvPositive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_bold"
+        android:paddingStart="18dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="18dp"
+        android:paddingBottom="8dp"
+        android:text="@string/logout"
+        android:textAlignment="center"
+        android:textColor="@color/design_default_color_error"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNegative"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvNegative"
+        app:layout_constraintTop_toTopOf="@+id/tvNegative" />
+
+    <TextView
+        android:id="@+id/tvNegative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="36dp"
+        android:fontFamily="@font/nunito_bold"
+        android:paddingStart="18dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="18dp"
+        android:paddingBottom="8dp"
+        android:text="@android:string/cancel"
+        android:textAlignment="center"
+        android:textColor="@color/on_background"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvPositive"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLogoutDialog" />
+
+    <ImageView
+        android:id="@+id/imgLogoutDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="18dp"
+        android:src="@drawable/illustration_logout"
+        android:contentDescription="@string/are_you_sure_to_logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -54,6 +54,9 @@
     <string name="enter_the_new_password_you_want_here">Enter the new password you want here</string>
     <string name="confirm_your_new_password_here">Confirm your new password here</string>
     <string name="clear_fields">Clear Fields</string>
+
+    <string name="are_you_sure_to_logout">Are you sure to logout?</string>
+
     <string name="recommendations_history">Recommendations History</string>
     <string name="join_us_to_explore_more_features_available">Join us to explore more features available</string>
     <string name="already_have_account">Already have account?</string>
@@ -87,4 +90,5 @@
         <item>@drawable/ic_about_filled</item>
         <item>@drawable/ic_logout_filled</item>
     </integer-array>
+
 </resources>

@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.cemil.R
 import com.bangkit.cemil.databinding.FragmentProfileBinding
+import com.bangkit.cemil.profile.LogoutDialogFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class ProfileFragment : Fragment() {
@@ -89,6 +90,9 @@ class ProfileFragment : Fragment() {
             tvProfileAccount.visibility = View.VISIBLE
             rvSettingList.visibility = View.VISIBLE
         }
+
+        binding.menuLogout.setOnClickListener {
+            LogoutDialogFragment().show(parentFragmentManager, LogoutDialogFragment.TAG)
 
         val settingAdapter = SettingAdapter(listSetting)
         binding.rvSettingList.apply {
