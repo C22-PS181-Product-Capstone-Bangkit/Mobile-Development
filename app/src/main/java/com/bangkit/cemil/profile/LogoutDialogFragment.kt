@@ -4,19 +4,28 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
+import com.bangkit.cemil.SettingPreferences
+import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentLogoutDialogBinding
+import kotlinx.coroutines.launch
 
 class LogoutDialogFragment : DialogFragment() {
 
     private lateinit var binding : FragmentLogoutDialogBinding
+    private lateinit var dialogCallback : DialogCallback
+
+    fun setDialogCallback(dialogCallback: DialogCallback){
+        this.dialogCallback = dialogCallback
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = FragmentLogoutDialogBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -34,8 +43,13 @@ class LogoutDialogFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val pref = SettingPreferences.getInstance(requireContext().dataStore)
         binding.tvPositive.setOnClickListener {
-            //Proceed to logout
+            Toast.makeText(context, "Logout succesful", Toast.LENGTH_SHORT).show()
+            lifecycleScope.launch{
+                pref.saveAuthorization(false)
+            }
+            dialogCallback.onDialogLogout()
             dismiss()
         }
         binding.tvNegative.setOnClickListener {
@@ -46,5 +60,7 @@ class LogoutDialogFragment : DialogFragment() {
     companion object{
         const val TAG = "LogoutDialog"
     }
-
+    interface DialogCallback{
+        fun onDialogLogout()
+    }
 }
