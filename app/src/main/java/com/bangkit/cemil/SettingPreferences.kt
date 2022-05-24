@@ -30,12 +30,19 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
         }
     }
 
+    suspend fun saveAuthorization(isAuthorized: Boolean){
+        dataStore.edit{
+            it[AUTHORIZED_KEY] = isAuthorized
+        }
+    }
+
     companion object{
         @Volatile
         private var INSTANCE: SettingPreferences? = null
 
         val THEME_KEY = booleanPreferencesKey("theme_mode")
         val LANDING_KEY = booleanPreferencesKey("first_time_landing")
+        val AUTHORIZED_KEY = booleanPreferencesKey("is_authorized")
 
         fun getInstance(dataStore: DataStore<Preferences>): SettingPreferences {
             return INSTANCE ?: synchronized(this) {

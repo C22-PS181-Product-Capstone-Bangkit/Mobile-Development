@@ -8,16 +8,21 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.cemil.R
+import com.bangkit.cemil.SettingPreferences
+import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentProfileBinding
 import com.bangkit.cemil.profile.LogoutDialogFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.launch
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
 
     private lateinit var binding : FragmentProfileBinding
+    private var isAuthorized: Boolean = false
 
     private val listSetting: ArrayList<SettingItem>
         get() {
@@ -46,7 +51,10 @@ class ProfileFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(binding.materialToolbar)
         (activity as AppCompatActivity).supportActionBar?.title = null
         (activity as AppCompatActivity).findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.VISIBLE
-
+        val pref = SettingPreferences.getInstance(requireContext().dataStore)
+        lifecycleScope.launch {
+            isAuthorized = pref.getPreferences()[SettingPreferences.AUTHORIZED_KEY] == true
+        }
         checkAuthorization()
 
         binding.layoutUnauthorized.btnCreateAccount.setOnClickListener {
@@ -59,6 +67,10 @@ class ProfileFragment : Fragment() {
             view.findNavController().navigate(toLoginFragment)
         }
 
+        binding.imgEditProfile.setOnClickListener{
+            val toEditProfileFragment = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment()
+            view.findNavController().navigate(toEditProfileFragment)
+        }
     }
 
     private fun checkAuthorization() {
@@ -126,14 +138,19 @@ class ProfileFragment : Fragment() {
                         // Navigate to About Cemil Fragment
                     }
                     resources.getString(R.string.logout) -> {
-                        LogoutDialogFragment().show(parentFragmentManager, LogoutDialogFragment.TAG)
+                        LogoutDialogFragment().let {
+                            it.setDialogCallback(this@ProfileFragment)
+                            it.show(parentFragmentManager, LogoutDialogFragment.TAG)
+                        }
                     }
                 }
             }
         })
     }
 
-    companion object {
-        private const val isAuthorized: Boolean = true
+    override fun onDialogLogout() {
+        hideProfile()
     }
 }
+
+

@@ -23,11 +23,6 @@ class EditProfileFragment : Fragment() {
         (activity as AppCompatActivity).apply {
             setSupportActionBar(binding.materialToolbar)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            onBackPressedDispatcher.addCallback(object: OnBackPressedCallback(true){
-                override fun handleOnBackPressed() {
-                    findNavController().navigate(R.id.profileFragment)
-                }
-            })
             binding.materialToolbar.setNavigationOnClickListener {
                 onBackPressed()
             }

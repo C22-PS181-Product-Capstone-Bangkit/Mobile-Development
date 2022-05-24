@@ -27,14 +27,10 @@
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
-            app:destination="@id/editProfileFragment"
-            app:popUpTo="@id/profileFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/editProfileFragment" />
         <action
             android:id="@+id/action_profileFragment_to_changePasswordFragment"
-            app:destination="@id/changePasswordFragment"
-            app:popUpTo="@id/profileFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/changePasswordFragment" />
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -43,9 +39,7 @@
             app:destination="@id/registerFragment" />
         <action
             android:id="@+id/action_profileFragment_to_appearanceFragment"
-            app:destination="@id/appearanceFragment"
-            app:popUpTo="@id/profileFragment"
-            app:popUpToInclusive="true"/>
+            app:destination="@id/appearanceFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
