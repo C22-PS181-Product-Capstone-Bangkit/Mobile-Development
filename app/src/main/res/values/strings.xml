@@ -39,8 +39,8 @@
     <string name="account">Account</string>
     <string name="my_reviews">My Reviews</string>
     <string name="recommendations">Recommendations</string>
-    <string name="appearances">Appearances</string>
-    <string name="change_language">Change Language</string>
+    <string name="appearance">Appearance</string>
+    <string name="language">Language</string>
     <string name="about_cemil">About Cemil</string>
     <string name="logout">Logout</string>
     <string name="change_password">Change Password</string>
@@ -60,4 +60,37 @@
     <string name="light">Light</string>
     <string name="dark">Dark</string>
     <string name="system_default">System Default</string>
+    <string name="recommendations_history">Recommendations History</string>
+    <string name="join_us_to_explore_more_features_available">Join us to explore more features available</string>
+    <string name="already_have_account">Already have account?</string>
+    <string name="back">Back</string>
+    <string name="login_account">Login Account</string>
+    <string name="click_here">Click here</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="or">or</string>
+    <string name="cemil_s_terms_and_conditions">Cemil\'s terms and conditions</string>
+    <string name="i_agree_to">I agree to</string>
+    <string name="sign_up_with_google">Sign up with Google</string>
+
+    <string-array name="setting_names">
+        <item>History</item>
+        <item>Reviews</item>
+        <item>Recommendations</item>
+        <item>Change Password</item>
+        <item>Appearance</item>
+        <item>Language</item>
+        <item>About Cemil</item>
+        <item>Log out</item>
+    </string-array>
+
+    <integer-array name="setting_icons">
+        <item>@drawable/ic_history_filled</item>
+        <item>@drawable/ic_review_filled</item>
+        <item>@drawable/ic_recommendation_filled</item>
+        <item>@drawable/ic_change_password_filled</item>
+        <item>@drawable/ic_appearance_filled</item>
+        <item>@drawable/ic_language_filled</item>
+        <item>@drawable/ic_about_filled</item>
+        <item>@drawable/ic_logout_filled</item>
+    </integer-array>
 </resources>

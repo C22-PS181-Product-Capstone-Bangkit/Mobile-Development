@@ -16,6 +16,8 @@
         <item name="colorOnBackground">@color/on_background</item>
 
         <item name="android:strokeColor">@color/grey</item>
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="colorOnTertiary">@color/on_tertiary</item>
     </style>
 
     <style name="Theme.Cemil.SplashScreen" parent="Theme.SplashScreen">
@@ -37,14 +39,14 @@
         <item name="android:letterSpacing">0</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="Theme.Cemil.EditText">
         <item name="android:fontFamily">@font/nunito_semibold</item>
         <item name="android:background">@drawable/custom_edittext</item>
-        <item name="android:paddingStart">26dp</item>
-        <item name="android:paddingEnd">26dp</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
         <item name="android:singleLine">true</item>
         <item name="android:textSize">16sp</item>
     </style>

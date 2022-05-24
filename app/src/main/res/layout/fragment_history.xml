@@ -15,7 +15,19 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvProfileTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/nunito_extrabold"
+            android:text="@string/recommendations_history"
+            android:textColor="?colorOnPrimary"
+            android:textSize="24sp" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <TextView
         android:layout_width="wrap_content"
