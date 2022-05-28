@@ -61,6 +61,11 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="roundedCornersImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
     <style name="Theme.Cemil.RadioButtonDrawable">
         <item name="colorAccent">?colorPrimary</item>
         <item name="android:textColorSecondary">@color/grey</item>

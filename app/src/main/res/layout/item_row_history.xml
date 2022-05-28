@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cv_history"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:layout_gravity="center"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    card_view:strokeWidth="1dp"
+    card_view:strokeColor="@color/grey"
+    card_view:cardBackgroundColor="?colorPrimary"
+    card_view:cardCornerRadius="8dp"
+    card_view:cardElevation="2dp"
+    card_view:cardMaxElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_historysub"
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:layout_gravity="center"
+            card_view:cardBackgroundColor="?android:colorBackground"
+            card_view:cardElevation="2dp"
+            card_view:cardMaxElevation="2dp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imgHistoryResto"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:padding="1dp"
+                    card_view:layout_constraintBottom_toBottomOf="parent"
+                    card_view:layout_constraintStart_toStartOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent"
+                    card_view:shapeAppearanceOverlay="@style/roundedCornersImageView"
+                    card_view:strokeColor="@color/grey"
+                    card_view:strokeWidth="1dp"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/tvHistoryRestoName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="17dp"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:letterSpacing="0.03"
+                    android:lines="1"
+                    android:text="@string/restaurant_name"
+                    android:textColor="?colorOnBackground"
+                    android:textSize="14sp"
+                    android:typeface="normal"
+                    card_view:layout_constraintEnd_toStartOf="@+id/btnHistoryReviews"
+                    card_view:layout_constraintStart_toEndOf="@+id/imgHistoryResto"
+                    card_view:layout_constraintTop_toTopOf="parent"
+                    tools:text="KFC Sarinah" />
+
+                <TextView
+                    android:id="@+id/tvHistoryRestoRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_regular"
+                    android:letterSpacing="0.05"
+                    android:text="@string/restaurant_rating"
+                    android:textColor="?colorOnBackground"
+                    android:textSize="12sp"
+                    card_view:layout_constraintBottom_toBottomOf="@+id/imgHistoryStar"
+                    card_view:layout_constraintStart_toEndOf="@+id/imgHistoryStar"
+                    card_view:layout_constraintTop_toTopOf="@+id/imgHistoryStar"
+                    tools:text="5.0 (489)" />
+
+                <ImageView
+                    android:id="@+id/imgHistoryStar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="-4dp"
+                    android:layout_marginTop="2dp"
+                    card_view:layout_constraintStart_toStartOf="@+id/tvHistoryRestoName"
+                    card_view:layout_constraintTop_toBottomOf="@+id/tvHistoryRestoName"
+                    card_view:srcCompat="@drawable/ic_star" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnHistoryReviews"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="?colorSecondary"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:padding="12dp"
+                    card_view:cornerRadius="8dp"
+                    card_view:icon="@drawable/ic_review_filled"
+                    card_view:iconTint="@color/background"
+                    card_view:layout_constraintBottom_toBottomOf="parent"
+                    card_view:layout_constraintEnd_toEndOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tvHistoryRestaurantLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/nunito_medium"
+            android:text="@string/restaurant"
+            android:textColor="?colorOnPrimary"
+            android:textSize="12sp"
+            card_view:layout_constraintBottom_toTopOf="@+id/cv_historysub"
+            card_view:layout_constraintStart_toEndOf="@+id/imgHistoryRestoLogo"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvHistoryDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/nunito_medium"
+            android:text="@string/_13_may_2022"
+            android:textColor="?colorOnPrimary"
+            android:textSize="12sp"
+            card_view:layout_constraintBottom_toTopOf="@+id/cv_historysub"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgHistoryRestoLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            card_view:layout_constraintBottom_toTopOf="@+id/cv_historysub"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:srcCompat="@drawable/ic_resto_logo" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

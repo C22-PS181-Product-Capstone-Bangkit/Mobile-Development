@@ -8,10 +8,12 @@
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable-night/ic_logo.xml" value="0.142" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable-night/illustration_logout.xml" value="0.112" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable-night/illustration_second_landing.xml" value="0.142" />
+        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable/btn_background.xml" value="0.158" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable/curved_dialog.xml" value="0.112" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable/curved_toolbar.xml" value="0.1865" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable/custom_edittext.xml" value="0.136" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable/ic_googlelogin.xml" value="0.142" />
+        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable/ic_history_filled.xml" value="0.1815" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable/ic_history_outlined.xml" value="0.112" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable/ic_home_selector.xml" value="0.112" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable/ic_illustration_logout.xml" value="0.112" />
@@ -22,7 +24,9 @@
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable/ic_logo.xml" value="0.142" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable/ic_profile_filled.xml" value="0.207" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable/ic_profile_outlined.xml" value="0.207" />
+        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable/ic_recent_searches.xml" value="0.1815" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable/ic_recommendations_filled.xml" value="0.112" />
+        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable/ic_review_filled.xml" value="0.158" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable/ic_successfulregister_illustration.xml" value="0.142" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable/illustration_first_landing.xml" value="0.142" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/drawable/illustration_logout.xml" value="0.112" />
@@ -35,20 +39,26 @@
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_edit_profile.xml" value="0.264" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_first_landing.xml" value="0.1283068783068783" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_forgot_password.xml" value="0.264" />
-        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_history.xml" value="0.18425925925925926" />
+        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_history.xml" value="0.5165644171779141" />
+        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_home.xml" value="0.26710402999062793" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_landing.xml" value="0.2" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_landing1.xml" value="0.14814814814814814" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_landing2.xml" value="0.264" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_landing3.xml" value="0.264" />
-        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_login.xml" value="0.264" />
+        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_logout_dialog.xml" value="0.264" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_profile.xml" value="0.39820359281437123" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_profile_unauthorized.xml" value="0.16302083333333334" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_register.xml" value="0.4" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_register_success.xml" value="0.176" />
-        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_search.xml" value="0.4" />
+        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_search.xml" value="0.264" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_second_landing.xml" value="0.22735507246376813" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_third_landing.xml" value="0.22735507246376813" />
+        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/item_category.xml" value="0.536" />
+        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/item_recent_searches.xml" value="0.264" />
+        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/item_row_history.xml" value="0.536" />
+        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/item_row_home_resto.xml" value="0.6968215158924206" />
+        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/item_row_search.xml" value="0.4" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/item_setting.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/menu/main_bottom_menu.xml" value="0.1" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable-night/ic_logo.xml" value="0.123" />

@@ -71,6 +71,14 @@
     <string name="cemil_s_terms_and_conditions">Cemil\'s terms and conditions</string>
     <string name="i_agree_to">I agree to</string>
     <string name="sign_up_with_google">Sign up with Google</string>
+    <string name="_13_may_2022">13 May 2022</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="restaurant_rating">Restaurant Rating</string>
+    <string name="sort_by_location">Sort by Location</string>
+    <string name="sort_by_ratings">Sort by Ratings</string>
+    <string name="recent_searches">Recent searches</string>
+    <string name="categories">Categories</string>
+    <string name="clear_all">Clear all</string>
 
     <string-array name="setting_names">
         <item>History</item>
@@ -92,5 +100,53 @@
         <item>@drawable/ic_language_filled</item>
         <item>@drawable/ic_about_filled</item>
         <item>@drawable/ic_logout_filled</item>
+    </integer-array>
+
+    <string-array name="category_titles">
+        <item>Bakery and Cake</item>
+        <item>Beef</item>
+        <item>Burger</item>
+        <item>Chicken</item>
+        <item>Chinese</item>
+        <item>Coffee</item>
+        <item>Duck</item>
+        <item>Ice Cream</item>
+        <item>Indonesian</item>
+        <item>Japanese</item>
+        <item>Korean</item>
+        <item>Noodles</item>
+        <item>Pasta</item>
+        <item>Pizza</item>
+        <item>Pork</item>
+        <item>Rice</item>
+        <item>Seafood</item>
+        <item>Snacks</item>
+        <item>Tea</item>
+        <item>Thai</item>
+        <item>Western</item>
+    </string-array>
+
+    <integer-array name="category_photos">
+        <item>@drawable/bakery_and_cake</item>
+        <item>@drawable/beef</item>
+        <item>@drawable/burger</item>
+        <item>@drawable/chicken</item>
+        <item>@drawable/chinese</item>
+        <item>@drawable/coffee</item>
+        <item>@drawable/duck</item>
+        <item>@drawable/ice_cream</item>
+        <item>@drawable/indonesian</item>
+        <item>@drawable/japanese</item>
+        <item>@drawable/korean</item>
+        <item>@drawable/noodles</item>
+        <item>@drawable/pasta</item>
+        <item>@drawable/pizza</item>
+        <item>@drawable/pork</item>
+        <item>@drawable/rice</item>
+        <item>@drawable/seafood</item>
+        <item>@drawable/snacks</item>
+        <item>@drawable/tea</item>
+        <item>@drawable/thai</item>
+        <item>@drawable/western</item>
     </integer-array>
 </resources>
