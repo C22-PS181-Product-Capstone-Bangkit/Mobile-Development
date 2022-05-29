@@ -79,6 +79,10 @@
     <string name="recent_searches">Recent searches</string>
     <string name="categories">Categories</string>
     <string name="clear_all">Clear all</string>
+    <string name="pick_location">Pick Location</string>
+    <string name="retrieve_your_current_location_search_a_location_or_choose_from_maps">Retrieve your current location, search a location, or choose from Maps.</string>
+    <string name="choose_current_location">Choose Current Location</string>
+    <string name="google_maps_api_key">AIzaSyDqe3NXc9qiFf82huuP3JgbJmlQDJd_Z1Y</string>
 
     <string-array name="setting_names">
         <item>History</item>
