@@ -4,6 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.first
 
 class SettingPreferences private constructor(private val dataStore: DataStore<Preferences>) {
@@ -36,6 +37,18 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
         }
     }
 
+    suspend fun saveLocation(location: String){
+        dataStore.edit {
+            it[LOCATION_KEY] = location
+        }
+    }
+
+    suspend fun deleteLocation(){
+        dataStore.edit {
+            it.remove(LOCATION_KEY)
+        }
+    }
+
     companion object{
         @Volatile
         private var INSTANCE: SettingPreferences? = null
@@ -43,6 +56,7 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
         val THEME_KEY = booleanPreferencesKey("theme_mode")
         val LANDING_KEY = booleanPreferencesKey("first_time_landing")
         val AUTHORIZED_KEY = booleanPreferencesKey("is_authorized")
+        val LOCATION_KEY = stringPreferencesKey("location")
 
         fun getInstance(dataStore: DataStore<Preferences>): SettingPreferences {
             return INSTANCE ?: synchronized(this) {

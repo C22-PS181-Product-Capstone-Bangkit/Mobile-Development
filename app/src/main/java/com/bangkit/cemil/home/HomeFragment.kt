@@ -12,18 +12,23 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import com.bangkit.cemil.SettingPreferences
+import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentHomeBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.CancellationTokenSource
+import kotlinx.coroutines.launch
 import java.util.*
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var locationAddress : String = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,8 +39,17 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val pref = SettingPreferences.getInstance(requireContext().dataStore)
+        lifecycleScope.launch {
+            locationAddress = pref.getPreferences()[SettingPreferences.LOCATION_KEY].toString()
+        }
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
-        getMyLocation()
+        if(locationAddress != "null"){
+            binding.tvCurrentLocation.text = locationAddress
+        }else{
+            getMyLocation()
+        }
+
         binding.tvCurrentLocation.setOnClickListener {
             navigateToLocationFragment()
         }

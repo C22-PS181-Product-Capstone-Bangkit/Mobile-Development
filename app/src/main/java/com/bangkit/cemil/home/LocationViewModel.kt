@@ -26,25 +26,9 @@ class LocationViewModel: ViewModel() {
                    responseList[index].getSecondaryText(null).toString()))
            }
             _listLocations.value = list
-           Log.e("LocationViewModel", "onSuccess: $list")
+            Log.e("LocationViewModel", "onSuccess: $list")
        }.addOnFailureListener {
             Log.e("LocationViewModel", "onFailure: ${it.message}")
         }
-        //Ini yg pake geocoder, hasil query result bakal 1 spesifik, walaupun maxResultnya dikasih 5
-//        val locationAddresses = geocoder.getFromLocationName(query, 5)
-//        val list = ArrayList<LocationSearchItem>()
-//        if(locationAddresses != null){
-//            for(index in locationAddresses.indices){
-//                val locationAddress = locationAddresses[index]
-//                list.add(LocationSearchItem(
-//                    locationAddress.featureName,
-//                    locationAddress.getAddressLine(0).replace("${locationAddress.featureName},", "").trim()
-//                ))
-//            }
-//            Log.e("LocationViewModel", "onFailure: $list")
-//        }else{
-//            Log.e("LocationViewModel", "onFailure: location null")
-//        }
-//        _listLocations.value = list
     }
 }

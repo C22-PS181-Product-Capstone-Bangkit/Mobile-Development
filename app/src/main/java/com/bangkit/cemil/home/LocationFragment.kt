@@ -1,6 +1,7 @@
 package com.bangkit.cemil.home
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
@@ -15,8 +16,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.cemil.R
+import com.bangkit.cemil.SettingPreferences
+import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentLocationBinding
 import com.bangkit.cemil.tools.LocationSearchAdapter
 import com.bangkit.cemil.tools.LocationSearchItem
@@ -25,12 +29,15 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.libraries.places.api.Places
+import kotlinx.coroutines.launch
 
 class LocationFragment : Fragment() {
 
     private lateinit var binding : FragmentLocationBinding
     private lateinit var viewModel: LocationViewModel
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var pref : SettingPreferences
+    private lateinit var appContext : Context
     private val list = ArrayList<LocationSearchItem>()
 
     override fun onCreateView(
@@ -50,6 +57,8 @@ class LocationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        appContext = view.context
+        pref = SettingPreferences.getInstance(requireContext().dataStore)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
         viewModel = ViewModelProvider(this)[LocationViewModel::class.java]
         binding.rvSearchLocation.apply {
@@ -70,8 +79,6 @@ class LocationFragment : Fragment() {
 
         binding.etSearchLocation.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
-                //Places perlu Billing, jadi fitur ini blm berfungsi, aku coba-coba explore lagi dulu, kalau tidak ada
-                //fitur pilih Alamat mungkin gak jadi
                 Places.initialize(requireContext(), getString(R.string.google_maps_api_key))
                 val placesClient = Places.createClient(requireContext())
                 viewModel.searchQueryLocation(query, placesClient)
@@ -92,7 +99,7 @@ class LocationFragment : Fragment() {
         when{
             permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> getMyCurrentLocation()
             permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> getMyCurrentLocation()
-            else -> Toast.makeText(requireContext(), "Location permisson needed. Try again.", Toast.LENGTH_SHORT).show()
+            else -> Toast.makeText(appContext, "Location permisson needed. Try again.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -102,16 +109,19 @@ class LocationFragment : Fragment() {
             fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY,
                 tokenSrc.token).addOnSuccessListener { location : Location? ->
                 if(location != null){
-                    val addresses = Geocoder(requireContext()).getFromLocation(location.latitude, location.longitude, 1)
+                    val addresses = Geocoder(appContext).getFromLocation(location.latitude, location.longitude, 1)
                     val currentLocation = if(addresses[0].featureName.contains("+")){
                         addresses[0].getAddressLine(0).replace("${addresses[0].featureName},", "").trim()
                     }else {
                         addresses[0].featureName
                     }
-                    Toast.makeText(context, currentLocation, Toast.LENGTH_SHORT).show()
-                    requireActivity().onBackPressed()
+                    lifecycleScope.launch {
+                        pref.deleteLocation()
+                        activity?.onBackPressed()
+                    }
+                    Toast.makeText(appContext, currentLocation, Toast.LENGTH_SHORT).show()
                 }else{
-                    Toast.makeText(context, "Cannot retrieve your current location.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(appContext, "Cannot retrieve your current location.", Toast.LENGTH_SHORT).show()
                 }
             }
         } else{
@@ -128,7 +138,11 @@ class LocationFragment : Fragment() {
         binding.rvSearchLocation.adapter = locationAdapter
         locationAdapter.setOnItemClickCallback(object : LocationSearchAdapter.OnItemClickCallback{
             override fun onItemClicked(data: LocationSearchItem) {
-                Toast.makeText(context, data.locationDesc.toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(appContext, data.locationDesc.toString(), Toast.LENGTH_SHORT).show()
+                lifecycleScope.launch {
+                    pref.saveLocation("${data.locationName.toString()}, ${data.locationDesc.toString()}")
+                    requireActivity().onBackPressed()
+                }
             }
         })
     }
