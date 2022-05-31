@@ -83,6 +83,12 @@
     <string name="retrieve_your_current_location_search_a_location_or_choose_from_maps">Retrieve your current location, search a location, or choose from Maps.</string>
     <string name="choose_current_location">Choose Current Location</string>
     <string name="google_maps_api_key">AIzaSyDqe3NXc9qiFf82huuP3JgbJmlQDJd_Z1Y</string>
+    <string name="reviews">Reviews</string>
+    <string name="read_more">Read more</string>
+    <string name="_0_0">0.0</string>
+    <string name="restaurant_location">Restaurant Location</string>
+    <string name="restaurant_open_hours">Restaurant Open Hours</string>
+    <string name="restaurant_average_cost">Restaurant Average Cost</string>
 
     <string-array name="setting_names">
         <item>History</item>
