@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".home.LocationFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/materialToolbarLocation"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@drawable/curved_toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/toolbarNavUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/back"
+            android:src="@drawable/ic_back_filled"
+            app:layout_constraintBottom_toBottomOf="@+id/tvProfileName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvProfileName"
+            app:tint="?colorOnPrimary"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/pick_location"
+            android:textColor="?colorOnPrimary"
+            android:textSize="20sp" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbarLocation">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialToolbarLocation">
+
+            <TextView
+                android:id="@+id/tvRetrieveYourLocation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/nunito_regular"
+                android:maxLines="2"
+                android:text="@string/retrieve_your_current_location_search_a_location_or_choose_from_maps"
+                android:textAlignment="viewStart"
+                android:textColor="?colorOnBackground"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnCurrentLocation"
+                style="@style/Theme.Cemil.ButtonText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/btn_background"
+                android:backgroundTint="?colorPrimary"
+                android:drawableStart="@drawable/ic_location"
+                android:drawablePadding="16dp"
+                android:drawableTint="@color/on_primary"
+                android:fontFamily="@font/nunito_extrabold"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="36dp"
+                android:text="@string/choose_current_location"
+                android:textColor="?colorOnPrimary"
+                app:cornerRadius="32sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRetrieveYourLocation" />
+
+            <TextView
+                android:id="@+id/tvSearchLocationLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/search"
+                android:textColor="?colorOnBackground"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@+id/etSearchLocation"
+                app:layout_constraintTop_toBottomOf="@+id/btnCurrentLocation" />
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/etSearchLocation"
+                style="@style/Theme.Cemil.EditText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/nunito_regular"
+                android:inputType="text"
+                android:paddingStart="-8dp"
+                android:paddingEnd="0dp"
+                app:defaultQueryHint="Address, building, monument..."
+                app:iconifiedByDefault="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSearchLocationLabel"
+                app:searchIcon="@drawable/ic_search_outlined_primary" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSearchLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etSearchLocation"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_location_search" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnChooseMaps"
+                style="@style/Theme.Cemil.ButtonText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/btn_background"
+                android:backgroundTint="?colorSecondary"
+                android:fontFamily="@font/nunito_extrabold"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/choose_current_location"
+                android:textColor="?colorOnSecondary"
+                app:cornerRadius="32sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvSearchLocation" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

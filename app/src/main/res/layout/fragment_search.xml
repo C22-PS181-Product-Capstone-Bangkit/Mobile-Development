@@ -13,8 +13,8 @@
         android:background="@drawable/curved_toolbar"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:contentInsetStart="16dp"
         app:contentInsetEnd="16dp"
+        app:contentInsetStart="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,9 +31,172 @@
             android:paddingEnd="0dp"
             app:defaultQueryHint="@string/foods_restaurants_users_reviews_etc"
             app:iconifiedByDefault="false"
-            app:searchIcon="@drawable/ic_search_selector"
+            app:searchIcon="@drawable/ic_search_outlined_primary"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="12dp" />
     </com.google.android.material.appbar.MaterialToolbar>
 
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/searchDefaultLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialToolbar">
+
+            <TextView
+                android:id="@+id/tvRecentSearchesLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/nunito_bold"
+                android:letterSpacing="0.03"
+                android:text="@string/recent_searches"
+                android:textColor="?colorOnBackground"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvSearchCategoriesLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/nunito_bold"
+                android:letterSpacing="0.03"
+                android:text="@string/categories"
+                android:textColor="?colorOnBackground"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvRecentSearches" />
+
+            <TextView
+                android:id="@+id/tvClearAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/nunito_bold"
+                android:letterSpacing="0.03"
+                android:text="@string/clear_all"
+                android:textColor="?colorPrimary"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRecentSearches"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRecentSearchesLabel"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_recent_searches" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCategories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:paddingEnd="-20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSearchCategoriesLabel"
+                tools:itemCount="3"
+                tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/item_category"
+                tools:orientation="horizontal" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/searchResultLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialToolbar">
+
+            <Button
+                android:id="@+id/btnSearchSortLocation"
+                style="@style/Theme.Cemil.ButtonText"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="17dp"
+                android:fontFamily="@font/nunito_bold"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/sort_by_location"
+                android:textColor="@color/background"
+                android:textSize="12sp"
+                app:cornerRadius="32sp"
+                app:layout_constraintEnd_toStartOf="@+id/btnSearchSortRating"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnSearchSortRating"
+                style="@style/Theme.Cemil.ButtonText"
+                android:layout_width="0dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/nunito_bold"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/sort_by_ratings"
+                android:textColor="@color/background"
+                android:textSize="12sp"
+                app:cornerRadius="32sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnSearchSortLocation"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnSearchSortLocation"
+                tools:listitem="@layout/item_row_search" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

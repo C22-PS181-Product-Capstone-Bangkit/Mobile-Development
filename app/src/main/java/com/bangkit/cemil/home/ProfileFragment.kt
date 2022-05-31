@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +15,8 @@ import com.bangkit.cemil.SettingPreferences
 import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentProfileBinding
 import com.bangkit.cemil.profile.LogoutDialogFragment
+import com.bangkit.cemil.tools.SettingAdapter
+import com.bangkit.cemil.tools.SettingItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 

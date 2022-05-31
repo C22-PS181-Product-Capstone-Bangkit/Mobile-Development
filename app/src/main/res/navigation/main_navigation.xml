@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="com.bangkit.cemil.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_locationFragment"
+            app:destination="@id/locationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.bangkit.cemil.home.SearchFragment"
@@ -66,4 +70,9 @@
         android:name="com.bangkit.cemil.profile.AppearanceFragment"
         android:label="fragment_appearance"
         tools:layout="@layout/fragment_appearance" />
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.bangkit.cemil.home.LocationFragment"
+        android:label="fragment_location"
+        tools:layout="@layout/fragment_location" />
 </navigation>

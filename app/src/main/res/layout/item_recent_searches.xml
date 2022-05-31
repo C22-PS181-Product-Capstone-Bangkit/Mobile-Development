@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tvProfileSetting"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:drawablePadding="4dp"
+        android:fontFamily="@font/nunito_regular"
+        android:gravity="center_vertical"
+        android:letterSpacing="0.03"
+        android:maxLength="200"
+        android:maxLines="1"
+        android:text="@string/restaurant_name"
+        android:textColor="?colorOnBackground"
+        android:textSize="14sp"
+        app:drawableTint="?colorOnBackground"
+        app:layout_constraintEnd_toStartOf="@+id/imgRecentSymbol"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:drawableStart="@drawable/ic_recent_searches"
+        tools:text="Niku Ramen" />
+
+    <ImageView
+        android:id="@+id/imgRecentSymbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_close" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/imgLocationSearchSymbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_location" />
+
+    <TextView
+        android:id="@+id/tvLocationName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:drawablePadding="4dp"
+        android:fontFamily="@font/nunito_bold"
+        android:gravity="center_vertical"
+        android:letterSpacing="0.03"
+        android:maxLength="200"
+        android:maxLines="1"
+        android:text="@string/pick_location"
+        android:textColor="?colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgLocationSearchSymbol"
+        app:layout_constraintStart_toEndOf="@+id/imgLocationSearchSymbol"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Batu Kapur City" />
+
+    <TextView
+        android:id="@+id/tvLocationDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:drawablePadding="4dp"
+        android:fontFamily="@font/nunito_medium"
+        android:maxLength="200"
+        android:maxLines="1"
+        android:text="@string/pick_location"
+        android:textColor="?colorOnBackground"
+        android:textSize="12sp"
+        app:drawableTint="?colorOnBackground"
+        app:layout_constraintStart_toEndOf="@+id/imgLocationSearchSymbol"
+        app:layout_constraintTop_toBottomOf="@+id/tvLocationName"
+        tools:text="Jl. Batu Kapur No. 2 RT 002 RW 012" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
+        android:background="?colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tvLocationDesc"
+        app:layout_constraintTop_toBottomOf="@+id/tvLocationDesc" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

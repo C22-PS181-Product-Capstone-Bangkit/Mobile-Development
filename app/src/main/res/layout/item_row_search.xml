@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="124dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imgSearchResto"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:elevation="0dp"
+        android:padding="1dp"
+        app:shapeAppearanceOverlay="@style/roundedCornersImageView"
+        tools:srcCompat="@tools:sample/avatars"
+        app:strokeColor="@color/grey"
+        app:strokeWidth="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSearchResto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/nunito_bold"
+        android:letterSpacing="0.05"
+        android:text="@string/restaurant_name"
+        android:textColor="?colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/imgSearchResto"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="KFC Sarinah" />
+
+    <ImageView
+        android:id="@+id/imgLocationSymbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintStart_toEndOf="@+id/imgSearchResto"
+        app:layout_constraintTop_toBottomOf="@+id/tvSearchResto"
+        app:srcCompat="@drawable/ic_location" />
+
+    <TextView
+        android:id="@+id/tvSearchRestoAddress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="90dp"
+        android:fontFamily="@font/nunito_medium"
+        android:letterSpacing="0.05"
+        android:maxLines="3"
+        android:text="@string/find_nearby_restaurants_from_your_location"
+        android:textColor="?colorOnBackground"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgLocationSymbol"
+        app:layout_constraintTop_toBottomOf="@+id/tvSearchResto"
+        tools:text="Sarinah, Lantai Ground, Jl. M.H. Thamrin No. 11, Gondangdia, Menteng, Jakarta Pusat, Jakarta" />
+
+    <TextView
+        android:id="@+id/tvHistoryRestoRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_regular"
+        android:letterSpacing="0.05"
+        android:text="@string/restaurant_rating"
+        android:textColor="?colorOnBackground"
+        android:textSize="12sp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/imgHistoryStar"
+        app:layout_constraintStart_toEndOf="@+id/imgHistoryStar"
+        app:layout_constraintTop_toTopOf="@+id/imgHistoryStar"
+        tools:text="5.0 (489)" />
+
+    <ImageView
+        android:id="@+id/imgHistoryStar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        app:layout_constraintStart_toStartOf="@+id/imgLocationSymbol"
+        app:layout_constraintTop_toBottomOf="@+id/imgLocationSymbol"
+        app:srcCompat="@drawable/ic_star" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentTop="true"
+        android:background="?colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
