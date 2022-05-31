@@ -59,12 +59,24 @@
         android:id="@+id/registerFragment"
         android:name="com.bangkit.cemil.authentication.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_registerSuccessFragment"
+            app:destination="@id/registerSuccessFragment"
+            app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.bangkit.cemil.authentication.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
     <fragment
         android:id="@+id/appearanceFragment"
         android:name="com.bangkit.cemil.profile.AppearanceFragment"
@@ -75,4 +87,15 @@
         android:name="com.bangkit.cemil.home.LocationFragment"
         android:label="fragment_location"
         tools:layout="@layout/fragment_location" />
+    <fragment
+        android:id="@+id/registerSuccessFragment"
+        android:name="com.bangkit.cemil.authentication.RegisterSuccessFragment"
+        android:label="fragment_register_success"
+        tools:layout="@layout/fragment_register_success" >
+        <action
+            android:id="@+id/action_registerSuccessFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:popUpTo="@id/registerSuccessFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>
