@@ -38,14 +38,18 @@
 
         <TextView
             android:id="@+id/tvCurrentLocation"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
             android:fontFamily="@font/nunito_extrabold"
+            android:maxLines="2"
             android:text="@string/your_location"
             android:textColor="@color/background"
             android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tvCurrentLocationLabel"
-            app:layout_constraintTop_toBottomOf="@+id/tvCurrentLocationLabel" />
+            app:layout_constraintTop_toBottomOf="@+id/tvCurrentLocationLabel"
+            tools:text="Jl. Kebon Sirih No.3, RW.2, Raya, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta" />
 
         <Button
             android:id="@+id/btnFindMeFood"

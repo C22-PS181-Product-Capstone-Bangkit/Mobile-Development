@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cv_review"
+    android:layout_width="match_parent"
+    android:layout_height="165dp"
+    android:layout_gravity="center"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    card_view:cardCornerRadius="0dp"
+    card_view:cardElevation="24dp"
+    card_view:cardMaxElevation="24dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent"
+            card_view:shapeAppearanceOverlay="@style/circleImageView"
+            card_view:srcCompat="@drawable/ic_profile_filled"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/tvReviewerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/name"
+            android:textColor="?colorOnBackground"
+            android:textSize="20sp"
+            card_view:layout_constraintStart_toEndOf="@+id/imgProfile"
+            card_view:layout_constraintTop_toTopOf="@+id/imgProfile"
+            tools:text="M Budi Anggara" />
+
+        <TextView
+            android:id="@+id/tvReviewerReviews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_medium"
+            android:text="@string/reviews"
+            android:textColor="?colorOnBackground"
+            android:textSize="10sp"
+            card_view:layout_constraintStart_toStartOf="@+id/tvReviewerName"
+            card_view:layout_constraintTop_toBottomOf="@+id/tvReviewerName"
+            tools:text="12 reviews" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvReviewRating"
+            android:layout_width="62dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginEnd="12dp"
+            card_view:cardBackgroundColor="?colorPrimary"
+            card_view:cardCornerRadius="6dp"
+            card_view:cardElevation="6dp"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imgStar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    android:contentDescription="@string/restaurant_rating"
+                    card_view:tint="@color/background"
+                    card_view:layout_constraintBottom_toBottomOf="parent"
+                    card_view:layout_constraintEnd_toEndOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent"
+                    card_view:srcCompat="@drawable/ic_star" />
+
+                <TextView
+                    android:id="@+id/tvReviewRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:fontFamily="@font/nunito_extrabold"
+                    android:text="@string/_0_0"
+                    android:textColor="@color/background"
+                    android:textSize="21sp"
+                    card_view:layout_constraintBottom_toBottomOf="parent"
+                    card_view:layout_constraintEnd_toStartOf="@+id/imgStar"
+                    card_view:layout_constraintStart_toStartOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent"
+                    tools:text="5.0" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tvReviewText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="32dp"
+            android:fontFamily="@font/nunito_regular"
+            android:letterSpacing="0.02"
+            android:text="@string/reviews"
+            android:textColor="?colorOnBackground"
+            android:textSize="10sp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/imgProfile"
+            card_view:lineHeight="16sp"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.." />
+
+        <TextView
+            android:id="@+id/tvReadMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="11dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/read_more"
+            android:textColor="?colorPrimary"
+            android:textSize="10sp"
+            android:textStyle="italic"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintStart_toStartOf="@+id/tvReviewText"
+            card_view:layout_constraintTop_toBottomOf="@+id/tvReviewText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

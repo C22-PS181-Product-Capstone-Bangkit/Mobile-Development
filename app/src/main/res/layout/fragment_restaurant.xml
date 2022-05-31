@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E1E3E4"
+    android:fillViewport="true"
+    tools:context=".home.RestaurantFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView2"
+            style="@style/CustomCardViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="410dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imgRestaurantBanner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="180dp"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/restaurant"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/chicken" />
+
+                <TextView
+                    android:id="@+id/tvRestaurantName"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/nunito_extrabold"
+                    android:text="@string/restaurant_name"
+                    android:textColor="?colorOnBackground"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imgRestaurantBanner"
+                    tools:text="KFC Sarinah" />
+
+                <TextView
+                    android:id="@+id/tvRestaurantCategory"
+                    android:layout_width="67dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/btn_background"
+                    android:backgroundTint="?colorPrimaryVariant"
+                    android:fontFamily="@font/nunito_medium"
+                    android:letterSpacing="0.04"
+                    android:paddingTop="3dp"
+                    android:text="@string/restaurant"
+                    android:textAlignment="center"
+                    android:textColor="@color/background"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@+id/tvRestaurantName"
+                    app:layout_constraintTop_toBottomOf="@+id/tvRestaurantName"
+                    tools:text="Chicken" />
+
+                <TextView
+                    android:id="@+id/tvRestaurantCategory2"
+                    android:layout_width="67dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/btn_background"
+                    android:backgroundTint="?colorPrimaryVariant"
+                    android:fontFamily="@font/nunito_medium"
+                    android:letterSpacing="0.04"
+                    android:paddingTop="3dp"
+                    android:text="@string/restaurant"
+                    android:textAlignment="center"
+                    android:textColor="@color/background"
+                    android:textSize="12sp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvRestaurantCategory"
+                    app:layout_constraintStart_toEndOf="@+id/tvRestaurantCategory"
+                    app:layout_constraintTop_toTopOf="@+id/tvRestaurantCategory"
+                    tools:text="Chicken" />
+
+                <TextView
+                    android:id="@+id/tvRestaurantCategory3"
+                    android:layout_width="67dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/btn_background"
+                    android:backgroundTint="?colorPrimaryVariant"
+                    android:fontFamily="@font/nunito_medium"
+                    android:letterSpacing="0.04"
+                    android:paddingTop="3dp"
+                    android:text="@string/restaurant"
+                    android:textAlignment="center"
+                    android:textColor="@color/background"
+                    android:textSize="12sp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvRestaurantCategory"
+                    app:layout_constraintStart_toEndOf="@+id/tvRestaurantCategory2"
+                    app:layout_constraintTop_toTopOf="@+id/tvRestaurantCategory"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:text="Chicken" />
+
+                <ImageView
+                    android:id="@+id/imgRestaurantLocationSymbol"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="-8dp"
+                    android:layout_marginTop="12dp"
+                    android:contentDescription="@string/restaurant_location"
+                    app:layout_constraintStart_toStartOf="@+id/tvRestaurantCategory"
+                    app:layout_constraintTop_toBottomOf="@+id/tvRestaurantCategory"
+                    app:srcCompat="@drawable/ic_location" />
+
+                <ImageView
+                    android:id="@+id/imgRestaurantTimeSymbol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:contentDescription="@string/restaurant_open_hours"
+                    app:layout_constraintEnd_toEndOf="@+id/imgRestaurantLocationSymbol"
+                    app:layout_constraintStart_toStartOf="@+id/imgRestaurantLocationSymbol"
+                    app:layout_constraintTop_toBottomOf="@+id/tvRestaurantLocation"
+                    app:srcCompat="@drawable/ic_access_hours" />
+
+                <ImageView
+                    android:id="@+id/imgRestaurantCostSymbol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:contentDescription="@string/restaurant_average_cost"
+                    app:layout_constraintEnd_toEndOf="@+id/imgRestaurantTimeSymbol"
+                    app:layout_constraintStart_toStartOf="@+id/imgRestaurantTimeSymbol"
+                    app:layout_constraintTop_toBottomOf="@+id/imgRestaurantTimeSymbol"
+                    app:srcCompat="@drawable/ic_costs" />
+
+                <TextView
+                    android:id="@+id/tvRestaurantLocation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/nunito_regular"
+                    android:maxLines="3"
+                    android:text="@string/current_location"
+                    android:textColor="?colorOnBackground"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imgRestaurantLocationSymbol"
+                    app:layout_constraintTop_toTopOf="@+id/imgRestaurantLocationSymbol"
+                    tools:text="Sarinah Thamrin, Lt. Basement, RT.8/RW.4, Gondangdia, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10350" />
+
+                <TextView
+                    android:id="@+id/tvRestaurantTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_regular"
+                    android:maxLines="2"
+                    android:textColor="?colorOnBackground"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgRestaurantTimeSymbol"
+                    app:layout_constraintStart_toEndOf="@+id/imgRestaurantLocationSymbol"
+                    app:layout_constraintTop_toTopOf="@+id/imgRestaurantTimeSymbol"
+                    tools:text="Open 24 hours every day" />
+
+                <TextView
+                    android:id="@+id/tvRestaurantCost"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_regular"
+                    android:maxLines="2"
+                    android:textColor="?colorOnBackground"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/imgRestaurantCostSymbol"
+                    app:layout_constraintStart_toStartOf="@+id/tvRestaurantTime"
+                    app:layout_constraintTop_toTopOf="@+id/imgRestaurantCostSymbol"
+                    tools:text="Rp25.000,00 / person" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView2">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvRestaurantReviewsLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="@string/reviews"
+                    android:textColor="?colorOnBackground"
+                    android:textSize="22sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvRestaurantReviewsAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:text="@string/reviews"
+                    android:textColor="?colorOnBackground"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvRestaurantReviewsLabel"
+                    app:layout_constraintStart_toEndOf="@+id/tvRestaurantReviewsLabel"
+                    app:layout_constraintTop_toTopOf="@+id/tvRestaurantReviewsLabel"
+                    tools:text="(489)" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvRestaurantReviewsLabel"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_row_review" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
