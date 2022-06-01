@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,13 +18,16 @@ import com.bangkit.cemil.databinding.FragmentProfileBinding
 import com.bangkit.cemil.profile.LogoutDialogFragment
 import com.bangkit.cemil.tools.SettingAdapter
 import com.bangkit.cemil.tools.SettingItem
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
 
     private lateinit var binding : FragmentProfileBinding
+    private lateinit var viewModel : ProfileViewModel
     private var isAuthorized: Boolean = false
+    private var accessToken: String? = null
 
     private val listSetting: ArrayList<SettingItem>
         get() {
@@ -49,15 +53,27 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
         (activity as AppCompatActivity).setSupportActionBar(binding.materialToolbar)
         (activity as AppCompatActivity).supportActionBar?.title = null
         (activity as AppCompatActivity).findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.VISIBLE
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
         lifecycleScope.launch {
             isAuthorized = pref.getPreferences()[SettingPreferences.AUTHORIZED_KEY] == true
+            accessToken = pref.getPreferences()[SettingPreferences.AUTHORIZATION_TOKEN_KEY]
+        }
+        viewModel.profileData.observe(viewLifecycleOwner){ profileData ->
+            if(profileData != null){
+                if(profileData.message == null && profileData.data == null){
+                    binding.tvProfileName.text = profileData.user?.name
+                    binding.tvProfileEmail.text = profileData.user?.email
+                    if(profileData.user?.profilePic != null){
+                        Glide.with(requireContext()).load(profileData.user.profilePic).into(binding.imgProfile)
+                    }
+                }
+            }
         }
         checkAuthorization()
-
         binding.layoutUnauthorized.btnCreateAccount.setOnClickListener {
             val toRegisterFragment = ProfileFragmentDirections.actionProfileFragmentToRegisterFragment()
             view.findNavController().navigate(toRegisterFragment)
@@ -76,6 +92,7 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
 
     private fun checkAuthorization() {
         if (isAuthorized) {
+            viewModel.fetchProfile(accessToken!!)
             showProfile()
         } else {
             hideProfile()

@@ -37,9 +37,21 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
         }
     }
 
+    suspend fun saveAuthorizationToken(token: String){
+        dataStore.edit{
+            it[AUTHORIZATION_TOKEN_KEY] = token
+        }
+    }
+
     suspend fun saveLocation(location: String){
         dataStore.edit {
             it[LOCATION_KEY] = location
+        }
+    }
+
+    suspend fun deleteAuthorizationToken(){
+        dataStore.edit {
+            it.remove(AUTHORIZATION_TOKEN_KEY)
         }
     }
 
@@ -57,6 +69,7 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
         val LANDING_KEY = booleanPreferencesKey("first_time_landing")
         val AUTHORIZED_KEY = booleanPreferencesKey("is_authorized")
         val LOCATION_KEY = stringPreferencesKey("location")
+        val AUTHORIZATION_TOKEN_KEY = stringPreferencesKey("authorization_token")
 
         fun getInstance(dataStore: DataStore<Preferences>): SettingPreferences {
             return INSTANCE ?: synchronized(this) {

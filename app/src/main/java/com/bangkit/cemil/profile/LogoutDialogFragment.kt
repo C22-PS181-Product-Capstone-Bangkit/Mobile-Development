@@ -48,6 +48,7 @@ class LogoutDialogFragment : DialogFragment() {
             Toast.makeText(context, "Logout succesful", Toast.LENGTH_SHORT).show()
             lifecycleScope.launch{
                 pref.saveAuthorization(false)
+                pref.deleteAuthorizationToken()
             }
             dialogCallback.onDialogLogout()
             dismiss()
