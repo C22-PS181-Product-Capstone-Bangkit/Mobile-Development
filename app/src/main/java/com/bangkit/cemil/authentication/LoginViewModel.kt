@@ -14,6 +14,9 @@ import retrofit2.Response
 
 class LoginViewModel : ViewModel() {
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading : LiveData<Boolean> = _isLoading
+
     private val _preferenceReady = MutableLiveData<Boolean>()
     val preferenceReady : LiveData<Boolean> = _preferenceReady
 
@@ -21,6 +24,7 @@ class LoginViewModel : ViewModel() {
     val loginResponse : LiveData<LoginResponse> = _loginResponse
 
     fun requestLogin(email: String, password: String){
+        _isLoading.value = true
         val client = ApiConfig.getApiService().loginRequest(email, password)
         client.enqueue(object: Callback<LoginResponse>{
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
@@ -29,10 +33,11 @@ class LoginViewModel : ViewModel() {
                }else if(response.code() == 400){
                    _loginResponse.value = LoginResponse(null, "Wrong email or password")
                }
+                _isLoading.value = false
             }
-
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 _loginResponse.value = LoginResponse(null, "Server Error")
+                _isLoading.value = false
             }
         })
     }

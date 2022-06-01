@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".authentication.LoginFragment">
 
+    <ProgressBar
+        android:id="@+id/loadingLogin"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="1dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbarLogin"
         android:layout_width="match_parent"
@@ -27,7 +39,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/tvProfileName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvProfileName"
-            app:tint="?colorOnPrimary"/>
+            app:tint="?colorOnPrimary" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -41,13 +53,14 @@
     </com.google.android.material.appbar.MaterialToolbar>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scrollbars="vertical"
-        app:layout_constraintTop_toBottomOf="@id/materialToolbarLogin"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/materialToolbarLogin">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -86,8 +99,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
                 android:fontFamily="@font/nunito_regular"
                 android:hint="@string/email"
                 android:importantForAutofill="no"
@@ -115,8 +128,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
                 android:fontFamily="@font/nunito_regular"
                 android:hint="@string/password"
                 android:importantForAutofill="no"
@@ -154,8 +167,8 @@
                 style="@style/Theme.Cemil.ButtonText"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginTop="32dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
@@ -177,7 +190,7 @@
                 app:layout_constraintEnd_toStartOf="@id/tvOr"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tvOr"
-                app:layout_constraintVertical_bias="0.6"/>
+                app:layout_constraintVertical_bias="0.6" />
 
             <TextView
                 android:id="@+id/tvOr"
@@ -188,8 +201,8 @@
                 android:text="@string/or"
                 android:textColor="?colorOnBackground"
                 android:textSize="20sp"
-                app:layout_constraintStart_toEndOf="@id/lineDividerLeft"
                 app:layout_constraintEnd_toStartOf="@id/lineDividerRight"
+                app:layout_constraintStart_toEndOf="@id/lineDividerLeft"
                 app:layout_constraintTop_toBottomOf="@+id/buttonAccountLogin" />
 
             <View
@@ -200,10 +213,10 @@
                 android:layout_marginEnd="16dp"
                 android:background="?colorPrimary"
                 app:layout_constraintBottom_toBottomOf="@id/tvOr"
-                app:layout_constraintStart_toEndOf="@id/tvOr"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvOr"
                 app:layout_constraintTop_toTopOf="@id/tvOr"
-                app:layout_constraintVertical_bias="0.6"/>
+                app:layout_constraintVertical_bias="0.6" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/buttonGoogleLogin"
@@ -211,8 +224,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/btn_background"
                 android:backgroundTint="?colorTertiary"
                 android:drawableStart="@drawable/ic_google"

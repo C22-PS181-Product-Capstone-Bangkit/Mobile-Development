@@ -19,7 +19,8 @@ class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private lateinit var viewModel: LoginViewModel
-    private var validity  = false
+    private var validityEmail = false
+    private var validityPass = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,10 +42,8 @@ class LoginFragment : Fragment() {
                 binding.etLoginEmail.error = "Email can't be empty!"
             }else if(password.isBlank()){
                 binding.etLoginPassword.error = "Password can't be empty!"
-            }else if(validity){
+            }else if(validityEmail && validityPass){
                 viewModel.requestLogin(email, password)
-            }else{
-                Toast.makeText(context, "Login Error", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -65,6 +64,10 @@ class LoginFragment : Fragment() {
                 requireView().findNavController().navigate(toProfileFragment)
             }
         }
+
+        viewModel.isLoading.observe(viewLifecycleOwner){
+            showLoading(it)
+        }
     }
 
     private fun setInputListener(){
@@ -72,7 +75,7 @@ class LoginFragment : Fragment() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                validity = if(!Patterns.EMAIL_ADDRESS.matcher(p0).matches()){
+                validityEmail = if(!Patterns.EMAIL_ADDRESS.matcher(p0).matches()){
                     binding.etLoginEmail.error = "Invalid email format!"
                     false
                 }else true
@@ -85,7 +88,7 @@ class LoginFragment : Fragment() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                validity = if(p0.toString().trim().length <= 5){
+                validityPass = if(p0.toString().trim().length <= 5){
                     binding.etLoginPassword.error = "Password needs to be at least 6 characters."
                     false
                 }else true
@@ -95,4 +98,7 @@ class LoginFragment : Fragment() {
         })
     }
 
+    private fun showLoading(isLoading: Boolean){
+        binding.loadingLogin.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
 }

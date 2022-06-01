@@ -14,6 +14,9 @@ import retrofit2.Response
 
 class RegisterViewModel : ViewModel(){
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading : LiveData<Boolean> = _isLoading
+
     private val _preferenceReady = MutableLiveData<Boolean>()
     val preferenceReady : LiveData<Boolean> = _preferenceReady
 
@@ -21,6 +24,7 @@ class RegisterViewModel : ViewModel(){
     val registerResponse : LiveData<RegisterResponse> = _registerResponse
 
     fun requestRegister(name: String, email: String, password: String){
+        _isLoading.value = true
         val client = ApiConfig.getApiService().registerRequest(name, email, password)
         client.enqueue(object: Callback<RegisterResponse>{
             override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
@@ -29,10 +33,12 @@ class RegisterViewModel : ViewModel(){
                 }else if(response.code() == 400){
                     _registerResponse.value = RegisterResponse(null, null, null, null, null, null, "An account with this email already exists. Please login.")
                 }
+                _isLoading.value = false
             }
 
             override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
                 _registerResponse.value = RegisterResponse(null, null, null, null, null, null, "Registration Failed. Try Again")
+                _isLoading.value = false
             }
         })
     }

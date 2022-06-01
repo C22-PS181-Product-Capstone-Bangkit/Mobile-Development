@@ -19,7 +19,8 @@ class RegisterFragment : Fragment() {
 
     private lateinit var binding : FragmentRegisterBinding
     private lateinit var viewModel: RegisterViewModel
-    private var validity = false
+    private var validityEmail = false
+    private var validityPass = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,11 +47,11 @@ class RegisterFragment : Fragment() {
                 binding.etRegisterEmail.error = "Email can't be empty!"
             }else if(password.isBlank()) {
                 binding.etRegisterPassword.error = "Password can't be empty!"
-            }else if(confirmPass.isBlank()){
-                binding.etRegisterConfirmPassword.error = "Confirm your password!"
+            }else if(confirmPass != password){
+                binding.etRegisterConfirmPassword.error = "Confirmation and entered password isn't equal!"
             }else if(!binding.materialCheckboxRegister.isChecked){
                 Toast.makeText(context, "Please read and accept the terms and conditions!", Toast.LENGTH_SHORT).show()
-            }else if(validity){
+            }else if(validityEmail && validityPass){
                 viewModel.requestRegister(name, email, password)
             }
         }
@@ -70,6 +71,10 @@ class RegisterFragment : Fragment() {
                 requireView().findNavController().navigate(toRegisterSuccessFragment)
             }
         }
+
+        viewModel.isLoading.observe(viewLifecycleOwner){
+            showLoading(it)
+        }
     }
 
     private fun setInputListener(){
@@ -77,7 +82,7 @@ class RegisterFragment : Fragment() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                validity = if(!Patterns.EMAIL_ADDRESS.matcher(p0).matches()){
+                validityEmail = if(!Patterns.EMAIL_ADDRESS.matcher(p0).matches()){
                     binding.etRegisterEmail.error = "Invalid email format!"
                     false
                 }else true
@@ -90,7 +95,7 @@ class RegisterFragment : Fragment() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                validity = if(p0.toString().trim().length <= 5){
+                validityPass = if(p0.toString().trim().length <= 5){
                     binding.etRegisterPassword.error = "Password needs to be at least 6 characters."
                     false
                 }else true
@@ -98,19 +103,10 @@ class RegisterFragment : Fragment() {
             override fun afterTextChanged(p0: Editable?) {
             }
         })
+    }
 
-        binding.etRegisterConfirmPassword.addTextChangedListener(object: TextWatcher{
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                validity = if(p0.toString().trim() != binding.etRegisterPassword.text.toString().trim()){
-                    binding.etRegisterConfirmPassword.error = "Confirmation and entered password isn't equal."
-                    false
-                }else true
-            }
-            override fun afterTextChanged(p0: Editable?) {
-            }
-        })
+    private fun showLoading(isLoading: Boolean){
+        binding.loadingRegister.visibility = if(isLoading) View.VISIBLE else View.GONE
     }
 
 }
