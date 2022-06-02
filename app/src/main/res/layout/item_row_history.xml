@@ -43,13 +43,14 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:padding="1dp"
+                    android:scaleType="centerCrop"
                     card_view:layout_constraintBottom_toBottomOf="parent"
                     card_view:layout_constraintStart_toStartOf="parent"
                     card_view:layout_constraintTop_toTopOf="parent"
                     card_view:shapeAppearanceOverlay="@style/roundedCornersImageView"
+                    card_view:srcCompat="@drawable/duck"
                     card_view:strokeColor="@color/grey"
-                    card_view:strokeWidth="1dp"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    card_view:strokeWidth="1dp" />
 
                 <TextView
                     android:id="@+id/tvHistoryRestoName"

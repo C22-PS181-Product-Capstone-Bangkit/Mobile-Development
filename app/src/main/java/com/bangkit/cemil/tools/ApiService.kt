@@ -3,6 +3,7 @@ package com.bangkit.cemil.tools
 import com.bangkit.cemil.tools.model.LoginResponse
 import com.bangkit.cemil.tools.model.ProfileResponse
 import com.bangkit.cemil.tools.model.RegisterResponse
+import com.bangkit.cemil.tools.model.RestaurantItem
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -27,5 +28,10 @@ interface ApiService {
     fun getProfile(
         @Header("Authorization")value : String,
     ): Call<ProfileResponse>
+
+    @GET("api/v1/restaurant/{restaurantId}")
+    fun getRestaurantById(
+        @Path("restaurantId")restaurantId : String,
+    ): Call<RestaurantItem>
 
 }

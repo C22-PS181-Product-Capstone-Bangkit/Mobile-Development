@@ -89,6 +89,7 @@
     <string name="restaurant_location">Restaurant Location</string>
     <string name="restaurant_open_hours">Restaurant Open Hours</string>
     <string name="restaurant_average_cost">Restaurant Average Cost</string>
+    <string name="phone_number">Phone Number</string>
 
     <string-array name="setting_names">
         <item>History</item>

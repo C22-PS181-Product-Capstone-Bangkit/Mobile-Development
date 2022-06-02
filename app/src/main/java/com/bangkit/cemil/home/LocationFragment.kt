@@ -69,7 +69,6 @@ class LocationFragment : Fragment() {
         viewModel.listLocations.observe(requireActivity()){
             list.clear()
             list.addAll(it)
-            Toast.makeText(context, list.toString(), Toast.LENGTH_SHORT).show()
             showRecyclerList()
         }
 

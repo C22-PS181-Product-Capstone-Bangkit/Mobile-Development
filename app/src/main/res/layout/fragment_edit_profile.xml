@@ -85,7 +85,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/nunito_medium"
-        android:text="@string/email"
+        android:text="@string/phone_number"
         android:textColor="?colorOnBackground"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/etEditPhone"

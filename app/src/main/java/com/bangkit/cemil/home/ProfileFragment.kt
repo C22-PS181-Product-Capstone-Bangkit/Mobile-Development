@@ -10,6 +10,8 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.cemil.R
 import com.bangkit.cemil.SettingPreferences
@@ -65,10 +67,10 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
         viewModel.profileData.observe(viewLifecycleOwner){ profileData ->
             if(profileData != null){
                 if(profileData.message == null && profileData.data == null){
-                    binding.tvProfileName.text = profileData.user?.name
-                    binding.tvProfileEmail.text = profileData.user?.email
-                    if(profileData.user?.profilePic != null){
-                        Glide.with(requireContext()).load(profileData.user.profilePic).into(binding.imgProfile)
+                    binding.tvProfileName.text = profileData.name
+                    binding.tvProfileEmail.text = profileData.email
+                    if(profileData.profilePic != null){
+                        Glide.with(requireContext()).load(profileData.profilePic).into(binding.imgProfile)
                     }
                 }
             }
@@ -130,10 +132,12 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
         }
 
         settingAdapter.setOnItemClickCallback(object : SettingAdapter.OnItemClickCallback{
+            val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
             override fun onItemClicked(data: SettingItem) {
                 when (data.text) {
                     resources.getString(R.string.history) -> {
                         // Navigate to History Tab of Bottom Navigation View
+                        NavigationUI.onNavDestinationSelected(bottomNav.menu.findItem(R.id.historyFragment), findNavController())
                     }
                     resources.getString(R.string.my_reviews) -> {
                         // Navigate to List of Reviews Fragment
