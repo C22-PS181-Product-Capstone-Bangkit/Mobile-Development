@@ -52,10 +52,12 @@ class HistoryFragment : Fragment() {
             viewModel.fetchProfileHistory(accessToken!!)
         }
         viewModel.historyData.observe(viewLifecycleOwner){
-            list.clear()
-            list.addAll(it)
-            list.reverse()
-            showRecyclerList()
+            if (it != null) {
+                list.clear()
+                list.addAll(it)
+                list.reverse()
+                showRecyclerList()
+            }
         }
 
         binding.rvHistory.layoutManager = LinearLayoutManager(requireContext())

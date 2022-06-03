@@ -82,7 +82,7 @@ class RegisterFragment : Fragment() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                validityEmail = if(!Patterns.EMAIL_ADDRESS.matcher(p0).matches()){
+                validityEmail = if(!Patterns.EMAIL_ADDRESS.matcher(p0.toString()).matches()){
                     binding.etRegisterEmail.error = "Invalid email format!"
                     false
                 }else true

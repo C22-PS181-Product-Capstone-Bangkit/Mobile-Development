@@ -12,11 +12,17 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.cemil.SettingPreferences
 import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentHomeBinding
+import com.bangkit.cemil.tools.HistoryAdapter
+import com.bangkit.cemil.tools.RestaurantAdapter
+import com.bangkit.cemil.tools.model.HistoryItem
+import com.bangkit.cemil.tools.model.RestaurantItem
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
@@ -28,7 +34,9 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val viewModel by viewModels<HomeViewModel>()
     private var locationAddress : String = ""
+    private val list = ArrayList<RestaurantItem>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,6 +48,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
+        binding.rvNearbyRestos.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        }
         lifecycleScope.launch {
             locationAddress = pref.getPreferences()[SettingPreferences.LOCATION_KEY].toString()
         }
@@ -49,12 +62,12 @@ class HomeFragment : Fragment() {
         }else{
             getMyLocation()
         }
-
-        binding.tvCurrentLocation.setOnClickListener {
-            navigateToLocationFragment()
-        }
-        binding.tvCurrentLocationLabel.setOnClickListener {
-            navigateToLocationFragment()
+        setLocationTextClickListener()
+        viewModel.requestRestoData()
+        viewModel.restoData.observe(viewLifecycleOwner){
+            list.clear()
+            list.addAll(it)
+            showRecyclerList()
         }
     }
 
@@ -107,8 +120,25 @@ class HomeFragment : Fragment() {
         return ContextCompat.checkSelfPermission(requireContext(), permission) == PackageManager.PERMISSION_GRANTED
     }
 
-    private fun navigateToLocationFragment(){
-        val toLocationFragment = HomeFragmentDirections.actionHomeFragmentToLocationFragment()
-        requireView().findNavController().navigate(toLocationFragment)
+    private fun setLocationTextClickListener(){
+        binding.tvCurrentLocation.setOnClickListener {
+            val toLocationFragment = HomeFragmentDirections.actionHomeFragmentToLocationFragment()
+            requireView().findNavController().navigate(toLocationFragment)
+        }
+        binding.tvCurrentLocationLabel.setOnClickListener {
+            val toLocationFragment = HomeFragmentDirections.actionHomeFragmentToLocationFragment()
+            requireView().findNavController().navigate(toLocationFragment)
+        }
+    }
+
+    private fun showRecyclerList(){
+        val adapter = RestaurantAdapter(list)
+        binding.rvNearbyRestos.adapter = adapter
+        adapter.setOnItemClickCallback(object : RestaurantAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: RestaurantItem) {
+                val toRestaurantFragment = HomeFragmentDirections.actionHomeFragmentToRestaurantFragment(data.id.toString())
+                requireView().findNavController().navigate(toRestaurantFragment)
+            }
+        })
     }
 }

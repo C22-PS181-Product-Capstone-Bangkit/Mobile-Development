@@ -73,77 +73,26 @@
             app:layout_constraintTop_toBottomOf="@+id/imgHomeBanner" />
 
         <TextView
-            android:id="@+id/tvFrequentlyVisited"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="26dp"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/nunito_bold"
-            android:text="@string/frequently_visited"
-            android:textColor="?colorOnBackground"
-            android:textSize="22sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnFindMeFood" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvFrequentlyVisited"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="26dp"
-            android:layout_marginTop="6dp"
-            android:clipChildren="false"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvFrequentlyVisited"
-            tools:itemCount="5"
-            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_row_home_resto"
-            tools:orientation="horizontal" />
-
-        <TextView
-            android:id="@+id/tvPopularRestos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="152dp"
-            android:fontFamily="@font/nunito_bold"
-            android:text="@string/popular_restos"
-            android:textColor="?colorOnBackground"
-            android:textSize="22sp"
-            app:layout_constraintStart_toStartOf="@+id/tvFrequentlyVisited"
-            app:layout_constraintTop_toBottomOf="@+id/tvFrequentlyVisited" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvPopularRestos"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="26dp"
-            android:layout_marginTop="6dp"
-            android:clipChildren="false"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPopularRestos"
-            tools:itemCount="5"
-            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_row_home_resto"
-            tools:orientation="horizontal" />
-
-        <TextView
             android:id="@+id/tvNearbyRestos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="152dp"
             android:fontFamily="@font/nunito_bold"
             android:text="@string/nearby_restos"
             android:textColor="?colorOnBackground"
             android:textSize="22sp"
-            app:layout_constraintStart_toStartOf="@+id/tvPopularRestos"
-            app:layout_constraintTop_toBottomOf="@+id/tvPopularRestos" />
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnFindMeFood" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvNearbyRestos"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="26dp"
             android:layout_marginTop="6dp"
-            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingStart="26dp"
+            android:paddingEnd="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvNearbyRestos"
             tools:itemCount="5"
@@ -152,5 +101,4 @@
             tools:orientation="horizontal" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </ScrollView>

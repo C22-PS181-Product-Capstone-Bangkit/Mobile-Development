@@ -15,14 +15,14 @@ import retrofit2.Response
 
 class HistoryViewModel : ViewModel() {
 
-    private val _historyData = MutableLiveData<List<HistoryItem>>()
-    val historyData : LiveData<List<HistoryItem>> = _historyData
+    private val _historyData = MutableLiveData<List<HistoryItem>?>()
+    val historyData : LiveData<List<HistoryItem>?> = _historyData
 
     fun fetchProfileHistory(accessToken: String){
         val client = ApiConfig.getApiService().getProfile("Bearer $accessToken")
         client.enqueue(object: Callback<ProfileResponse> {
             override fun onResponse(call: Call<ProfileResponse>, response: Response<ProfileResponse>) {
-                _historyData.value = response.body()?.history!!
+                _historyData.value = response.body()?.history
             }
 
             override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {

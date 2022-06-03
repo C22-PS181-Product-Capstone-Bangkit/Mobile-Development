@@ -3,12 +3,11 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cv_home"
-    android:layout_width="100dp"
-    android:layout_height="130dp"
+    android:layout_width="110dp"
+    android:layout_height="166dp"
     android:layout_gravity="center"
-    android:layout_marginLeft="8dp"
     android:layout_marginTop="4dp"
-    android:layout_marginRight="8dp"
+    android:layout_marginEnd="16dp"
     android:layout_marginBottom="4dp"
     card_view:cardBackgroundColor="@color/background"
     card_view:cardCornerRadius="8dp"
@@ -21,40 +20,87 @@
 
         <ImageView
             android:id="@+id/imgItemResto"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerInside"
+            android:scaleType="centerCrop"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+            card_view:srcCompat="@drawable/burger" />
+
+        <ImageView
+            android:id="@+id/imgHistoryStar"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginBottom="6dp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintStart_toStartOf="@+id/tvItemRestoName"
+            card_view:srcCompat="@drawable/ic_star" />
 
         <TextView
             android:id="@+id/tvItemRestoName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="5dp"
             android:fontFamily="@font/nunito_bold"
+            android:lines="2"
+            android:maxLines="2"
             android:text="@string/restaurant_name"
             android:textColor="@color/on_background"
-            android:textSize="10sp"
+            android:textSize="11sp"
+            card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/imgItemResto" />
+            card_view:layout_constraintTop_toBottomOf="@+id/imgItemResto"
+            card_view:lineHeight="12dp"
+            tools:text="Nasi Bebek Pak Hendra Bandung" />
 
         <TextView
-            android:id="@+id/tvItemRestoDetails"
+            android:id="@+id/tvItemRestoRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="2dp"
-            android:fontFamily="@font/nunito_semibold"
-            android:text="@string/x_km_x_ratings"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="2dp"
+            android:fontFamily="@font/nunito_medium"
+            android:maxLines="1"
             android:textColor="@color/on_background"
-            android:textSize="5sp"
-            card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/tvItemRestoName" />
+            android:textSize="8sp"
+            card_view:layout_constraintBottom_toBottomOf="@+id/imgHistoryStar"
+            card_view:layout_constraintEnd_toStartOf="@+id/view"
+            card_view:layout_constraintStart_toEndOf="@+id/imgHistoryStar"
+            card_view:layout_constraintTop_toTopOf="@+id/imgHistoryStar"
+            tools:text="4.8 (489+)" />
+
+        <TextView
+            android:id="@+id/tvItemRestoDistance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="4dp"
+            android:fontFamily="@font/nunito_medium"
+            android:maxLines="1"
+            android:textColor="@color/on_background"
+            android:textSize="8sp"
+            card_view:layout_constraintBottom_toBottomOf="@+id/tvItemRestoRating"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintStart_toEndOf="@+id/view"
+            card_view:layout_constraintTop_toTopOf="@+id/tvItemRestoRating"
+            card_view:layout_constraintVertical_bias="0.0"
+            tools:text="0.1 km" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="2dp"
+            android:layout_height="2dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="1dp"
+            android:background="@drawable/circle"
+            card_view:layout_constraintBottom_toBottomOf="@+id/tvItemRestoRating"
+            card_view:layout_constraintEnd_toStartOf="@+id/tvItemRestoDistance"
+            card_view:layout_constraintStart_toEndOf="@+id/tvItemRestoRating"
+            card_view:layout_constraintTop_toTopOf="@+id/tvItemRestoRating" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

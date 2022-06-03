@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_locationFragment"
             app:destination="@id/locationFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_restaurantFragment"
+            app:destination="@id/restaurantFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -97,5 +100,14 @@
             app:destination="@id/profileFragment"
             app:popUpTo="@id/registerSuccessFragment"
             app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/restaurantFragment"
+        android:name="com.bangkit.cemil.home.RestaurantFragment"
+        android:label="fragment_restaurant"
+        tools:layout="@layout/fragment_restaurant" >
+        <argument
+            android:name="restaurantId"
+            app:argType="string" />
     </fragment>
 </navigation>

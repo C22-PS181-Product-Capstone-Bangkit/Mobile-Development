@@ -1,9 +1,6 @@
 package com.bangkit.cemil.tools
 
-import com.bangkit.cemil.tools.model.LoginResponse
-import com.bangkit.cemil.tools.model.ProfileResponse
-import com.bangkit.cemil.tools.model.RegisterResponse
-import com.bangkit.cemil.tools.model.RestaurantItem
+import com.bangkit.cemil.tools.model.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -34,4 +31,15 @@ interface ApiService {
         @Path("restaurantId")restaurantId : String,
     ): Call<RestaurantItem>
 
+    @GET("api/v1/restaurant")
+    fun getRestaurant(): Call<List<RestaurantItem>>
+
+    @FormUrlEncoded
+    @PUT("api/v1/edit-profile")
+    fun postEditProfile(
+        @Header("Authorization")value : String,
+        @Field("name")name: String,
+        @Field("email")email: String,
+        @Field("phone")phone: String
+    ): Call<EditResponse>
 }

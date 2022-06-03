@@ -11,27 +11,43 @@ data class RestaurantResponse(
 data class RestaurantItem(
 
 	@field:SerializedName("photoPlaces")
-	val photoPlaces: Any? = null,
+	val photoPlaces: String? = null,
+
+	@field:SerializedName("profilePic")
+	val profilePic: String? = null,
 
 	@field:SerializedName("contact")
-	val contact: Any? = null,
+	val contact: String? = null,
 
 	@field:SerializedName("name")
 	val name: String? = null,
 
 	@field:SerializedName("rating")
-	val rating: Int? = null,
+	val rating: String? = null,
 
 	@field:SerializedName("openHour")
-	val openHour: Any? = null,
+	val openHour: String? = null,
+
+	@field:SerializedName("price")
+	val price: String? = null,
 
 	@field:SerializedName("location")
-	val location: Any? = null,
+	val location: String? = null,
 
 	@field:SerializedName("id")
 	val id: String? = null,
 
 	@field:SerializedName("category")
-	val category: String? = null
+	val category: String? = null,
+
+	@field:SerializedName("countReview")
+	val countReview: Int = 0,
+
+	@field:SerializedName("review")
+	val review: List<ReviewItem>? = null,
+
+	@field:SerializedName("message")
+	val message: String? = null
 )
+
 

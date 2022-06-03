@@ -67,10 +67,10 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
         viewModel.profileData.observe(viewLifecycleOwner){ profileData ->
             if(profileData != null){
                 if(profileData.message == null && profileData.data == null){
-                    binding.tvProfileName.text = profileData.name
-                    binding.tvProfileEmail.text = profileData.email
-                    if(profileData.profilePic != null){
-                        Glide.with(requireContext()).load(profileData.profilePic).into(binding.imgProfile)
+                    binding.tvProfileName.text = profileData.user?.name
+                    binding.tvProfileEmail.text = profileData.user?.email
+                    if(profileData.user?.profilePic != null){
+                        Glide.with(requireContext()).load(profileData.user.profilePic).into(binding.imgProfile)
                     }
                 }
             }

@@ -9,17 +9,17 @@ import com.bangkit.cemil.databinding.ItemSettingBinding
 
 class RecentSearchAdapter(private val listRecentSearches: List<RecentSearchItem>): RecyclerView.Adapter<RecentSearchAdapter.ViewHolder>() {
 
-    private lateinit var onItemClickCallback: SettingAdapter.OnItemClickCallback
+    private lateinit var onItemClickCallback: OnItemClickCallback
 
     class ViewHolder(var binding: ItemRecentSearchesBinding) : RecyclerView.ViewHolder(binding.root)
 
-    fun setOnItemClickCallback(onItemClickCallback: SettingAdapter.OnItemClickCallback) {
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemRecentSearchesBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return RecentSearchAdapter.ViewHolder(binding)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -28,4 +28,8 @@ class RecentSearchAdapter(private val listRecentSearches: List<RecentSearchItem>
     }
 
     override fun getItemCount() = listRecentSearches.size
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: String)
+    }
 }
