@@ -3,9 +3,7 @@ package com.bangkit.cemil.tools
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bangkit.cemil.databinding.ItemCategoryBinding
 import com.bangkit.cemil.databinding.ItemRecentSearchesBinding
-import com.bangkit.cemil.databinding.ItemSettingBinding
 
 class RecentSearchAdapter(private val listRecentSearches: List<RecentSearchItem>): RecyclerView.Adapter<RecentSearchAdapter.ViewHolder>() {
 

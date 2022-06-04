@@ -7,8 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.bangkit.cemil.tools.ApiConfig
 import com.bangkit.cemil.tools.model.HistoryItem
 import com.bangkit.cemil.tools.model.ProfileResponse
-import com.bangkit.cemil.tools.model.RestaurantItem
-import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

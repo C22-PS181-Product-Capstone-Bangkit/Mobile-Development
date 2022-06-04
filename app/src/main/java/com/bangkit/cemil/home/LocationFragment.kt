@@ -133,7 +133,6 @@ class LocationFragment : Fragment() {
     }
 
     private fun showRecyclerList(){
-
         val locationAdapter = LocationSearchAdapter(list)
         binding.rvSearchLocation.adapter = locationAdapter
         locationAdapter.setOnItemClickCallback(object : LocationSearchAdapter.OnItemClickCallback{

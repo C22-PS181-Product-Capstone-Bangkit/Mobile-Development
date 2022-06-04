@@ -63,21 +63,10 @@ class EditProfileFragment : Fragment() {
             }
         }
         setInputListener()
-        binding.tvSaveEdit.setOnClickListener {
-            val name = binding.etEditName.text.toString().trim()
-            val email = binding.etEditEmail.text.toString().trim()
-            val phone = binding.etEditPhone.text.toString().trim()
-            if(name.isBlank()){
-                binding.etEditName.error = "Name can't be empty!"
-            }else if(email.isBlank()){
-                binding.etEditEmail.error = "Email can't be empty!"
-            }else if(validityEmail && validityPass){
-                viewModel.postEditProfile(accessToken.toString(), name, email, phone)
-            }
-        }
+        setButtonListener()
     }
 
-    fun setInputListener(){
+    private fun setInputListener(){
         binding.etEditEmail.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
@@ -105,5 +94,19 @@ class EditProfileFragment : Fragment() {
             override fun afterTextChanged(p0: Editable?) {
             }
         })
+    }
+    private fun setButtonListener(){
+        binding.tvSaveEdit.setOnClickListener {
+            val name = binding.etEditName.text.toString().trim()
+            val email = binding.etEditEmail.text.toString().trim()
+            val phone = binding.etEditPhone.text.toString().trim()
+            if(name.isBlank()){
+                binding.etEditName.error = "Name can't be empty!"
+            }else if(email.isBlank()){
+                binding.etEditEmail.error = "Email can't be empty!"
+            }else if(validityEmail && validityPass){
+                viewModel.postEditProfile(accessToken.toString(), name, email, phone)
+            }
+        }
     }
 }

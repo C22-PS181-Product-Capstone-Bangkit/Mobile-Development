@@ -6,8 +6,6 @@
     <string name="get_started">Get Started</string>
     <string name="obtain_latest_reviews_from_the_customers">Obtain latest reviews from the customers</string>
     <string name="illustration">Illustration</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login">Login</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -90,6 +88,11 @@
     <string name="restaurant_open_hours">Restaurant Open Hours</string>
     <string name="restaurant_average_cost">Restaurant Average Cost</string>
     <string name="phone_number">Phone Number</string>
+    <string name="preferences">Preferences</string>
+    <string name="average_price">Average Price</string>
+    <string name="open_days">Open Days</string>
+    <string name="distance">Distance</string>
+    <string name="rating">Rating</string>
 
     <string-array name="setting_names">
         <item>History</item>
@@ -160,4 +163,28 @@
         <item>@drawable/thai</item>
         <item>@drawable/western</item>
     </integer-array>
+
+    <string-array name="average_price">
+        <item>Rp.10.000</item>
+        <item>Rp.25.000</item>
+        <item>Rp.50.000</item>
+        <item>Rp.100.000+</item>
+    </string-array>
+
+    <string-array name="open_days">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+
+    <string-array name="distance">
+        <item>0–5 km</item>
+        <item>5–10 km</item>
+        <item>10+ km</item>
+    </string-array>
+
 </resources>

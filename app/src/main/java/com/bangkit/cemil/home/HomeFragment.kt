@@ -5,7 +5,6 @@ import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,18 +19,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.cemil.SettingPreferences
 import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentHomeBinding
-import com.bangkit.cemil.tools.HistoryAdapter
 import com.bangkit.cemil.tools.RestaurantAdapter
-import com.bangkit.cemil.tools.model.HistoryItem
 import com.bangkit.cemil.tools.model.RestaurantItem
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.CancellationTokenSource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
-import kotlin.math.roundToInt
 
 class HomeFragment : Fragment() {
 
@@ -73,18 +71,26 @@ class HomeFragment : Fragment() {
         viewModel.restoData.observe(viewLifecycleOwner){ it ->
             val results = FloatArray(1)
             val restaurants = it.toMutableList()
-            calculateRestaurantDistances(restaurants.listIterator(), results, pref)
-            restaurants.sortBy { it.distance?.toDouble() }
-            list.clear()
-            list.addAll(restaurants)
-            showRecyclerList()
+            lifecycleScope.launch(Dispatchers.IO){
+                calculateRestaurantDistances(restaurants.listIterator(), results, pref)
+                restaurants.sortBy { it.distance?.toDouble() }
+                list.clear()
+                list.addAll(restaurants)
+                withContext(Dispatchers.Main){
+                    showRecyclerList()
+                }
+            }
+        }
+        binding.btnFindMeFood.setOnClickListener {
+            val toPreferencesFragment = HomeFragmentDirections.actionHomeFragmentToPreferencesFragment()
+            requireView().findNavController().navigate(toPreferencesFragment)
         }
     }
 
     private fun calculateRestaurantDistances(iterator: MutableListIterator<RestaurantItem>, results: FloatArray, pref: SettingPreferences) {
         while (iterator.hasNext()) {
             val oldValue = iterator.next()
-            val addresses = Geocoder(requireContext()).getFromLocationName(oldValue.location, 1)
+            val addresses = Geocoder(requireContext()).getFromLocationName(oldValue.location.toString(), 1)
             if (addresses.size > 0) {
                 val latitude = addresses[0].latitude
                 val longitude = addresses[0].longitude

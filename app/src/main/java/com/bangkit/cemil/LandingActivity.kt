@@ -17,7 +17,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bangkit.cemil.databinding.ActivityLandingBinding
 import com.bangkit.cemil.home.MainActivity
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 val Context.dataStore : DataStore<Preferences> by preferencesDataStore(name = "settings")

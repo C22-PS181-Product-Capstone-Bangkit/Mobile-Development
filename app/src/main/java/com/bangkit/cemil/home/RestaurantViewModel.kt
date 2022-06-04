@@ -22,7 +22,6 @@ class RestaurantViewModel: ViewModel() {
             }
 
             override fun onFailure(call: Call<RestaurantItem>, t: Throwable) {
-
             }
         })
 

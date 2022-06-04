@@ -82,4 +82,9 @@ dependencies {
 
     //SwipeToRefresh library
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    //FlexboxLayout library
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
+    
+
 }

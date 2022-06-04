@@ -48,7 +48,6 @@ class HistoryFragment : Fragment() {
         }
         //Check isNullOrEmpty to only initialize API call after app is first launched
         if(isAuthorized && viewModel.historyData.value.isNullOrEmpty()){
-            Log.e("HistoryFragment", " API called")
             viewModel.fetchProfileHistory(accessToken!!)
         }
         viewModel.historyData.observe(viewLifecycleOwner){

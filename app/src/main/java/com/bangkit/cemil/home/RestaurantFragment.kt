@@ -5,10 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
-import com.bangkit.cemil.LandingFragment
-import com.bangkit.cemil.R
 import com.bangkit.cemil.databinding.FragmentRestaurantBinding
 import com.bumptech.glide.Glide
 
@@ -31,9 +28,8 @@ class RestaurantFragment : Fragment() {
         viewModel.getRestaurantById(dataRestaurantId)
         viewModel.restoData.observe(viewLifecycleOwner){
             binding.nestedScrollView.visibility = View.VISIBLE
-            binding.tvRestaurantName.text = it.name
-            val categoryAmount = it.category?.split(", ")
             val restoReviewAmount = "(${it.countReview})"
+            val categoryAmount = it.category?.split(", ")
             if(categoryAmount?.size!! >= 1){
                 binding.tvRestaurantCategory.text = categoryAmount[0]
             }
@@ -49,13 +45,12 @@ class RestaurantFragment : Fragment() {
                     text = categoryAmount[2]
                 }
             }
-
+            binding.tvRestaurantName.text = it.name
             binding.tvRestaurantTime.text = it.openHour
             binding.tvRestaurantLocation.text = it.location
             binding.tvRestaurantCost.text = it.price
-            Glide.with(requireContext()).load(it.photoPlaces).into(binding.imgRestaurantBanner)
             binding.tvRestaurantReviewsAmount.text = restoReviewAmount
+            Glide.with(requireContext()).load(it.photoPlaces).into(binding.imgRestaurantBanner)
         }
     }
-
 }

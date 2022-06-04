@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_restaurantFragment"
             app:destination="@id/restaurantFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_preferencesFragment"
+            app:destination="@id/preferencesFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -110,4 +113,9 @@
             android:name="restaurantId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/preferencesFragment"
+        android:name="com.bangkit.cemil.home.PreferencesFragment"
+        android:label="fragment_preferences"
+        tools:layout="@layout/fragment_preferences" />
 </navigation>
