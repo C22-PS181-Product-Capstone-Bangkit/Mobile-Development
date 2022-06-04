@@ -26,10 +26,11 @@ class RestaurantAdapter(private val restaurantList: List<RestaurantItem>) : Recy
         val restaurantItem = restaurantList[position]
         val restaurantReviews = if(restaurantItem.countReview > 999) "999+" else restaurantItem.countReview
         val restaurantRating = "${(restaurantItem.rating ?: 0.0).toString()} (${restaurantReviews})"
+        val restaurantDistance = "${restaurantItem.distance} km"
         holder.binding.apply {
             tvItemRestoName.text = restaurantItem.name
             tvItemRestoRating.text = restaurantRating
-            tvItemRestoDistance.text = "0.1 km"
+            tvItemRestoDistance.text = restaurantDistance
             if(restaurantItem.profilePic != null){
                 Glide.with(holder.itemView.context).load(restaurantItem.profilePic).into(imgItemResto)
             }

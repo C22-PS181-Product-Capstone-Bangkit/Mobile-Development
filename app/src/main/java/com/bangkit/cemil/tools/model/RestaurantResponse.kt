@@ -47,7 +47,9 @@ data class RestaurantItem(
 	val review: List<ReviewItem>? = null,
 
 	@field:SerializedName("message")
-	val message: String? = null
+	val message: String? = null,
+
+	var distance: String? = null
 )
 
 

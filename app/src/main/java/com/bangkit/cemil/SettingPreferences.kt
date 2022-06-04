@@ -49,6 +49,13 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
         }
     }
 
+    suspend fun saveLatitudeLongitude(latitude: String, longitude: String){
+        dataStore.edit{
+            it[LATITUDE_KEY] = latitude
+            it[LONGITUDE_KEY] = longitude
+        }
+    }
+
     suspend fun deleteAuthorizationToken(){
         dataStore.edit {
             it.remove(AUTHORIZATION_TOKEN_KEY)
@@ -58,6 +65,8 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
     suspend fun deleteLocation(){
         dataStore.edit {
             it.remove(LOCATION_KEY)
+            it.remove(LATITUDE_KEY)
+            it.remove(LONGITUDE_KEY)
         }
     }
 
@@ -70,6 +79,8 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
         val AUTHORIZED_KEY = booleanPreferencesKey("is_authorized")
         val LOCATION_KEY = stringPreferencesKey("location")
         val AUTHORIZATION_TOKEN_KEY = stringPreferencesKey("authorization_token")
+        val LATITUDE_KEY = stringPreferencesKey("latitude")
+        val LONGITUDE_KEY = stringPreferencesKey("longitude")
 
         fun getInstance(dataStore: DataStore<Preferences>): SettingPreferences {
             return INSTANCE ?: synchronized(this) {

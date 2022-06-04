@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,9 +27,11 @@ import com.bangkit.cemil.tools.model.RestaurantItem
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.CancellationTokenSource
 import kotlinx.coroutines.launch
 import java.util.*
+import kotlin.math.roundToInt
 
 class HomeFragment : Fragment() {
 
@@ -36,6 +39,7 @@ class HomeFragment : Fragment() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val viewModel by viewModels<HomeViewModel>()
     private var locationAddress : String = ""
+    private var latLng : LatLng? = null
     private val list = ArrayList<RestaurantItem>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,13 +52,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
+
         binding.rvNearbyRestos.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
         }
         lifecycleScope.launch {
             locationAddress = pref.getPreferences()[SettingPreferences.LOCATION_KEY].toString()
+            latLng = LatLng(pref.getPreferences()[SettingPreferences.LATITUDE_KEY]?.toDouble() ?: 0.0,
+                pref.getPreferences()[SettingPreferences.LONGITUDE_KEY]?.toDouble() ?: 0.0)
         }
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
         if(locationAddress != "null"){
@@ -64,10 +70,36 @@ class HomeFragment : Fragment() {
         }
         setLocationTextClickListener()
         viewModel.requestRestoData()
-        viewModel.restoData.observe(viewLifecycleOwner){
+        viewModel.restoData.observe(viewLifecycleOwner){ it ->
+            val results = FloatArray(1)
+            val restaurants = it.toMutableList()
+            calculateRestaurantDistances(restaurants.listIterator(), results, pref)
+            restaurants.sortBy { it.distance?.toDouble() }
             list.clear()
-            list.addAll(it)
+            list.addAll(restaurants)
             showRecyclerList()
+        }
+    }
+
+    private fun calculateRestaurantDistances(iterator: MutableListIterator<RestaurantItem>, results: FloatArray, pref: SettingPreferences) {
+        while (iterator.hasNext()) {
+            val oldValue = iterator.next()
+            val addresses = Geocoder(requireContext()).getFromLocationName(oldValue.location, 1)
+            if (addresses.size > 0) {
+                val latitude = addresses[0].latitude
+                val longitude = addresses[0].longitude
+                if(latLng == null){
+                    val userAddress = Geocoder(requireContext()).getFromLocationName(locationAddress, 1)
+                    Location.distanceBetween(userAddress[0].latitude, userAddress[0].longitude, latitude, longitude, results)
+                    lifecycleScope.launch{
+                        pref.saveLatitudeLongitude(userAddress[0].latitude.toString(), userAddress[0].longitude.toString())
+                    }
+                }else{
+                    Location.distanceBetween(latLng!!.latitude, latLng!!.longitude, latitude, longitude, results)
+                }
+            }
+            oldValue.distance = (Math.round((results[0] / 1000) * 10.0) / 10.0).toString()
+            iterator.set(oldValue)
         }
     }
 
