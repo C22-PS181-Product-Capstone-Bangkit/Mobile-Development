@@ -11,7 +11,7 @@ data class ProfileResponse(
 	val history: List<HistoryItem?>? = null,
 
 	@field:SerializedName("user")
-	val user: User? = null,
+	val user: User?,
 
 	@field:SerializedName("likes")
 	val likes: List<LikesItem?>? = null,
@@ -68,25 +68,25 @@ data class ReviewItem(
 data class User(
 
 	@field:SerializedName("profilePic")
-	val profilePic: Any? = null,
+	val profilePic: String?,
 
 	@field:SerializedName("name")
-	val name: String? = null,
+	val name: String,
 
 	@field:SerializedName("id")
-	val id: String? = null,
+	val id: String?,
 
 	@field:SerializedName("idFriend")
-	val idFriend: String? = null,
+	val idFriend: String?,
 
 	@field:SerializedName("exp")
-	val exp: Int? = null,
+	val exp: Int?,
 
 	@field:SerializedName("iat")
-	val iat: Int? = null,
+	val iat: Int,
 
 	@field:SerializedName("email")
-	val email: String? = null
+	val email: String
 )
 
 data class HistoryItem(

@@ -12,6 +12,7 @@
     <color name="grey">#FF949494</color>
     <color name="tertiary">#FFBF2300</color>
     <color name="on_tertiary">#FFFFFFFF</color>
+    <color name="outline">#FF6F787C</color>
 
     <!-- Dark theme colors -->
     <color name="primary_dark">#FF86E4F9</color>
@@ -25,4 +26,5 @@
     <color name="grey_dark">#FFE8E8E8</color>
     <color name="tertiary_dark">#FFFFA68D</color>
     <color name="on_tertiary_dark">#FFBF2300</color>
+    <color name="outline_dark">#FF899296</color>
 </resources>

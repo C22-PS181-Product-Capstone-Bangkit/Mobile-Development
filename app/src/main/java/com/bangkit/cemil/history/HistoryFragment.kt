@@ -1,4 +1,4 @@
-package com.bangkit.cemil.home
+package com.bangkit.cemil.history
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import com.bangkit.cemil.R
 import com.bangkit.cemil.databinding.FragmentHistoryBinding
 
 class HistoryFragment : Fragment() {

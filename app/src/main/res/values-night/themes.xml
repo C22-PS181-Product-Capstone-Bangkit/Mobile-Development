@@ -18,6 +18,8 @@
         <item name="android:strokeColor">@color/grey_dark</item>
         <item name="colorTertiary">@color/tertiary_dark</item>
         <item name="colorOnTertiary">@color/on_tertiary_dark</item>
+
+        <item name="colorOutline">@color/outline_dark</item>
     </style>
 
     <style name="Theme.Cemil.SplashScreen" parent="Theme.SplashScreen">

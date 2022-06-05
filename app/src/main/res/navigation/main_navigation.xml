@@ -21,12 +21,12 @@
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/historyFragment"
-        android:name="com.bangkit.cemil.home.HistoryFragment"
+        android:name="com.bangkit.cemil.history.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.bangkit.cemil.home.ProfileFragment"
+        android:name="com.bangkit.cemil.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action

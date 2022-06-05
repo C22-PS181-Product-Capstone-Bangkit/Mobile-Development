@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".home.ProfileFragment">
+    tools:context=".profile.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -24,13 +24,11 @@
 
             <TextView
                 android:id="@+id/tvProfileTitle"
+                style="@style/Theme.Cemil.Toolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:fontFamily="@font/nunito_extrabold"
-                android:text="@string/profile"
-                android:textColor="?colorOnPrimary"
-                android:textSize="24sp" />
+                android:text="@string/profile" />
 
         </com.google.android.material.appbar.MaterialToolbar>
 
@@ -44,6 +42,70 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/materialToolbar" />
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/materialToolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/shimmer_img_profile"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/bg_shimmer"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/circleImageView" />
+
+                <TextView
+                    android:id="@+id/shimmer_tv_name"
+                    android:layout_width="0dp"
+                    android:layout_height="16dp"
+                    android:background="@drawable/bg_shimmer"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:textColor="?colorOnBackground"
+                    android:textSize="20sp"
+                    app:layout_constraintWidth_percent="0.3"
+                    app:layout_constraintBottom_toTopOf="@id/shimmer_tv_email"
+                    app:layout_constraintStart_toEndOf="@+id/shimmer_img_profile"
+                    app:layout_constraintTop_toTopOf="@+id/shimmer_img_profile" />
+
+                <TextView
+                    android:id="@+id/shimmer_tv_email"
+                    android:layout_width="0dp"
+                    android:layout_height="16dp"
+                    android:background="@drawable/bg_shimmer"
+                    android:fontFamily="@font/nunito_medium"
+                    android:textColor="?colorOnBackground"
+                    app:layout_constraintWidth_percent="0.6"
+                    app:layout_constraintBottom_toBottomOf="@id/shimmer_img_profile"
+                    app:layout_constraintStart_toStartOf="@+id/shimmer_tv_name"
+                    app:layout_constraintTop_toBottomOf="@+id/shimmer_tv_name" />
+
+                <ImageButton
+                    android:id="@+id/shimmer_btn_edit"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/bg_shimmer"
+                    android:contentDescription="@string/edit_profile"
+                    app:layout_constraintBottom_toBottomOf="@+id/shimmer_tv_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/shimmer_tv_name"
+                    app:tint="?colorPrimary" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgProfile"
             android:layout_width="64dp"
@@ -53,8 +115,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/materialToolbar"
             app:shapeAppearanceOverlay="@style/circleImageView"
-            app:srcCompat="@drawable/ic_profile_filled"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@tools:sample/avatars"
+            tools:visibility="invisible"/>
 
         <TextView
             android:id="@+id/tvProfileName"
@@ -62,26 +124,28 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/nunito_bold"
-            android:text="@string/name"
             android:textColor="?colorOnBackground"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@id/tvProfileEmail"
             app:layout_constraintEnd_toStartOf="@+id/imgEditProfile"
             app:layout_constraintStart_toEndOf="@+id/imgProfile"
-            app:layout_constraintTop_toTopOf="@+id/imgProfile" />
+            app:layout_constraintTop_toTopOf="@+id/imgProfile"
+            tools:text="@string/name"
+            tools:visibility="invisible"/>
 
         <TextView
             android:id="@+id/tvProfileEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_medium"
-            android:text="@string/email"
             android:textColor="?colorOnBackground"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@id/imgProfile"
             app:layout_constraintEnd_toEndOf="@+id/tvProfileName"
             app:layout_constraintStart_toStartOf="@+id/tvProfileName"
-            app:layout_constraintTop_toBottomOf="@+id/tvProfileName" />
+            app:layout_constraintTop_toBottomOf="@+id/tvProfileName"
+            tools:text="@string/email"
+            tools:visibility="invisible"/>
 
         <ImageButton
             android:id="@+id/imgEditProfile"
@@ -94,7 +158,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/tvProfileName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvProfileName"
-            app:tint="?colorPrimary" />
+            app:tint="?colorPrimary"
+            tools:visibility="invisible"/>
 
         <TextView
             android:id="@+id/tvProfileAccount"

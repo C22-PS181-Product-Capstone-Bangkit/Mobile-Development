@@ -1,4 +1,4 @@
-package com.bangkit.cemil.home
+package com.bangkit.cemil.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,16 +12,25 @@ import retrofit2.Response
 class ProfileViewModel : ViewModel() {
 
     private val _profileData = MutableLiveData<ProfileResponse>()
-    val profileData : LiveData<ProfileResponse> = _profileData
+    val profileData: LiveData<ProfileResponse> = _profileData
 
-    fun fetchProfile(accessToken: String){
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    fun fetchProfile(accessToken: String) {
+        _isLoading.value = true
         val client = ApiConfig.getApiService().getProfile("Bearer $accessToken")
-        client.enqueue(object: Callback<ProfileResponse>{
-            override fun onResponse(call: Call<ProfileResponse>, response: Response<ProfileResponse>) {
+        client.enqueue(object : Callback<ProfileResponse> {
+            override fun onResponse(
+                call: Call<ProfileResponse>,
+                response: Response<ProfileResponse>
+            ) {
+                _isLoading.value = false
                 _profileData.value = response.body()
             }
 
             override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
+                _isLoading.value = false
                 _profileData.value = ProfileResponse(null, null, null, null, "Error", null)
             }
         })
