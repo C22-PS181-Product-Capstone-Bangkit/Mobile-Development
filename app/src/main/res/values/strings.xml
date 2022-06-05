@@ -93,6 +93,8 @@
     <string name="open_days">Open Days</string>
     <string name="distance">Distance</string>
     <string name="rating">Rating</string>
+    <string name="add_review">Add Review</string>
+    <string name="see_all_reviews">See All Reviews</string>
 
     <string-array name="setting_names">
         <item>History</item>
