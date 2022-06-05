@@ -3,6 +3,7 @@ package com.bangkit.cemil.profile
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -33,7 +34,7 @@ class ChangePasswordFragment : Fragment() {
         (activity as AppCompatActivity).apply{
             setSupportActionBar(binding.materialToolbarChangePassword)
             supportActionBar?.setDisplayShowTitleEnabled(false)
-            binding.materialToolbarChangePassword.setNavigationOnClickListener {
+            binding.toolbarNavUp.setOnClickListener {
                 onBackPressed()
             }
         }
@@ -52,10 +53,11 @@ class ChangePasswordFragment : Fragment() {
         viewModel.changePassResponse.observe(viewLifecycleOwner){
             if(it != null){
                 if(it.message == "Password Berhasil Diubah"){
+                    Toast.makeText(context, "Password successfully changed!", Toast.LENGTH_SHORT).show()
                     val toProfileFragment = ChangePasswordFragmentDirections.actionChangePasswordFragmentToProfileFragment()
                     requireView().findNavController().navigate(toProfileFragment)
                 }else{
-                    Toast.makeText(context, "Failed, check your current password", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -67,7 +69,7 @@ class ChangePasswordFragment : Fragment() {
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 validityPass = if(p0.toString().trim().length <= 5){
-                    binding.etCurrentPassword.error = "Password needs to be at least 6 characters."
+                    binding.etNewPassword.error = "Password needs to be at least 6 characters."
                     false
                 }else true
             }

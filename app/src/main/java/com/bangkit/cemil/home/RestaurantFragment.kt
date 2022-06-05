@@ -9,7 +9,9 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.bangkit.cemil.databinding.FragmentRestaurantBinding
 import com.bangkit.cemil.tools.HistoryAdapter
+import com.bangkit.cemil.tools.ReviewAdapter
 import com.bangkit.cemil.tools.model.HistoryItem
+import com.bangkit.cemil.tools.model.RestaurantReviewItem
 import com.bangkit.cemil.tools.model.ReviewItem
 import com.bumptech.glide.Glide
 
@@ -17,7 +19,7 @@ class RestaurantFragment : Fragment() {
 
     private lateinit var binding : FragmentRestaurantBinding
     private val viewModel by viewModels<RestaurantViewModel>()
-    private val list = ArrayList<ReviewItem>()
+    private val list = ArrayList<RestaurantReviewItem>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,16 +58,19 @@ class RestaurantFragment : Fragment() {
             binding.tvRestaurantCost.text = it.price
             binding.tvRestaurantReviewsAmount.text = restoReviewAmount
             Glide.with(requireContext()).load(it.photoPlaces).into(binding.imgRestaurantBanner)
+            list.clear()
+            list.addAll(it.review!!)
+            showRecyclerList()
         }
     }
 
     private fun showRecyclerList(){
-//        val adapter = HistoryAdapter(list)
-//        binding.rvReviews.adapter = adapter
-//        adapter.setOnItemClickCallback(object : HistoryAdapter.OnItemClickCallback{
-//            override fun onItemClicked(data: HistoryItem) {
-//                Toast.makeText(context, data.toString(), Toast.LENGTH_SHORT).show()
-//            }
-//        })
+        val adapter = ReviewAdapter(list)
+        binding.rvReviews.adapter = adapter
+        adapter.setOnItemClickCallback(object : ReviewAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: RestaurantReviewItem) {
+                Toast.makeText(context, data.toString(), Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }
