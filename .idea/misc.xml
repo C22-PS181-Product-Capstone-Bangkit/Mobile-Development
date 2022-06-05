@@ -80,6 +80,8 @@
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable-night/illustration_profile_unauthorized.xml" value="0.2395" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable-night/illustration_second_landing.xml" value="0.234" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable-night/illustration_third_landing.xml" value="0.234" />
+        <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable-night/img_profile_placeholder.xml" value="0.1" />
+        <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/bg_shimmer.xml" value="0.1875" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/btn_background.xml" value="0.1875" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/custom_edittext.xml" value="0.234" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/ic_about_filled.xml" value="0.2395" />
@@ -109,6 +111,7 @@
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/illustration_profile_unauthorized.xml" value="0.2395" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/illustration_second_landing.xml" value="0.234" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/illustration_third_landing.xml" value="0.234" />
+        <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/img_profile_placeholder.xml" value="0.1" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/tab_selector.xml" value="0.234" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/activity_landing.xml" value="0.264" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/activity_main.xml" value="0.264" />
@@ -120,7 +123,7 @@
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_landing2.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_landing3.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_login.xml" value="0.264" />
-        <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
+        <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_profile.xml" value="0.4" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_profile_unauthorized.xml" value="0.264" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_register.xml" value="0.176" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_search.xml" value="0.25416666666666665" />

@@ -33,39 +33,45 @@ import java.util.*
 
 class HomeFragment : Fragment() {
 
-    private lateinit var binding : FragmentHomeBinding
+    private lateinit var binding: FragmentHomeBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var locationAddress: String = ""
     private val viewModel by viewModels<HomeViewModel>()
-    private var locationAddress : String = ""
     private var latLng : LatLng? = null
     private val list = ArrayList<RestaurantItem>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
 
         binding.rvNearbyRestos.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
+
         lifecycleScope.launch {
             locationAddress = pref.getPreferences()[SettingPreferences.LOCATION_KEY].toString()
             latLng = LatLng(pref.getPreferences()[SettingPreferences.LATITUDE_KEY]?.toDouble() ?: 0.0,
                 pref.getPreferences()[SettingPreferences.LONGITUDE_KEY]?.toDouble() ?: 0.0)
         }
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
-        if(locationAddress != "null"){
+
+        if (locationAddress != "null") {
             binding.tvCurrentLocation.text = locationAddress
-        }else{
+        } else {
             getMyLocation()
         }
+
         setLocationTextClickListener()
         viewModel.requestRestoData()
         viewModel.restoData.observe(viewLifecycleOwner){ it ->
@@ -81,6 +87,11 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
+        binding.tvCurrentLocationLabel.setOnClickListener {
+            navigateToLocationFragment()
+        }
+
         binding.btnFindMeFood.setOnClickListener {
             val toPreferencesFragment = HomeFragmentDirections.actionHomeFragmentToPreferencesFragment()
             requireView().findNavController().navigate(toPreferencesFragment)
@@ -109,53 +120,75 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){ permissions ->
-        when{
-            permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> getMyLocation()
-            permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> getMyLocation()
-            else -> Toast.makeText(requireContext(), "Location permisson needed. Try again.", Toast.LENGTH_SHORT).show()
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            when {
+                permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> getMyLocation()
+                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> getMyLocation()
+                else -> Toast.makeText(
+                    requireContext(),
+                    "Location permission needed. Try again.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
-    }
 
-    private fun getMyLocation(){
-        if(checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION) && checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
-            fusedLocationClient.lastLocation.addOnSuccessListener { location : Location? ->
-                if(location != null){
-                    val addresses = Geocoder(requireContext()).getFromLocation(location.latitude, location.longitude, 1)
-                    val myLocation = addresses[0].featureName
-                    //Replace Plus Code POI names with street addresses
-                    binding.tvCurrentLocation.text = if(myLocation.contains("+")){
-                        addresses[0].getAddressLine(0).replace("${myLocation},", "").trim()
-                    }else {
-                        myLocation
-                    }
-                }else{
+    private fun getMyLocation() {
+        if (checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION) && checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
+            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                if (location != null) {
+                    val addresses = Geocoder(requireContext()).getFromLocation(
+                        location.latitude,
+                        location.longitude,
+                        1
+                    )
+                    val myLocation = addresses[0].getAddressLine(0)
+                    binding.tvCurrentLocation.text = myLocation
+                } else {
                     //If no last location found in cache, attempt to retrieve the Current Location
                     val tokenSrc = CancellationTokenSource()
-                    fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY,
-                        tokenSrc.token).addOnSuccessListener { currLocation : Location? ->
-                        if(currLocation != null){
-                            val addresses = Geocoder(requireContext()).getFromLocation(currLocation.latitude, currLocation.longitude, 1)
-                            val myLocation = addresses[0].featureName
-                            //Replace Plus Code POI names with street addresses
-                            binding.tvCurrentLocation.text = if(myLocation.contains("+")){
-                                addresses[0].getAddressLine(0).replace("${myLocation},", "").trim()
-                            }else {
-                                myLocation
-                            }
-                        }else{
-                            Toast.makeText(context, "Cannot retrieve your current location.", Toast.LENGTH_SHORT).show()
+                    fusedLocationClient.getCurrentLocation(
+                        LocationRequest.PRIORITY_HIGH_ACCURACY,
+                        tokenSrc.token
+                    ).addOnSuccessListener { currLocation: Location? ->
+                        if (currLocation != null) {
+                            val addresses = Geocoder(requireContext()).getFromLocation(
+                                currLocation.latitude,
+                                currLocation.longitude,
+                                1
+                            )
+                            val myLocation = addresses[0].getAddressLine(0)
+                            binding.tvCurrentLocation.text = myLocation
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "Cannot retrieve your current location.",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }
             }
-        } else{
-            requestPermissionLauncher.launch(arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION))
+        } else {
+            requestPermissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+            )
         }
     }
 
-    private fun checkPermission(permission : String) :Boolean{
-        return ContextCompat.checkSelfPermission(requireContext(), permission) == PackageManager.PERMISSION_GRANTED
+    private fun checkPermission(permission: String): Boolean {
+        return ContextCompat.checkSelfPermission(
+            requireContext(),
+            permission
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun navigateToLocationFragment() {
+        val toLocationFragment = HomeFragmentDirections.actionHomeFragmentToLocationFragment()
+        requireView().findNavController().navigate(toLocationFragment)
     }
 
     private fun setLocationTextClickListener(){

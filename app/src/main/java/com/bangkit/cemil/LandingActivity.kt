@@ -19,7 +19,8 @@ import com.bangkit.cemil.home.MainActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.launch
 
-val Context.dataStore : DataStore<Preferences> by preferencesDataStore(name = "settings")
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
+
 class LandingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLandingBinding
@@ -34,9 +35,9 @@ class LandingActivity : AppCompatActivity() {
         binding = ActivityLandingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
-        lifecycleScope.launch{
+        lifecycleScope.launch {
             firstTimeLanding = pref.getPreferences()[SettingPreferences.LANDING_KEY]
-            if(firstTimeLanding == false){
+            if (firstTimeLanding == false) {
                 startMainActivity()
             }
         }
@@ -53,7 +54,7 @@ class LandingActivity : AppCompatActivity() {
         }
 
         binding.landingGetStartedButton.setOnClickListener {
-            lifecycleScope.launch{
+            lifecycleScope.launch {
                 pref.saveFirstTimeLanding(false)
             }
             startMainActivity()
@@ -87,10 +88,10 @@ class LandingActivity : AppCompatActivity() {
         }
     }
 
-    private fun setThemeMode(pref: SettingPreferences){
-        lifecycleScope.launch{
+    private fun setThemeMode(pref: SettingPreferences) {
+        lifecycleScope.launch {
             themeMode = pref.getPreferences()[SettingPreferences.THEME_KEY]
-            when(themeMode){
+            when (themeMode) {
                 true -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 false -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 else -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
@@ -98,7 +99,7 @@ class LandingActivity : AppCompatActivity() {
         }
     }
 
-    private fun startMainActivity(){
+    private fun startMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
