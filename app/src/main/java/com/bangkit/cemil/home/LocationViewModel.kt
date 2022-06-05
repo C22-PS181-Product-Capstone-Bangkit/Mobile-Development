@@ -17,18 +17,17 @@ class LocationViewModel: ViewModel() {
     fun searchQueryLocation(query : String?, placesClient: PlacesClient){
         val request = FindAutocompletePredictionsRequest.builder().setQuery(query).build()
         val list = ArrayList<LocationSearchItem>()
-        Log.e("LocationViewModel", "Querying Location...")
         placesClient.findAutocompletePredictions(request).addOnSuccessListener { response: FindAutocompletePredictionsResponse ->
            val responseList = response.autocompletePredictions
            for(index in responseList.indices){
                list.add(LocationSearchItem(
                    responseList[index].getPrimaryText(null).toString(),
-                   responseList[index].getSecondaryText(null).toString()))
+                   responseList[index].getSecondaryText(null).toString()
+               ))
            }
             _listLocations.value = list
-            Log.e("LocationViewModel", "onSuccess: $list")
        }.addOnFailureListener {
             Log.e("LocationViewModel", "onFailure: ${it.message}")
-        }
+       }
     }
 }

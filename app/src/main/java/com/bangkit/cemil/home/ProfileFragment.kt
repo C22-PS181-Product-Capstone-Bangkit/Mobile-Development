@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.cemil.R
 import com.bangkit.cemil.SettingPreferences
@@ -25,7 +27,7 @@ import kotlinx.coroutines.launch
 class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
 
     private lateinit var binding : FragmentProfileBinding
-    private lateinit var viewModel : ProfileViewModel
+    private val viewModel by viewModels<ProfileViewModel>()
     private var isAuthorized: Boolean = false
     private var accessToken: String? = null
 
@@ -53,10 +55,11 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
-        (activity as AppCompatActivity).setSupportActionBar(binding.materialToolbar)
-        (activity as AppCompatActivity).supportActionBar?.title = null
-        (activity as AppCompatActivity).findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.VISIBLE
+        (activity as AppCompatActivity).apply {
+            setSupportActionBar(binding.materialToolbar)
+            supportActionBar?.title = null
+            findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.VISIBLE
+        }
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
         lifecycleScope.launch {
             isAuthorized = pref.getPreferences()[SettingPreferences.AUTHORIZED_KEY] == true
@@ -74,20 +77,7 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
             }
         }
         checkAuthorization()
-        binding.layoutUnauthorized.btnCreateAccount.setOnClickListener {
-            val toRegisterFragment = ProfileFragmentDirections.actionProfileFragmentToRegisterFragment()
-            view.findNavController().navigate(toRegisterFragment)
-        }
-
-        binding.layoutUnauthorized.btnLogin.setOnClickListener {
-            val toLoginFragment = ProfileFragmentDirections.actionProfileFragmentToLoginFragment()
-            view.findNavController().navigate(toLoginFragment)
-        }
-
-        binding.imgEditProfile.setOnClickListener{
-            val toEditProfileFragment = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment()
-            view.findNavController().navigate(toEditProfileFragment)
-        }
+        setButtonListener()
     }
 
     private fun checkAuthorization() {
@@ -121,7 +111,10 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
             tvProfileAccount.visibility = View.VISIBLE
             rvSettingList.visibility = View.VISIBLE
         }
+        setUpSettingsRecyclerList()
+    }
 
+    private fun setUpSettingsRecyclerList(){
         val settingAdapter = SettingAdapter(listSetting)
         binding.rvSettingList.apply {
             setHasFixedSize(true)
@@ -130,10 +123,11 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
         }
 
         settingAdapter.setOnItemClickCallback(object : SettingAdapter.OnItemClickCallback{
+            val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
             override fun onItemClicked(data: SettingItem) {
                 when (data.text) {
                     resources.getString(R.string.history) -> {
-                        // Navigate to History Tab of Bottom Navigation View
+                        NavigationUI.onNavDestinationSelected(bottomNav.menu.findItem(R.id.historyFragment), findNavController())
                     }
                     resources.getString(R.string.my_reviews) -> {
                         // Navigate to List of Reviews Fragment
@@ -164,6 +158,23 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
                 }
             }
         })
+    }
+
+    private fun setButtonListener(){
+        binding.layoutUnauthorized.btnCreateAccount.setOnClickListener {
+            val toRegisterFragment = ProfileFragmentDirections.actionProfileFragmentToRegisterFragment()
+            requireView().findNavController().navigate(toRegisterFragment)
+        }
+
+        binding.layoutUnauthorized.btnLogin.setOnClickListener {
+            val toLoginFragment = ProfileFragmentDirections.actionProfileFragmentToLoginFragment()
+            requireView().findNavController().navigate(toLoginFragment)
+        }
+
+        binding.imgEditProfile.setOnClickListener{
+            val toEditProfileFragment = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment()
+            requireView().findNavController().navigate(toEditProfileFragment)
+        }
     }
 
     override fun onDialogLogout() {

@@ -25,9 +25,7 @@
             android:background="@android:color/transparent"
             android:contentDescription="@string/back"
             android:src="@drawable/ic_back_filled"
-            app:layout_constraintBottom_toBottomOf="@+id/tvProfileName"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvProfileName"
             app:tint="?colorOnPrimary"/>
 
         <TextView
