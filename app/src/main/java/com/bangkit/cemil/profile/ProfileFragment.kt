@@ -177,16 +177,15 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
                         // Navigate to List of Reviews Fragment
                     }
                     resources.getString(R.string.recommendations) -> {
-                        // Navigate to List of Recommendations Fragment
+                        val toLikesFragment = ProfileFragmentDirections.actionProfileFragmentToLikesFragment()
+                        requireView().findNavController().navigate(toLikesFragment)
                     }
                     resources.getString(R.string.change_password) -> {
-                        val toChangePasswordFragment =
-                            ProfileFragmentDirections.actionProfileFragmentToChangePasswordFragment()
+                        val toChangePasswordFragment = ProfileFragmentDirections.actionProfileFragmentToChangePasswordFragment()
                         requireView().findNavController().navigate(toChangePasswordFragment)
                     }
                     resources.getString(R.string.appearance) -> {
-                        val toAppearanceFragment =
-                            ProfileFragmentDirections.actionProfileFragmentToAppearanceFragment()
+                        val toAppearanceFragment = ProfileFragmentDirections.actionProfileFragmentToAppearanceFragment()
                         requireView().findNavController().navigate(toAppearanceFragment)
                     }
                     resources.getString(R.string.language) -> {

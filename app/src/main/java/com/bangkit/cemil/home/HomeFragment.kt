@@ -50,7 +50,6 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
 
         binding.rvNearbyRestos.apply {

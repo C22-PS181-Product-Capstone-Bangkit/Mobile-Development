@@ -50,6 +50,9 @@
         <action
             android:id="@+id/action_profileFragment_to_appearanceFragment"
             app:destination="@id/appearanceFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_likesFragment"
+            app:destination="@id/likesFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -122,4 +125,13 @@
         android:name="com.bangkit.cemil.home.PreferencesFragment"
         android:label="fragment_preferences"
         tools:layout="@layout/fragment_preferences" />
+    <fragment
+        android:id="@+id/likesFragment"
+        android:name="com.bangkit.cemil.profile.LikesFragment"
+        android:label="fragment_likes"
+        tools:layout="@layout/fragment_likes" >
+        <action
+            android:id="@+id/action_likesFragment_to_restaurantFragment"
+            app:destination="@id/restaurantFragment" />
+    </fragment>
 </navigation>

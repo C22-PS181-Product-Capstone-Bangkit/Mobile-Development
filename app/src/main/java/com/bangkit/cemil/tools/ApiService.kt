@@ -67,4 +67,12 @@ interface ApiService {
     fun getRestaurantByName(
         @Path("restaurantId")restaurantId : String,
     ): Call<List<RestaurantItem>>
+
+    @FormUrlEncoded
+    @POST("api/v1/favorite")
+    fun postLike(
+        @Header("Authorization")value : String,
+        @Field("idRestaurant")idRestaurant: String,
+    ): Call<LikeResponse>
+
 }
