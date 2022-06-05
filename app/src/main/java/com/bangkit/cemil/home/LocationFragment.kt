@@ -69,7 +69,6 @@ class LocationFragment : Fragment() {
         viewModel.listLocations.observe(requireActivity()){
             list.clear()
             list.addAll(it)
-            Toast.makeText(context, list.toString(), Toast.LENGTH_SHORT).show()
             showRecyclerList()
         }
 
@@ -139,8 +138,10 @@ class LocationFragment : Fragment() {
         locationAdapter.setOnItemClickCallback(object : LocationSearchAdapter.OnItemClickCallback{
             override fun onItemClicked(data: LocationSearchItem) {
                 Toast.makeText(appContext, data.locationDesc.toString(), Toast.LENGTH_SHORT).show()
+                val addresses = Geocoder(requireContext()).getFromLocationName(data.locationDesc, 1)
                 lifecycleScope.launch {
-                    pref.saveLocation("${data.locationName.toString()}, ${data.locationDesc.toString()}")
+                    pref.saveLocation("${data.locationName}, ${data.locationDesc}")
+                    pref.saveLatitudeLongitude(addresses[0].latitude.toString(), addresses[0].longitude.toString())
                     requireActivity().onBackPressed()
                 }
             }

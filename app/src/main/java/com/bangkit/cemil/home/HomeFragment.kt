@@ -12,22 +12,34 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.cemil.SettingPreferences
 import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentHomeBinding
+import com.bangkit.cemil.tools.RestaurantAdapter
+import com.bangkit.cemil.tools.model.RestaurantItem
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.CancellationTokenSource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.*
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var locationAddress: String = ""
+    private val viewModel by viewModels<HomeViewModel>()
+    private var latLng : LatLng? = null
+    private val list = ArrayList<RestaurantItem>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,8 +53,15 @@ class HomeFragment : Fragment() {
 
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
 
+        binding.rvNearbyRestos.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        }
+
         lifecycleScope.launch {
             locationAddress = pref.getPreferences()[SettingPreferences.LOCATION_KEY].toString()
+            latLng = LatLng(pref.getPreferences()[SettingPreferences.LATITUDE_KEY]?.toDouble() ?: 0.0,
+                pref.getPreferences()[SettingPreferences.LONGITUDE_KEY]?.toDouble() ?: 0.0)
         }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
@@ -53,12 +72,51 @@ class HomeFragment : Fragment() {
             getMyLocation()
         }
 
-        binding.tvCurrentLocation.setOnClickListener {
-            navigateToLocationFragment()
+        setLocationTextClickListener()
+        viewModel.requestRestoData()
+        viewModel.restoData.observe(viewLifecycleOwner){ it ->
+            val results = FloatArray(1)
+            val restaurants = it.toMutableList()
+            lifecycleScope.launch(Dispatchers.IO){
+                calculateRestaurantDistances(restaurants.listIterator(), results, pref)
+                restaurants.sortBy { it.distance?.toDouble() }
+                list.clear()
+                list.addAll(restaurants)
+                withContext(Dispatchers.Main){
+                    showRecyclerList()
+                }
+            }
         }
 
         binding.tvCurrentLocationLabel.setOnClickListener {
             navigateToLocationFragment()
+        }
+
+        binding.btnFindMeFood.setOnClickListener {
+            val toPreferencesFragment = HomeFragmentDirections.actionHomeFragmentToPreferencesFragment()
+            requireView().findNavController().navigate(toPreferencesFragment)
+        }
+    }
+
+    private fun calculateRestaurantDistances(iterator: MutableListIterator<RestaurantItem>, results: FloatArray, pref: SettingPreferences) {
+        while (iterator.hasNext()) {
+            val oldValue = iterator.next()
+            val addresses = Geocoder(requireContext()).getFromLocationName(oldValue.location.toString(), 1)
+            if (addresses.size > 0) {
+                val latitude = addresses[0].latitude
+                val longitude = addresses[0].longitude
+                if(latLng == null){
+                    val userAddress = Geocoder(requireContext()).getFromLocationName(locationAddress, 1)
+                    Location.distanceBetween(userAddress[0].latitude, userAddress[0].longitude, latitude, longitude, results)
+                    lifecycleScope.launch{
+                        pref.saveLatitudeLongitude(userAddress[0].latitude.toString(), userAddress[0].longitude.toString())
+                    }
+                }else{
+                    Location.distanceBetween(latLng!!.latitude, latLng!!.longitude, latitude, longitude, results)
+                }
+            }
+            oldValue.distance = (Math.round((results[0] / 1000) * 10.0) / 10.0).toString()
+            iterator.set(oldValue)
         }
     }
 
@@ -131,5 +189,27 @@ class HomeFragment : Fragment() {
     private fun navigateToLocationFragment() {
         val toLocationFragment = HomeFragmentDirections.actionHomeFragmentToLocationFragment()
         requireView().findNavController().navigate(toLocationFragment)
+    }
+
+    private fun setLocationTextClickListener(){
+        binding.tvCurrentLocation.setOnClickListener {
+            val toLocationFragment = HomeFragmentDirections.actionHomeFragmentToLocationFragment()
+            requireView().findNavController().navigate(toLocationFragment)
+        }
+        binding.tvCurrentLocationLabel.setOnClickListener {
+            val toLocationFragment = HomeFragmentDirections.actionHomeFragmentToLocationFragment()
+            requireView().findNavController().navigate(toLocationFragment)
+        }
+    }
+
+    private fun showRecyclerList(){
+        val adapter = RestaurantAdapter(list)
+        binding.rvNearbyRestos.adapter = adapter
+        adapter.setOnItemClickCallback(object : RestaurantAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: RestaurantItem) {
+                val toRestaurantFragment = HomeFragmentDirections.actionHomeFragmentToRestaurantFragment(data.id.toString())
+                requireView().findNavController().navigate(toRestaurantFragment)
+            }
+        })
     }
 }

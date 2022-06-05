@@ -5,16 +5,16 @@ import com.google.gson.annotations.SerializedName
 data class ProfileResponse(
 
 	@field:SerializedName("review")
-	val review: List<ReviewItem?>? = null,
+	val review: List<ReviewItem>? = null,
 
 	@field:SerializedName("history")
-	val history: List<HistoryItem?>? = null,
+	val history: List<HistoryItem>? = null,
 
 	@field:SerializedName("user")
 	val user: User?,
 
 	@field:SerializedName("likes")
-	val likes: List<LikesItem?>? = null,
+	val likes: List<LikesItem>? = null,
 
 	@field:SerializedName("message")
 	val message: String? = null,
@@ -23,34 +23,37 @@ data class ProfileResponse(
 	val data: String? = null
 )
 
-data class LikesItem(
+data class User(
 
-	@field:SerializedName("idAccount")
-	val idAccount: String? = null,
+	@field:SerializedName("phone")
+	val phone: String? = null,
 
-	@field:SerializedName("idRestaurant")
-	val idRestaurant: String? = null,
+	@field:SerializedName("profilePic")
+	val profilePic: String? = null,
+
+	@field:SerializedName("name")
+	val name: String? = null,
 
 	@field:SerializedName("id")
 	val id: String? = null,
 
-	@field:SerializedName("status")
-	val status: Boolean? = null
+	@field:SerializedName("idFriend")
+	val idFriend: String? = null,
+
+	@field:SerializedName("email")
+	val email: String? = null
 )
 
 data class ReviewItem(
 
-	@field:SerializedName("idAccount")
-	val idAccount: String? = null,
-
 	@field:SerializedName("createdAt")
 	val createdAt: String? = null,
 
-	@field:SerializedName("idRestaurant")
-	val idRestaurant: String? = null,
-
 	@field:SerializedName("subject")
 	val subject: String? = null,
+
+	@field:SerializedName("name")
+	val name: String? = null,
 
 	@field:SerializedName("rating")
 	val rating: Int? = null,
@@ -58,17 +61,20 @@ data class ReviewItem(
 	@field:SerializedName("description")
 	val description: String? = null,
 
-	@field:SerializedName("id")
-	val id: String? = null,
-
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null
 )
 
-data class User(
+data class HistoryItem(
 
 	@field:SerializedName("profilePic")
 	val profilePic: String?,
+
+	@field:SerializedName("photoPlaces")
+	val photoPlaces: String? = null,
+
+	@field:SerializedName("createdAt")
+	val createdAt: String? = null,
 
 	@field:SerializedName("name")
 	val name: String,
@@ -86,16 +92,22 @@ data class User(
 	val iat: Int,
 
 	@field:SerializedName("email")
-	val email: String
+	val email: String,
+
+	@field:SerializedName("rating")
+	val rating: Int? = null,
+
+	@field:SerializedName("title")
+	val title: String? = null,
+
+	@field:SerializedName("updatedAt")
+	val updatedAt: String? = null
 )
 
-data class HistoryItem(
+data class LikesItem(
 
 	@field:SerializedName("idAccount")
 	val idAccount: String? = null,
-
-	@field:SerializedName("createdAt")
-	val createdAt: String? = null,
 
 	@field:SerializedName("idRestaurant")
 	val idRestaurant: String? = null,
@@ -103,9 +115,13 @@ data class HistoryItem(
 	@field:SerializedName("id")
 	val id: String? = null,
 
-	@field:SerializedName("title")
-	val title: String? = null,
+	@field:SerializedName("status")
+	val status: Boolean? = null
+)
 
-	@field:SerializedName("updatedAt")
-	val updatedAt: String? = null
+data class EditResponse(
+
+	@field:SerializedName("message")
+	val message: String? = null
+
 )

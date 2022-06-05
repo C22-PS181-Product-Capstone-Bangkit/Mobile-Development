@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CustomChipStyle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="?colorOnBackground"
+    android:textSize="14sp"
+    android:textAppearance="@style/CustomChipStyle"
+    app:chipEndPadding="12dp"
+    app:chipIcon="@drawable/ic_star"
+    app:chipMinHeight="24dp"
+    app:chipStartPadding="12dp"
+    app:chipStrokeColor="?colorOnBackground"
+    app:chipStrokeWidth="0.8dp" />

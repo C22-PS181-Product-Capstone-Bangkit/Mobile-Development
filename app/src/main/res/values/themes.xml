@@ -91,4 +91,10 @@
         <item name="cornerSizeBottomLeft">8dp</item>
     </style>
 
+    <style name="CustomChipStyle" parent="@style/Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor">@color/chip_preferences</item>
+        <item name="chipCornerRadius">8dp</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+    </style>
+
 </resources>

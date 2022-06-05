@@ -5,10 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.findNavController
-import com.bangkit.cemil.R
 import com.bangkit.cemil.databinding.FragmentChangePasswordBinding
 
 class ChangePasswordFragment : Fragment() {
@@ -18,7 +15,7 @@ class ChangePasswordFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentChangePasswordBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity).apply{
             setSupportActionBar(binding.materialToolbar)

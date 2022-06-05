@@ -18,7 +18,7 @@ data class RegisterResponse(
 	val accessToken: String? = null,
 
 	@field:SerializedName("profilePic")
-	val profilePic: Any? = null,
+	val profilePic: String? = null,
 
 	@field:SerializedName("name")
 	val name: String? = null,
@@ -39,7 +39,7 @@ data class RegisterResponse(
 data class AuthenticateResponse(
 
 	@field:SerializedName("profilePic")
-	val profilePic: Any? = null,
+	val profilePic: String? = null,
 
 	@field:SerializedName("name")
 	val name: String? = null,

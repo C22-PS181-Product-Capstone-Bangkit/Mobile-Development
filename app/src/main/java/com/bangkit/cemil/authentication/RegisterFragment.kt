@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bangkit.cemil.SettingPreferences
 import com.bangkit.cemil.dataStore
@@ -18,7 +18,7 @@ import com.bangkit.cemil.databinding.FragmentRegisterBinding
 class RegisterFragment : Fragment() {
 
     private lateinit var binding : FragmentRegisterBinding
-    private lateinit var viewModel: RegisterViewModel
+    private val viewModel by viewModels<RegisterViewModel>()
     private var validityEmail = false
     private var validityPass = false
 
@@ -33,29 +33,8 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
-        viewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
-
         setInputListener()
-        binding.buttonAccountRegister.setOnClickListener {
-            val name = binding.etRegisterName.text.toString().trim()
-            val email = binding.etRegisterEmail.text.toString().trim()
-            val password = binding.etRegisterPassword.text.toString().trim()
-            val confirmPass = binding.etRegisterConfirmPassword.text.toString().trim()
-            if(name.isBlank()){
-                binding.etRegisterName.error = "Name can't be empty!"
-            }else if(email.isBlank()){
-                binding.etRegisterEmail.error = "Email can't be empty!"
-            }else if(password.isBlank()) {
-                binding.etRegisterPassword.error = "Password can't be empty!"
-            }else if(confirmPass != password){
-                binding.etRegisterConfirmPassword.error = "Confirmation and entered password isn't equal!"
-            }else if(!binding.materialCheckboxRegister.isChecked){
-                Toast.makeText(context, "Please read and accept the terms and conditions!", Toast.LENGTH_SHORT).show()
-            }else if(validityEmail && validityPass){
-                viewModel.requestRegister(name, email, password)
-            }
-        }
-
+        setButtonListener()
         viewModel.registerResponse.observe(viewLifecycleOwner){ registerResponse ->
             if(registerResponse.message != null){
                 Toast.makeText(context, registerResponse.message, Toast.LENGTH_SHORT).show()
@@ -82,7 +61,7 @@ class RegisterFragment : Fragment() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                validityEmail = if(!Patterns.EMAIL_ADDRESS.matcher(p0).matches()){
+                validityEmail = if(!Patterns.EMAIL_ADDRESS.matcher(p0.toString()).matches()){
                     binding.etRegisterEmail.error = "Invalid email format!"
                     false
                 }else true
@@ -105,8 +84,29 @@ class RegisterFragment : Fragment() {
         })
     }
 
+    private fun setButtonListener(){
+        binding.buttonAccountRegister.setOnClickListener {
+            val name = binding.etRegisterName.text.toString().trim()
+            val email = binding.etRegisterEmail.text.toString().trim()
+            val password = binding.etRegisterPassword.text.toString().trim()
+            val confirmPass = binding.etRegisterConfirmPassword.text.toString().trim()
+            if(name.isBlank()){
+                binding.etRegisterName.error = "Name can't be empty!"
+            }else if(email.isBlank()){
+                binding.etRegisterEmail.error = "Email can't be empty!"
+            }else if(password.isBlank()) {
+                binding.etRegisterPassword.error = "Password can't be empty!"
+            }else if(confirmPass != password){
+                binding.etRegisterConfirmPassword.error = "Confirmation and entered password isn't equal!"
+            }else if(!binding.materialCheckboxRegister.isChecked){
+                Toast.makeText(context, "Please read and accept the terms and conditions!", Toast.LENGTH_SHORT).show()
+            }else if(validityEmail && validityPass){
+                viewModel.requestRegister(name, email, password)
+            }
+        }
+    }
+
     private fun showLoading(isLoading: Boolean){
         binding.loadingRegister.visibility = if(isLoading) View.VISIBLE else View.GONE
     }
-
 }

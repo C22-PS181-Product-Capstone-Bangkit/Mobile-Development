@@ -31,7 +31,7 @@ class ProfileViewModel : ViewModel() {
 
             override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
                 _isLoading.value = false
-                _profileData.value = ProfileResponse(null, null, null, null, "Error", null)
+                _profileData.value = ProfileResponse(null, null, null, null, t.message, null)
             }
         })
     }
