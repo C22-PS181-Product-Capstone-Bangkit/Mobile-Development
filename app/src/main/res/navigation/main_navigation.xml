@@ -60,7 +60,11 @@
         android:id="@+id/changePasswordFragment"
         android:name="com.bangkit.cemil.profile.ChangePasswordFragment"
         android:label="fragment_change_password"
-        tools:layout="@layout/fragment_change_password" />
+        tools:layout="@layout/fragment_change_password" >
+        <action
+            android:id="@+id/action_changePasswordFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.bangkit.cemil.authentication.RegisterFragment"

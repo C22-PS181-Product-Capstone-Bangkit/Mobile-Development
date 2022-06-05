@@ -42,7 +42,7 @@
             tools:text="M Budi Anggara" />
 
         <TextView
-            android:id="@+id/tvReviewerReviews"
+            android:id="@+id/tvReviewDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_medium"
@@ -51,7 +51,7 @@
             android:textSize="10sp"
             card_view:layout_constraintStart_toStartOf="@+id/tvReviewerName"
             card_view:layout_constraintTop_toBottomOf="@+id/tvReviewerName"
-            tools:text="12 reviews" />
+            tools:text="2 days ago" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvReviewRating"

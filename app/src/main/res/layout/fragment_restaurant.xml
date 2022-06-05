@@ -240,6 +240,7 @@
                     tools:text="(489)" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvReviews"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -251,8 +252,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvRestaurantReviewsLabel"
                     tools:itemCount="3"
-                    tools:listitem="@layout/item_row_review"
-                    tools:visibility="gone" />
+                    tools:listitem="@layout/item_row_review" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>

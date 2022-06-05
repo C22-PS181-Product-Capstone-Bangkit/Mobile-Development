@@ -5,14 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.bangkit.cemil.databinding.FragmentRestaurantBinding
+import com.bangkit.cemil.tools.HistoryAdapter
+import com.bangkit.cemil.tools.model.HistoryItem
+import com.bangkit.cemil.tools.model.ReviewItem
 import com.bumptech.glide.Glide
 
 class RestaurantFragment : Fragment() {
 
     private lateinit var binding : FragmentRestaurantBinding
     private val viewModel by viewModels<RestaurantViewModel>()
+    private val list = ArrayList<ReviewItem>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,5 +57,15 @@ class RestaurantFragment : Fragment() {
             binding.tvRestaurantReviewsAmount.text = restoReviewAmount
             Glide.with(requireContext()).load(it.photoPlaces).into(binding.imgRestaurantBanner)
         }
+    }
+
+    private fun showRecyclerList(){
+//        val adapter = HistoryAdapter(list)
+//        binding.rvReviews.adapter = adapter
+//        adapter.setOnItemClickCallback(object : HistoryAdapter.OnItemClickCallback{
+//            override fun onItemClicked(data: HistoryItem) {
+//                Toast.makeText(context, data.toString(), Toast.LENGTH_SHORT).show()
+//            }
+//        })
     }
 }

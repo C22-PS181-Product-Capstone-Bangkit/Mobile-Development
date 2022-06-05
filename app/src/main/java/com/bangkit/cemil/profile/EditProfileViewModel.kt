@@ -32,7 +32,7 @@ class EditProfileViewModel : ViewModel() {
     }
 
     fun postEditProfile(accessToken: String, name: String, email: String, phone: String){
-        val client = ApiConfig.getApiService().postEditProfile("Bearer $accessToken", name, email, phone)
+        val client = ApiConfig.getApiService().putEditProfile("Bearer $accessToken", name, email, phone)
         client.enqueue(object: Callback<EditResponse>{
             override fun onResponse(call: Call<EditResponse>, response: Response<EditResponse>) {
                 _editResponse.value = response.body()

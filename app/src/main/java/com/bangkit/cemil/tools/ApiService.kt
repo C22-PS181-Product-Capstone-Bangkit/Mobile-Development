@@ -36,10 +36,35 @@ interface ApiService {
 
     @FormUrlEncoded
     @PUT("api/v1/edit-profile")
-    fun postEditProfile(
+    fun putEditProfile(
         @Header("Authorization")value : String,
         @Field("name")name: String,
-        @Field("email")email: String,
-        @Field("phone")phone: String
+        @Field("phone")phone: String,
+        @Field("email")email: String
     ): Call<EditResponse>
+
+    @FormUrlEncoded
+    @PUT("api/v1/reset-password")
+    fun putChangePassword(
+        @Header("Authorization")value : String,
+        @Field("oldPassword")oldPassword: String,
+        @Field("password")password: String,
+    ): Call<ChangePasswordResponse>
+
+    @FormUrlEncoded
+    @POST("api/v1/upload-profile")
+    fun postUploadPhoto(
+        @Header("Authorization")value : String,
+        @Field("oldPassword")oldPassword: String
+    ): Call<ChangePasswordResponse>
+
+    @GET("api/v1/restaurant/{restaurantId}")
+    fun getRestaurantByCategory(
+        @Path("restaurantId")restaurantId : String,
+    ): Call<List<RestaurantItem>>
+
+    @GET("api/v1/restaurant/{restaurantId}")
+    fun getRestaurantByName(
+        @Path("restaurantId")restaurantId : String,
+    ): Call<List<RestaurantItem>>
 }
