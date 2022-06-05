@@ -18,12 +18,20 @@
         <item name="android:strokeColor">@color/grey</item>
         <item name="colorTertiary">@color/tertiary</item>
         <item name="colorOnTertiary">@color/on_tertiary</item>
+
+        <item name="colorOutline">@color/outline</item>
     </style>
 
     <style name="Theme.Cemil.SplashScreen" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/background</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo</item>
         <item name="postSplashScreenTheme">@style/Theme.Cemil</item>
+    </style>
+
+    <style name="Theme.Cemil.Toolbar">
+        <item name="android:fontFamily">@font/nunito_bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">?colorOnPrimary</item>
     </style>
 
     <style name="Theme.Cemil.LandingScreenText">
