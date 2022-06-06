@@ -45,7 +45,7 @@ class LogoutDialogFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
         binding.tvPositive.setOnClickListener {
-            Toast.makeText(context, "Logout succesful", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Logout successful", Toast.LENGTH_SHORT).show()
             lifecycleScope.launch{
                 pref.saveAuthorization(false)
                 pref.deleteAuthorizationToken()
