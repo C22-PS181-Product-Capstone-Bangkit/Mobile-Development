@@ -25,7 +25,7 @@ class LogoutDialogFragment : DialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLogoutDialogBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -44,6 +44,7 @@ class LogoutDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
+
         binding.tvPositive.setOnClickListener {
             Toast.makeText(context, "Logout successful", Toast.LENGTH_SHORT).show()
             lifecycleScope.launch{
@@ -53,6 +54,7 @@ class LogoutDialogFragment : DialogFragment() {
             dialogCallback.onDialogLogout()
             dismiss()
         }
+
         binding.tvNegative.setOnClickListener {
             dismiss()
         }
