@@ -43,13 +43,35 @@ data class RestaurantItem(
 	@field:SerializedName("countReview")
 	val countReview: Int = 0,
 
-	@field:SerializedName("review")
-	val review: List<ReviewItem>? = null,
-
 	@field:SerializedName("message")
 	val message: String? = null,
 
+	@field:SerializedName("review")
+	val review: List<RestaurantReviewItem>? = null,
+
 	var distance: String? = null
+
+)
+
+data class RestaurantReviewItem(
+
+	@field:SerializedName("createdAt")
+	val createdAt: String? = null,
+
+	@field:SerializedName("profilePic")
+	val profilePic: String? = null,
+
+	@field:SerializedName("name")
+	val name: String? = null,
+
+	@field:SerializedName("rating")
+	val rating: Int? = null,
+
+	@field:SerializedName("description")
+	val description: String? = null,
+
+	@field:SerializedName("updatedAt")
+	val updatedAt: String? = null
 )
 
 

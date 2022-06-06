@@ -24,7 +24,7 @@
         android:fontFamily="@font/nunito_extrabold"
         android:text="@string/congratulations_your_account_is_created_successfully"
         android:textAlignment="center"
-        android:textColor="#000000"
+        android:textColor="?colorOnBackground"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/btnRegisterSuccess"
         app:layout_constraintEnd_toEndOf="parent"

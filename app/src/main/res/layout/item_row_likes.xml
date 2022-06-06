@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="124dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imgLikedResto"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:elevation="0dp"
+        android:padding="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/roundedCornersImageView"
+        app:strokeColor="@color/grey"
+        app:strokeWidth="1dp"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvLikedResto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/nunito_bold"
+        android:letterSpacing="0.05"
+        android:text="@string/restaurant_name"
+        android:textColor="?colorOnBackground"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/imgLikedResto"
+        app:layout_constraintTop_toTopOf="@+id/imgLikedResto"
+        tools:text="KFC Sarinah" />
+
+    <TextView
+        android:id="@+id/tvLikedRestoCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintVertical_bias="0.5"
+        android:fontFamily="@font/nunito_medium"
+        android:letterSpacing="0.05"
+        android:text="@string/categories"
+        android:textColor="?colorOnBackground"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/imgLikedStar"
+        app:layout_constraintStart_toStartOf="@+id/tvLikedResto"
+        app:layout_constraintTop_toBottomOf="@+id/tvLikedResto" />
+
+    <TextView
+        android:id="@+id/tvLikedRestoRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_regular"
+        android:letterSpacing="0.05"
+        android:text="@string/restaurant_rating"
+        android:textColor="?colorOnBackground"
+        android:textSize="12sp"
+
+        app:layout_constraintBottom_toBottomOf="@+id/imgLikedStar"
+        app:layout_constraintStart_toEndOf="@+id/imgLikedStar"
+        app:layout_constraintTop_toTopOf="@+id/imgLikedStar"
+        tools:text="5.0 (489)" />
+
+    <ImageView
+        android:id="@+id/imgLikedStar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-4dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgLikedResto"
+        app:layout_constraintStart_toStartOf="@+id/tvLikedResto"
+        app:srcCompat="@drawable/ic_star" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentTop="true"
+        android:background="?colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

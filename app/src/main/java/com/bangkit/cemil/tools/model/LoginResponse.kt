@@ -33,7 +33,7 @@ data class RegisterResponse(
 	val email: String? = null,
 
 	@field:SerializedName("message")
-	val message: String?
+	val message: String? = null
 )
 
 data class AuthenticateResponse(
@@ -58,6 +58,13 @@ data class AuthenticateResponse(
 
 	@field:SerializedName("email")
 	val email: String? = null
+)
+
+data class ChangePasswordResponse(
+
+	@field:SerializedName("message")
+	val message: String? = null
+
 )
 
 

@@ -41,6 +41,7 @@
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/activity_landing.xml" value="0.264" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/category_chips.xml" value="0.72" />
+        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_add_review.xml" value="0.4" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_appearance.xml" value="0.39341085271317827" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_change_password.xml" value="0.264" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_edit_profile.xml" value="0.4" />
@@ -52,6 +53,7 @@
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_landing1.xml" value="0.14814814814814814" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_landing2.xml" value="0.264" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_landing3.xml" value="0.264" />
+        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_likes.xml" value="0.264" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_location.xml" value="0.4" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_login.xml" value="0.4" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_logout_dialog.xml" value="0.264" />
@@ -60,7 +62,8 @@
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_profile_unauthorized.xml" value="0.16302083333333334" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_register.xml" value="0.2" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_register_success.xml" value="0.176" />
-        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_restaurant.xml" value="0.264" />
+        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_restaurant.xml" value="0.4864864864864865" />
+        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_restaurant_reviews.xml" value="0.4" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_search.xml" value="0.536" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_second_landing.xml" value="0.22735507246376813" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_third_landing.xml" value="0.22735507246376813" />
@@ -71,6 +74,7 @@
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/item_row_histories.xml" value="0.6" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/item_row_history.xml" value="0.264" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/item_row_home_resto.xml" value="0.8" />
+        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/item_row_likes.xml" value="0.6" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/item_row_review.xml" value="0.4" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/item_row_search.xml" value="0.4" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/item_setting.xml" value="0.25416666666666665" />

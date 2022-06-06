@@ -106,17 +106,32 @@ data class HistoryItem(
 
 data class LikesItem(
 
-	@field:SerializedName("idAccount")
-	val idAccount: String? = null,
-
-	@field:SerializedName("idRestaurant")
-	val idRestaurant: String? = null,
+	@field:SerializedName("restaurant")
+	val restaurant: LikedRestaurant? = null,
 
 	@field:SerializedName("id")
-	val id: String? = null,
+	val id: String? = null
+)
 
-	@field:SerializedName("status")
-	val status: Boolean? = null
+data class LikedRestaurant(
+
+	@field:SerializedName("countReview")
+	val countReview: Int? = null,
+
+	@field:SerializedName("profilePic")
+	val profilePic: String? = null,
+
+	@field:SerializedName("name")
+	val name: String? = null,
+
+	@field:SerializedName("category")
+	val category: String? = null,
+
+	@field:SerializedName("rating")
+	val rating: Double? = null,
+
+	@field:SerializedName("id")
+	val id: String? = null
 )
 
 data class EditResponse(

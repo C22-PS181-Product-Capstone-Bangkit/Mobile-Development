@@ -51,8 +51,13 @@
             android:id="@+id/action_profileFragment_to_appearanceFragment"
             app:destination="@id/appearanceFragment" />
         <action
+<<<<<<< HEAD
             android:id="@+id/action_profileFragment_self"
             app:destination="@id/profileFragment" />
+=======
+            android:id="@+id/action_profileFragment_to_likesFragment"
+            app:destination="@id/likesFragment" />
+>>>>>>> 47c03482d56c93981cbce89c9b08e676f95db1a2
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -63,7 +68,11 @@
         android:id="@+id/changePasswordFragment"
         android:name="com.bangkit.cemil.profile.ChangePasswordFragment"
         android:label="fragment_change_password"
-        tools:layout="@layout/fragment_change_password" />
+        tools:layout="@layout/fragment_change_password" >
+        <action
+            android:id="@+id/action_changePasswordFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.bangkit.cemil.authentication.RegisterFragment"
@@ -109,16 +118,54 @@
     </fragment>
     <fragment
         android:id="@+id/restaurantFragment"
-        android:name="com.bangkit.cemil.home.RestaurantFragment"
+        android:name="com.bangkit.cemil.restaurant.RestaurantFragment"
         android:label="fragment_restaurant"
         tools:layout="@layout/fragment_restaurant" >
         <argument
             android:name="restaurantId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_restaurantFragment_to_restaurantReviewsFragment"
+            app:destination="@id/restaurantReviewsFragment" />
+        <action
+            android:id="@+id/action_restaurantFragment_to_addReviewFragment"
+            app:destination="@id/addReviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/preferencesFragment"
         android:name="com.bangkit.cemil.home.PreferencesFragment"
         android:label="fragment_preferences"
         tools:layout="@layout/fragment_preferences" />
+    <fragment
+        android:id="@+id/likesFragment"
+        android:name="com.bangkit.cemil.profile.LikesFragment"
+        android:label="fragment_likes"
+        tools:layout="@layout/fragment_likes" >
+        <action
+            android:id="@+id/action_likesFragment_to_restaurantFragment"
+            app:destination="@id/restaurantFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/restaurantReviewsFragment"
+        android:name="com.bangkit.cemil.restaurant.RestaurantReviewsFragment"
+        android:label="fragment_restaurant_reviews"
+        tools:layout="@layout/fragment_restaurant_reviews" >
+        <argument
+            android:name="restaurantId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/addReviewFragment"
+        android:name="com.bangkit.cemil.restaurant.AddReviewFragment"
+        android:label="fragment_add_review"
+        tools:layout="@layout/fragment_add_review" >
+        <argument
+            android:name="restaurantId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_addReviewFragment_to_restaurantFragment"
+            app:destination="@id/restaurantFragment"
+            app:popUpTo="@id/addReviewFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>

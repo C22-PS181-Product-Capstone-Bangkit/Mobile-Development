@@ -27,9 +27,9 @@ class AppearanceFragment : Fragment() {
     ): View? {
         binding = FragmentAppearanceBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity).apply{
-            setSupportActionBar(binding.materialToolbar)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            binding.materialToolbar.setNavigationOnClickListener {
+            setSupportActionBar(binding.materialToolbarAppearance)
+            supportActionBar?.setDisplayShowTitleEnabled(false)
+            binding.toolbarNavUp.setOnClickListener {
                 onBackPressed()
             }
         }
