@@ -124,6 +124,9 @@ data class LikedRestaurant(
 	@field:SerializedName("name")
 	val name: String? = null,
 
+	@field:SerializedName("category")
+	val category: String? = null,
+
 	@field:SerializedName("rating")
 	val rating: Double? = null,
 

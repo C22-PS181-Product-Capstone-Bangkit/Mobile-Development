@@ -72,7 +72,7 @@ class LikesFragment : Fragment() {
         binding.rvLikes.adapter = adapter
         adapter.setOnItemClickCallback(object : LikesAdapter.OnItemClickCallback{
             override fun onItemClicked(data: LikesItem) {
-                val toRestaurantFragment = LikesFragmentDirections.actionLikesFragmentToRestaurantFragment(data.id.toString())
+                val toRestaurantFragment = LikesFragmentDirections.actionLikesFragmentToRestaurantFragment(data.restaurant!!.id.toString())
                 requireView().findNavController().navigate(toRestaurantFragment)
             }
         })

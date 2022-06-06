@@ -30,6 +30,7 @@ class LikesAdapter(private val likedList: List<LikesItem>) : RecyclerView.Adapte
             tvLikedRestoRating.text = likedRestoRating
             Glide.with(holder.itemView.context).load(likedItem.restaurant!!.profilePic).into(imgLikedResto)
         }
+        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(likedList[holder.adapterPosition]) }
     }
 
     override fun getItemCount() = likedList.size

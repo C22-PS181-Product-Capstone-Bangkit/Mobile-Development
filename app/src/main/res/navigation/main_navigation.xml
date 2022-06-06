@@ -113,12 +113,18 @@
     </fragment>
     <fragment
         android:id="@+id/restaurantFragment"
-        android:name="com.bangkit.cemil.home.RestaurantFragment"
+        android:name="com.bangkit.cemil.restaurant.RestaurantFragment"
         android:label="fragment_restaurant"
         tools:layout="@layout/fragment_restaurant" >
         <argument
             android:name="restaurantId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_restaurantFragment_to_restaurantReviewsFragment"
+            app:destination="@id/restaurantReviewsFragment" />
+        <action
+            android:id="@+id/action_restaurantFragment_to_addReviewFragment"
+            app:destination="@id/addReviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/preferencesFragment"
@@ -133,5 +139,28 @@
         <action
             android:id="@+id/action_likesFragment_to_restaurantFragment"
             app:destination="@id/restaurantFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/restaurantReviewsFragment"
+        android:name="com.bangkit.cemil.restaurant.RestaurantReviewsFragment"
+        android:label="fragment_restaurant_reviews"
+        tools:layout="@layout/fragment_restaurant_reviews" >
+        <argument
+            android:name="restaurantId"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/addReviewFragment"
+        android:name="com.bangkit.cemil.restaurant.AddReviewFragment"
+        android:label="fragment_add_review"
+        tools:layout="@layout/fragment_add_review" >
+        <argument
+            android:name="restaurantId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_addReviewFragment_to_restaurantFragment"
+            app:destination="@id/restaurantFragment"
+            app:popUpTo="@id/addReviewFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

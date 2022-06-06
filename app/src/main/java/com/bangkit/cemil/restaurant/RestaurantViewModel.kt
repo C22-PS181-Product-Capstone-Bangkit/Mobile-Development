@@ -1,4 +1,4 @@
-package com.bangkit.cemil.home
+package com.bangkit.cemil.restaurant
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

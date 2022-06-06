@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:fillViewport="true"
     android:visibility="invisible"
-    tools:context=".home.RestaurantFragment"
+    tools:context=".restaurant.RestaurantFragment"
     tools:visibility="visible">
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -190,5 +190,7 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="how_would_you_rate_this_restaurant">How would you rate this restaurant?</string>
+    <string name="write_your_review_here">Write your review here</string>
 
 </resources>

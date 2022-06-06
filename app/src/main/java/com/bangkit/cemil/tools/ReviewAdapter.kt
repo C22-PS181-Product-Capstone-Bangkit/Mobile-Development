@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bangkit.cemil.R
 import com.bangkit.cemil.databinding.ItemRowReviewBinding
 import com.bangkit.cemil.tools.model.RestaurantReviewItem
 import com.bumptech.glide.Glide
@@ -34,7 +35,12 @@ class ReviewAdapter(private val reviewList : List<RestaurantReviewItem>) : Recyc
             tvReviewText.text = reviewItem.description
             tvReviewRating.text = reviewItem.rating?.toDouble().toString()
             tvReviewDate.text = daysAgo
-            Glide.with(holder.itemView.context).load(reviewItem.profilePic).into(imgProfile)
+            if (reviewItem.profilePic != null) {
+                Glide.with(holder.itemView.context).load(reviewItem.profilePic).into(imgProfile)
+            } else {
+                Glide.with(holder.itemView.context).load(R.drawable.img_profile_placeholder).into(imgProfile)
+            }
+
         }
         holder.binding.tvReadMore.setOnClickListener { onItemClickCallback.onItemClicked(reviewList[holder.adapterPosition]) }
     }

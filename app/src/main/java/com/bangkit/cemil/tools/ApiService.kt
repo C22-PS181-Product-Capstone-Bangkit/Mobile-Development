@@ -75,4 +75,13 @@ interface ApiService {
         @Field("idRestaurant")idRestaurant: String,
     ): Call<LikeResponse>
 
+    @FormUrlEncoded
+    @POST("api/v1/review")
+    fun postReview(
+        @Header("Authorization")value : String,
+        @Field("idRestaurant")idRestaurant: String,
+        @Field("rating")rating: Double,
+        @Field("description")description: String,
+    ): Call<AddReviewResponse>
+
 }

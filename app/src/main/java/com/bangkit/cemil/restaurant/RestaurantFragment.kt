@@ -1,4 +1,4 @@
-package com.bangkit.cemil.home
+package com.bangkit.cemil.restaurant
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.cemil.SettingPreferences
 import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentRestaurantBinding
+import com.bangkit.cemil.home.HomeFragmentDirections
 import com.bangkit.cemil.tools.ReviewAdapter
 import com.bangkit.cemil.tools.model.RestaurantItem
 import com.bangkit.cemil.tools.model.RestaurantReviewItem
@@ -50,13 +52,19 @@ class RestaurantFragment : Fragment() {
             setupRestaurantPageContent(it)
             list.clear()
             list.addAll(it.review!!)
+            list.reverse()
             showRecyclerList()
         }
         viewModel.restoLike.observe(viewLifecycleOwner){
             Toast.makeText(context, "Restaurant liked!", Toast.LENGTH_SHORT).show()
         }
         binding.tvAddReview.setOnClickListener {
-            Toast.makeText(context, "To Add Review Page", Toast.LENGTH_SHORT).show()
+            val toAddReviewFragment = RestaurantFragmentDirections.actionRestaurantFragmentToAddReviewFragment(dataRestaurantId)
+            requireView().findNavController().navigate(toAddReviewFragment)
+        }
+        binding.btnSeeAllReviews.setOnClickListener {
+            val toRestaurantReviewsFragment = RestaurantFragmentDirections.actionRestaurantFragmentToRestaurantReviewsFragment(dataRestaurantId)
+            requireView().findNavController().navigate(toRestaurantReviewsFragment)
         }
         binding.fabBack.setOnClickListener {
             requireActivity().onBackPressed()
