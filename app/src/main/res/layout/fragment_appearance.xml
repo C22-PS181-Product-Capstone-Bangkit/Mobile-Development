@@ -7,7 +7,7 @@
     tools:context=".profile.AppearanceFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/materialToolbar"
+        android:id="@+id/materialToolbarAppearance"
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:background="@drawable/curved_toolbar"
@@ -16,23 +16,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="16dp">
-            <TextView
-                android:id="@+id/tvFragmentAppearance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/nunito_bold"
-                android:text="@string/appearance"
-                android:textColor="?colorOnPrimary"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageButton
+            android:id="@+id/toolbarNavUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/back"
+            android:src="@drawable/ic_back_filled"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="?colorOnPrimary"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/appearance"
+            android:textColor="?colorOnPrimary"
+            android:textSize="20sp" />
+
     </com.google.android.material.appbar.MaterialToolbar>
 
     <TextView
@@ -46,7 +50,7 @@
         android:textColor="?colorOnBackground"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialToolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbarAppearance" />
 
     <RadioGroup
         android:id="@+id/themeRadioGroup"

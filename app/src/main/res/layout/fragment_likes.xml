@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile.LikesFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/materialToolbarLikes"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="@drawable/curved_toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/toolbarNavUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/back"
+            android:src="@drawable/ic_back_filled"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="?colorOnPrimary"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/recommendations"
+            android:textColor="?colorOnPrimary"
+            android:textSize="20sp" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLikesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbarLikes">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvLikes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_row_likes" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
