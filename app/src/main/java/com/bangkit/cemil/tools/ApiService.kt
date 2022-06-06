@@ -84,4 +84,10 @@ interface ApiService {
         @Field("description")description: String,
     ): Call<AddReviewResponse>
 
+    @DELETE("api/v1/favorite/{likeId}")
+    fun deleteLike(
+        @Header("Authorization")value : String,
+        @Path("likeId")likeId: String,
+    ): Call<LikeDeleteResponse>
+
 }
