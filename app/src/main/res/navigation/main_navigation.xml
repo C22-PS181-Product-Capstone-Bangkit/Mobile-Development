@@ -51,6 +51,9 @@
             android:id="@+id/action_profileFragment_to_appearanceFragment"
             app:destination="@id/appearanceFragment" />
         <action
+            android:id="@+id/action_profileFragment_self"
+            app:destination="@id/profileFragment" />
+        <action
             android:id="@+id/action_profileFragment_to_likesFragment"
             app:destination="@id/likesFragment" />
     </fragment>

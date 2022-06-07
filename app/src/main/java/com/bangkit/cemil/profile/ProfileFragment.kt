@@ -223,7 +223,8 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
     }
 
     override fun onDialogLogout() {
-        hideProfile()
+        val toSelf = ProfileFragmentDirections.actionProfileFragmentSelf()
+        requireView().findNavController().navigate(toSelf)
     }
 }
 

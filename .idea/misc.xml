@@ -41,7 +41,6 @@
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/activity_landing.xml" value="0.264" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/category_chips.xml" value="0.72" />
-        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_add_review.xml" value="0.4" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_appearance.xml" value="0.39341085271317827" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_change_password.xml" value="0.264" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_edit_profile.xml" value="0.4" />
@@ -53,7 +52,6 @@
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_landing1.xml" value="0.14814814814814814" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_landing2.xml" value="0.264" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_landing3.xml" value="0.264" />
-        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_likes.xml" value="0.264" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_location.xml" value="0.4" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_login.xml" value="0.4" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_logout_dialog.xml" value="0.264" />
@@ -62,8 +60,7 @@
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_profile_unauthorized.xml" value="0.16302083333333334" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_register.xml" value="0.2" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_register_success.xml" value="0.176" />
-        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_restaurant.xml" value="0.4864864864864865" />
-        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_restaurant_reviews.xml" value="0.4" />
+        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_restaurant.xml" value="0.264" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_search.xml" value="0.536" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_second_landing.xml" value="0.22735507246376813" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/fragment_third_landing.xml" value="0.22735507246376813" />
@@ -74,19 +71,21 @@
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/item_row_histories.xml" value="0.6" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/item_row_history.xml" value="0.264" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/item_row_home_resto.xml" value="0.8" />
-        <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/item_row_likes.xml" value="0.6" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/item_row_review.xml" value="0.4" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/item_row_search.xml" value="0.4" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/layout/item_setting.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Samuel/Desktop/Git Projects/Mobile-Development/app/src/main/res/menu/main_bottom_menu.xml" value="0.1" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable-night/ic_logo.xml" value="0.123" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable-night/illustration_first_landing.xml" value="0.1495" />
+        <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable-night/illustration_logout.xml" value="0.102" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable-night/illustration_profile_unauthorized.xml" value="0.2395" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable-night/illustration_second_landing.xml" value="0.234" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable-night/illustration_third_landing.xml" value="0.234" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable-night/img_profile_placeholder.xml" value="0.1" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/bg_shimmer.xml" value="0.1875" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/btn_background.xml" value="0.1875" />
+        <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/curved_dialog.xml" value="0.1535" />
+        <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/curved_toolbar.xml" value="0.1" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/custom_edittext.xml" value="0.234" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/ic_about_filled.xml" value="0.2395" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/ic_dark.xml" value="0.2395" />
@@ -112,6 +111,7 @@
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/ic_search_selector.xml" value="0.2395" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/ic_successfulregister_illustration.xml" value="0.234" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/illustration_first_landing.xml" value="0.1495" />
+        <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/illustration_logout.xml" value="0.102" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/illustration_profile_unauthorized.xml" value="0.2395" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/illustration_second_landing.xml" value="0.234" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/illustration_third_landing.xml" value="0.234" />
@@ -127,12 +127,14 @@
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_landing2.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_landing3.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_login.xml" value="0.264" />
+        <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_logout_dialog.xml" value="0.264" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_profile.xml" value="0.4" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_profile_unauthorized.xml" value="0.264" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_register.xml" value="0.176" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_search.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_second_landing.xml" value="0.264" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_third_landing.xml" value="0.536" />
+        <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/item_category.xml" value="0.264" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/item_setting.xml" value="0.253125" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/menu/main_bottom_menu.xml" value="0.253125" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/menu/main_menu.xml" value="0.2076923076923077" />

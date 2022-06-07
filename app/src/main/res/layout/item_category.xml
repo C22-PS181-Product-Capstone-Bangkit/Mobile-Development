@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="10dp"
     android:layout_marginBottom="10dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgCategory"
-        android:layout_width="114dp"
+        android:layout_width="102dp"
         android:layout_height="68dp"
-        android:scaleType="centerCrop"
-        android:tint="#99191C1D"
+        android:adjustViewBounds="true"
+        android:tint="@color/dark_tint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,15 +24,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/nunito_bold"
+        android:layout_margin="4dp"
         android:text="@string/categories"
         android:textAlignment="center"
         android:textColor="@color/background"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/imgCategory"
         app:layout_constraintEnd_toEndOf="@+id/imgCategory"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.51"
-        tools:text="Bakery and Cale" />
+        app:layout_constraintStart_toStartOf="@id/imgCategory"
+        app:layout_constraintTop_toTopOf="@id/imgCategory"
+        tools:text="Bakery and Cake" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

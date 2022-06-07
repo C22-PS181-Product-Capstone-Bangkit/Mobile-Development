@@ -13,6 +13,7 @@
     <color name="tertiary">#FFBF2300</color>
     <color name="on_tertiary">#FFFFFFFF</color>
     <color name="outline">#FF6F787C</color>
+    <color name="dark_tint">#99191C1D</color>
 
     <!-- Dark theme colors -->
     <color name="primary_dark">#FF86E4F9</color>
