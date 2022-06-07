@@ -140,3 +140,12 @@ data class EditResponse(
 	val message: String? = null
 
 )
+
+data class UploadPictureResponse(
+
+	@field:SerializedName("user")
+	val user: User? = null
+)
+
+
+

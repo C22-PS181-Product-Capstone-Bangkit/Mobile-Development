@@ -1,5 +1,9 @@
 package com.bangkit.cemil.profile
 
+import android.content.ContentResolver
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,18 +13,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bangkit.cemil.SettingPreferences
 import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentEditProfileBinding
+import com.bangkit.cemil.tools.ImageUtils.reduceFileImage
+import com.bangkit.cemil.tools.ImageUtils.uriToFile
 import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
+import java.io.OutputStream
 
 class EditProfileFragment : Fragment() {
 
     private lateinit var binding : FragmentEditProfileBinding
     private val viewModel by viewModels<EditProfileViewModel>()
+    private var getFile : File? = null
     private var validityEmail = false
     private var validityPass = false
     private var accessToken : String? = null
@@ -108,5 +127,37 @@ class EditProfileFragment : Fragment() {
                 viewModel.postEditProfile(accessToken.toString(), name, email, phone)
             }
         }
+        binding.imgProfileEdit.setOnClickListener{
+            openGallery()
+        }
     }
+
+    private fun openGallery(){
+        val intentGallery = Intent()
+        intentGallery.action = Intent.ACTION_GET_CONTENT
+        intentGallery.type = "image/*"
+        val chooser = Intent.createChooser(intentGallery, "Choose Picture")
+        launcherIntentGallery.launch(chooser)
+
+    }
+
+    private val launcherIntentGallery = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == AppCompatActivity.RESULT_OK) {
+            val selectedImg: Uri = result.data?.data as Uri
+            val myFile = uriToFile(selectedImg, requireContext())
+            getFile = myFile
+            binding.imgProfileEdit.setImageURI(selectedImg)
+            if(getFile != null){
+                val file = reduceFileImage(getFile as File)
+//                val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+                val requestImageFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+                val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData("file", file.name, requestImageFile)
+                viewModel.uploadProfilePicture(accessToken.toString(), imageMultipart)
+            }else{
+                Toast.makeText(context, "Upload image failed.", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+
 }

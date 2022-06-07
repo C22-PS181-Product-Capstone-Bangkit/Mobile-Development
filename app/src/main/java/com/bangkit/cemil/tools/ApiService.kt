@@ -1,6 +1,7 @@
 package com.bangkit.cemil.tools
 
 import com.bangkit.cemil.tools.model.*
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -89,5 +90,12 @@ interface ApiService {
         @Header("Authorization")value : String,
         @Path("likeId")likeId: String,
     ): Call<LikeDeleteResponse>
+
+    @Multipart
+    @POST("api/v1/upload-pic")
+    fun uploadPicture(
+        @Header("Authorization")value: String,
+        @Part file: MultipartBody.Part
+    ): Call<UploadPictureResponse>
 
 }
