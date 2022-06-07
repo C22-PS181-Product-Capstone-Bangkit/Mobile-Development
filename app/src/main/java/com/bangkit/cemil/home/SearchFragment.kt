@@ -15,7 +15,6 @@ import com.bangkit.cemil.tools.CategoryAdapter
 import com.bangkit.cemil.tools.CategoryItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class SearchFragment : Fragment() {
 
@@ -25,12 +24,13 @@ class SearchFragment : Fragment() {
         get() {
             val categoryList = ArrayList<CategoryItem>()
             lifecycleScope.launch(Dispatchers.IO){
-                    val settingTitles = resources.getStringArray(R.array.category_titles)
-                    val settingPhotoIds = resources.obtainTypedArray(R.array.category_photos)
-                    for (index in settingTitles.indices) {
-                        val categoryItem = CategoryItem(settingTitles[index], settingPhotoIds.getResourceId(index, -1))
-                        categoryList.add(categoryItem)
-                    }
+                val settingTitles = resources.getStringArray(R.array.category_titles)
+                val settingPhotoIds = resources.obtainTypedArray(R.array.category_photos)
+                for (index in settingTitles.indices) {
+                    val categoryItem = CategoryItem(settingTitles[index], settingPhotoIds.getResourceId(index, -1))
+                    categoryList.add(categoryItem)
+                }
+                settingPhotoIds.recycle()
             }
             return categoryList
         }
@@ -38,7 +38,7 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity).apply{
             setSupportActionBar(binding.materialToolbar)
@@ -62,6 +62,7 @@ class SearchFragment : Fragment() {
             layoutManager = GridLayoutManager(context, 3)
             adapter = categoriesAdapter
         }
+
         categoriesAdapter.setOnItemClickCallback(object: CategoryAdapter.OnItemClickCallback{
             override fun onItemClicked(data: CategoryItem) {
                 Toast.makeText(context, data.title, Toast.LENGTH_SHORT).show()
