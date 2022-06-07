@@ -56,6 +56,9 @@
         <action
             android:id="@+id/action_profileFragment_to_likesFragment"
             app:destination="@id/likesFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_reviewsFragment"
+            app:destination="@id/reviewsFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -165,5 +168,14 @@
             app:destination="@id/restaurantFragment"
             app:popUpTo="@id/addReviewFragment"
             app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/reviewsFragment"
+        android:name="com.bangkit.cemil.profile.ReviewsFragment"
+        android:label="fragment_reviews"
+        tools:layout="@layout/fragment_reviews" >
+        <action
+            android:id="@+id/action_reviewsFragment_to_restaurantFragment"
+            app:destination="@id/restaurantFragment" />
     </fragment>
 </navigation>

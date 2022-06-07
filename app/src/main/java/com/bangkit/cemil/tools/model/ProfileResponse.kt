@@ -49,11 +49,8 @@ data class ReviewItem(
 	@field:SerializedName("createdAt")
 	val createdAt: String? = null,
 
-	@field:SerializedName("subject")
-	val subject: String? = null,
-
-	@field:SerializedName("name")
-	val name: String? = null,
+	@field:SerializedName("restaurant")
+	val restaurant: Restaurant? = null,
 
 	@field:SerializedName("rating")
 	val rating: Int? = null,
@@ -63,6 +60,27 @@ data class ReviewItem(
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null
+)
+
+data class Restaurant(
+
+	@field:SerializedName("countReview")
+	val countReview: Int? = null,
+
+	@field:SerializedName("profilePic")
+	val profilePic: String? = null,
+
+	@field:SerializedName("name")
+	val name: String? = null,
+
+	@field:SerializedName("rating")
+	val rating: Double? = null,
+
+	@field:SerializedName("id")
+	val id: String? = null,
+
+	@field:SerializedName("category")
+	val category: String? = null
 )
 
 data class HistoryItem(
@@ -107,32 +125,32 @@ data class HistoryItem(
 data class LikesItem(
 
 	@field:SerializedName("restaurant")
-	val restaurant: LikedRestaurant? = null,
+	val restaurant: Restaurant? = null,
 
 	@field:SerializedName("id")
 	val id: String? = null
 )
 
-data class LikedRestaurant(
-
-	@field:SerializedName("countReview")
-	val countReview: Int? = null,
-
-	@field:SerializedName("profilePic")
-	val profilePic: String? = null,
-
-	@field:SerializedName("name")
-	val name: String? = null,
-
-	@field:SerializedName("category")
-	val category: String? = null,
-
-	@field:SerializedName("rating")
-	val rating: Double? = null,
-
-	@field:SerializedName("id")
-	val id: String? = null
-)
+//data class LikedRestaurant(
+//
+//	@field:SerializedName("countReview")
+//	val countReview: Int? = null,
+//
+//	@field:SerializedName("profilePic")
+//	val profilePic: String? = null,
+//
+//	@field:SerializedName("name")
+//	val name: String? = null,
+//
+//	@field:SerializedName("category")
+//	val category: String? = null,
+//
+//	@field:SerializedName("rating")
+//	val rating: Double? = null,
+//
+//	@field:SerializedName("id")
+//	val id: String? = null
+//)
 
 data class EditResponse(
 

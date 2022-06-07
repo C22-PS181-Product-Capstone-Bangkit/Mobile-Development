@@ -98,7 +98,7 @@
 
     <string-array name="setting_names">
         <item>History</item>
-        <item>Reviews</item>
+        <item>My Reviews</item>
         <item>Recommendations</item>
         <item>Change Password</item>
         <item>Appearance</item>
