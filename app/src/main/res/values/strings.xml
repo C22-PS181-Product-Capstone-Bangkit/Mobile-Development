@@ -193,5 +193,6 @@
     <string name="how_would_you_rate_this_restaurant">How would you rate this restaurant?</string>
     <string name="write_your_review_here">Write your review here</string>
     <string name="cancel">Cancel</string>
+    <string name="find_me_restaurant">Find me Restaurant</string>
 
 </resources>
