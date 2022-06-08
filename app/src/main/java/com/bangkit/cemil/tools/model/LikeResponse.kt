@@ -16,3 +16,8 @@ data class LikeResponse(
 	@field:SerializedName("message")
 	val message: String? = null
 )
+
+data class LikeDeleteResponse(
+	@field:SerializedName("message")
+	val message: String? = null
+)
