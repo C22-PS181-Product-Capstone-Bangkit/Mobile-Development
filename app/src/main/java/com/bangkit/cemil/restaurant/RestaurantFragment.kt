@@ -20,6 +20,7 @@ import com.bangkit.cemil.tools.ReviewAdapter
 import com.bangkit.cemil.tools.model.LikesItem
 import com.bangkit.cemil.tools.model.RestaurantItem
 import com.bangkit.cemil.tools.model.RestaurantReviewItem
+import com.bangkit.cemil.tools.model.ReviewItem
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
@@ -55,6 +56,8 @@ class RestaurantFragment : Fragment() {
         viewModel.profileData.observe(viewLifecycleOwner){ profileData ->
             likeItem = profileData.likes?.find{it.restaurant?.id == dataRestaurantId}
             if(likeItem != null) toggleLikeButtonOn() else toggleLikeButtonOff()
+            val alreadyReviewed = profileData.review?.any { it.restaurant?.id == dataRestaurantId }
+            if(alreadyReviewed == true) binding.tvAddReview.visibility = View.GONE
         }
         viewModel.restoLike.observe(viewLifecycleOwner){
             Toast.makeText(context, "Restaurant liked!", Toast.LENGTH_SHORT).show()

@@ -113,6 +113,7 @@
         android:numStars="5"
         android:progressTint="?colorSecondary"
         android:rating="5"
+        android:stepSize="1.0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvHowWouldYouRate" />
