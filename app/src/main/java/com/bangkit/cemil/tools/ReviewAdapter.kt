@@ -42,7 +42,7 @@ class ReviewAdapter(private val reviewList : List<RestaurantReviewItem>) : Recyc
             }
 
         }
-        holder.binding.tvReadMore.setOnClickListener { onItemClickCallback.onItemClicked(reviewList[holder.adapterPosition]) }
+        holder.binding.tvReviewText.setOnClickListener { onItemClickCallback.onItemClicked(reviewList[holder.adapterPosition]) }
     }
 
     override fun getItemCount() = reviewList.size
