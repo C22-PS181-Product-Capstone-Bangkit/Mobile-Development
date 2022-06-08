@@ -22,6 +22,7 @@ import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentEditProfileBinding
 import com.bangkit.cemil.tools.ImageUtils.reduceFileImage
 import com.bangkit.cemil.tools.ImageUtils.uriToFile
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
@@ -146,14 +147,18 @@ class EditProfileFragment : Fragment() {
             val selectedImg: Uri = result.data?.data as Uri
             val myFile = uriToFile(selectedImg, requireContext())
             getFile = myFile
-            binding.imgProfileEdit.setImageURI(selectedImg)
-            if(getFile != null){
-                val file = reduceFileImage(getFile as File)
+            if (getFile != null) {
+                val file = getFile
+                Glide.with(requireContext())
+                    .load(file)
+                    .into(binding.imgProfileEdit)
+                //val file = reduceFileImage(getFile as File)
 //                val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-                val requestImageFile = file.asRequestBody("image/*".toMediaTypeOrNull())
-                val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData("file", file.name, requestImageFile)
+                val requestImageFile = file!!.asRequestBody("image/*".toMediaTypeOrNull())
+                val imageMultipart: MultipartBody.Part =
+                    MultipartBody.Part.createFormData("file", file.name, requestImageFile)
                 viewModel.uploadProfilePicture(accessToken.toString(), imageMultipart)
-            }else{
+            } else {
                 Toast.makeText(context, "Upload image failed.", Toast.LENGTH_SHORT).show()
             }
         }

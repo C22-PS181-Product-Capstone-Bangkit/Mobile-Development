@@ -72,7 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/materialToolbarEdit"
         app:shapeAppearanceOverlay="@style/circleImageView"
         app:srcCompat="@drawable/ic_profile_filled"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@drawable/beef" />
 
     <TextView
         android:id="@+id/tvEditNameLabel"

@@ -48,12 +48,11 @@ class EditProfileViewModel : ViewModel() {
     }
 
     fun uploadProfilePicture(accessToken: String, imageMultipart: MultipartBody.Part){
-        val client = ApiConfig.getApiService().uploadPicture(accessToken, imageMultipart)
+        val client = ApiConfig.getApiService().uploadPicture("Bearer $accessToken", imageMultipart)
         client.enqueue(object: Callback<UploadPictureResponse>{
             override fun onResponse(call: Call<UploadPictureResponse>, response: Response<UploadPictureResponse>) {
-                Log.e("EditProfile", "u error")
                 if(response.isSuccessful){
-                    Log.e("EditProfile", "asd: ${response.message()}")
+
                 }else{
                     Log.e("EditProfile", "asd: ${response.message()}")
                     try {
