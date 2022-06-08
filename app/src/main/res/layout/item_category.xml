@@ -11,6 +11,7 @@
         android:layout_width="102dp"
         android:layout_height="68dp"
         android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
         android:tint="@color/dark_tint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

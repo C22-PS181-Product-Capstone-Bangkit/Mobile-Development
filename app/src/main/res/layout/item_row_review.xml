@@ -4,10 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cv_review"
     android:layout_width="match_parent"
-    android:layout_height="165dp"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
     card_view:cardCornerRadius="0dp"
     card_view:cardElevation="24dp"
     card_view:cardMaxElevation="24dp">
@@ -18,8 +16,8 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgProfile"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             card_view:layout_constraintStart_toStartOf="parent"
@@ -51,22 +49,22 @@
             android:fontFamily="@font/nunito_medium"
             android:text="@string/reviews"
             android:textColor="?colorOnBackground"
-            android:textSize="10sp"
+            android:textSize="12sp"
             card_view:layout_constraintStart_toStartOf="@+id/tvReviewerName"
             card_view:layout_constraintTop_toBottomOf="@+id/tvReviewerName"
             tools:text="2 days ago" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvReviewRating"
-            android:layout_width="62dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="19dp"
+            android:layout_width="67dp"
+            android:layout_height="35.5dp"
             android:layout_marginEnd="12dp"
             card_view:cardBackgroundColor="?colorPrimary"
             card_view:cardCornerRadius="6dp"
             card_view:cardElevation="6dp"
+            card_view:layout_constraintBottom_toBottomOf="@id/imgProfile"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent">
+            card_view:layout_constraintTop_toTopOf="@id/imgProfile">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -104,16 +102,17 @@
         <TextView
             android:id="@+id/tvReviewText"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="9dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="12dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="12dp"
+            android:maxLines="4"
+            android:ellipsize="end"
             android:fontFamily="@font/nunito_regular"
-            android:letterSpacing="0.02"
             android:text="@string/reviews"
             android:textColor="?colorOnBackground"
-            android:textSize="10sp"
+            android:textSize="12sp"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
@@ -121,19 +120,5 @@
             card_view:lineHeight="16sp"
             tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.." />
 
-        <TextView
-            android:id="@+id/tvReadMore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="11dp"
-            android:fontFamily="@font/nunito_bold"
-            android:text="@string/read_more"
-            android:textColor="?colorPrimary"
-            android:textSize="10sp"
-            android:textStyle="italic"
-            card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintStart_toStartOf="@+id/tvReviewText"
-            card_view:layout_constraintTop_toBottomOf="@+id/tvReviewText" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

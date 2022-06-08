@@ -63,7 +63,7 @@ class HomeFragment : Fragment() {
                 pref.getPreferences()[SettingPreferences.LONGITUDE_KEY]?.toDouble() ?: 0.0)
         }
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(view.context)
 
         if (locationAddress != "null") {
             binding.tvCurrentLocation.text = locationAddress
@@ -143,6 +143,7 @@ class HomeFragment : Fragment() {
                     )
                     val myLocation = addresses[0].getAddressLine(0)
                     binding.tvCurrentLocation.text = myLocation
+
                 } else {
                     //If no last location found in cache, attempt to retrieve the Current Location
                     val tokenSrc = CancellationTokenSource()
