@@ -25,10 +25,10 @@ class LikesAdapter(private val likedList: List<LikesItem>) : RecyclerView.Adapte
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val likedItem = likedList[position]
         holder.binding.apply {
-            val likedRestoRating = "${likedItem.restaurant!!.rating} (${likedItem.restaurant!!.countReview})"
-            tvLikedResto.text = likedItem.restaurant!!.name
+            val likedRestoRating = "${likedItem.restaurant!!.rating} (${likedItem.restaurant.countReview})"
+            tvLikedResto.text = likedItem.restaurant.name
             tvLikedRestoRating.text = likedRestoRating
-            Glide.with(holder.itemView.context).load(likedItem.restaurant!!.profilePic).into(imgLikedResto)
+            Glide.with(holder.itemView.context).load(likedItem.restaurant.profilePic).into(imgLikedResto)
         }
         holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(likedList[holder.adapterPosition]) }
     }

@@ -174,7 +174,8 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
                         NavigationUI.onNavDestinationSelected(bottomNav.menu.findItem(R.id.historyFragment), findNavController())
                     }
                     resources.getString(R.string.my_reviews) -> {
-                        // Navigate to List of Reviews Fragment
+                        val toReviewsFragment = ProfileFragmentDirections.actionProfileFragmentToReviewsFragment()
+                        requireView().findNavController().navigate(toReviewsFragment)
                     }
                     resources.getString(R.string.recommendations) -> {
                         val toLikesFragment = ProfileFragmentDirections.actionProfileFragmentToLikesFragment()

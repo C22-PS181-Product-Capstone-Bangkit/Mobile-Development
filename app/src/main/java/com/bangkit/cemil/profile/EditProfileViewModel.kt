@@ -1,11 +1,14 @@
 package com.bangkit.cemil.profile
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bangkit.cemil.tools.ApiConfig
 import com.bangkit.cemil.tools.model.EditResponse
 import com.bangkit.cemil.tools.model.ProfileResponse
+import com.bangkit.cemil.tools.model.UploadPictureResponse
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,6 +43,30 @@ class EditProfileViewModel : ViewModel() {
 
             override fun onFailure(call: Call<EditResponse>, t: Throwable) {
                 _editResponse.value = EditResponse(t.message)
+            }
+        })
+    }
+
+    fun uploadProfilePicture(accessToken: String, imageMultipart: MultipartBody.Part){
+        val client = ApiConfig.getApiService().uploadPicture(accessToken, imageMultipart)
+        client.enqueue(object: Callback<UploadPictureResponse>{
+            override fun onResponse(call: Call<UploadPictureResponse>, response: Response<UploadPictureResponse>) {
+                Log.e("EditProfile", "u error")
+                if(response.isSuccessful){
+                    Log.e("EditProfile", "asd: ${response.message()}")
+                }else{
+                    Log.e("EditProfile", "asd: ${response.message()}")
+                    try {
+                        Log.e("UploadImage", "Response failure = " + response.errorBody()!!.string()
+                        )
+                    } catch (e: Exception) {
+                        Log.e("UploadImage", "IOException = " + e.message)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<UploadPictureResponse>, t: Throwable) {
+                Log.e("EditProfile", "unknown error")
             }
         })
     }

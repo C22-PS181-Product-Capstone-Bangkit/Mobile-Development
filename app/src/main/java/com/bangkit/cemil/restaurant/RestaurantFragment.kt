@@ -1,20 +1,23 @@
 package com.bangkit.cemil.restaurant
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bangkit.cemil.R
 import com.bangkit.cemil.SettingPreferences
 import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentRestaurantBinding
-import com.bangkit.cemil.home.HomeFragmentDirections
 import com.bangkit.cemil.tools.ReviewAdapter
+import com.bangkit.cemil.tools.model.LikesItem
 import com.bangkit.cemil.tools.model.RestaurantItem
 import com.bangkit.cemil.tools.model.RestaurantReviewItem
 import com.bumptech.glide.Glide
@@ -26,8 +29,10 @@ import kotlin.collections.ArrayList
 class RestaurantFragment : Fragment() {
 
     private lateinit var binding : FragmentRestaurantBinding
+    private lateinit var dataRestaurantId : String
     private val viewModel by viewModels<RestaurantViewModel>()
     private var accessToken : String? = null
+    private var likeItem: LikesItem? = null
     private val list = ArrayList<RestaurantReviewItem>()
 
     override fun onCreateView(
@@ -40,11 +45,26 @@ class RestaurantFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val dataRestaurantId = RestaurantFragmentArgs.fromBundle(arguments as Bundle).restaurantId
+        dataRestaurantId = RestaurantFragmentArgs.fromBundle(arguments as Bundle).restaurantId
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
         lifecycleScope.launch {
             accessToken = pref.getPreferences()[SettingPreferences.AUTHORIZATION_TOKEN_KEY]
         }
+        if(accessToken == null) binding.fabLike.visibility = View.INVISIBLE else viewModel.fetchProfile(accessToken!!)
+
+        viewModel.profileData.observe(viewLifecycleOwner){ profileData ->
+            likeItem = profileData.likes?.find{it.restaurant?.id == dataRestaurantId}
+            if(likeItem != null) toggleLikeButtonOn() else toggleLikeButtonOff()
+        }
+        viewModel.restoLike.observe(viewLifecycleOwner){
+            Toast.makeText(context, "Restaurant liked!", Toast.LENGTH_SHORT).show()
+            toggleLikeButtonOn()
+        }
+        viewModel.restoDeleteLike.observe(viewLifecycleOwner){
+            Toast.makeText(context, "Restaurant like removed!", Toast.LENGTH_SHORT).show()
+            toggleLikeButtonOff()
+        }
+
         binding.rvReviews.layoutManager = LinearLayoutManager(context)
         viewModel.getRestaurantById(dataRestaurantId)
         viewModel.restoData.observe(viewLifecycleOwner){
@@ -55,23 +75,8 @@ class RestaurantFragment : Fragment() {
             list.reverse()
             showRecyclerList()
         }
-        viewModel.restoLike.observe(viewLifecycleOwner){
-            Toast.makeText(context, "Restaurant liked!", Toast.LENGTH_SHORT).show()
-        }
-        binding.tvAddReview.setOnClickListener {
-            val toAddReviewFragment = RestaurantFragmentDirections.actionRestaurantFragmentToAddReviewFragment(dataRestaurantId)
-            requireView().findNavController().navigate(toAddReviewFragment)
-        }
-        binding.btnSeeAllReviews.setOnClickListener {
-            val toRestaurantReviewsFragment = RestaurantFragmentDirections.actionRestaurantFragmentToRestaurantReviewsFragment(dataRestaurantId)
-            requireView().findNavController().navigate(toRestaurantReviewsFragment)
-        }
-        binding.fabBack.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
-        binding.fabLike.setOnClickListener {
-            viewModel.postRestaurantLike(accessToken.toString(), dataRestaurantId)
-        }
+
+        setButtonListener()
     }
 
     private fun showRecyclerList(){
@@ -114,5 +119,33 @@ class RestaurantFragment : Fragment() {
     private fun currencyFormat(amount: String) : String{
         val rupiahFormatter = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
         return rupiahFormatter.format(amount.toDouble())
+    }
+
+    private fun setButtonListener(){
+        binding.tvAddReview.setOnClickListener {
+            val toAddReviewFragment = RestaurantFragmentDirections.actionRestaurantFragmentToAddReviewFragment(dataRestaurantId)
+            requireView().findNavController().navigate(toAddReviewFragment)
+        }
+        binding.btnSeeAllReviews.setOnClickListener {
+            val toRestaurantReviewsFragment = RestaurantFragmentDirections.actionRestaurantFragmentToRestaurantReviewsFragment(dataRestaurantId)
+            requireView().findNavController().navigate(toRestaurantReviewsFragment)
+        }
+        binding.fabBack.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+    }
+
+    private fun toggleLikeButtonOff(){
+        binding.fabLike.imageTintList = ColorStateList.valueOf(com.google.android.material.R.attr.strokeColor)
+        binding.fabLike.setOnClickListener {
+            viewModel.postRestaurantLike(accessToken.toString(), dataRestaurantId)
+        }
+    }
+
+    private fun toggleLikeButtonOn(){
+        binding.fabLike.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.secondary))
+        binding.fabLike.setOnClickListener {
+            viewModel.deleteRestaurantLike(accessToken.toString(), likeItem?.id.toString())
+        }
     }
 }

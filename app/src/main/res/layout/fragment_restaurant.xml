@@ -40,6 +40,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/imgRestaurantBanner"
                     app:maxImageSize="24dp"
+                    app:borderWidth="0dp"
                     app:srcCompat="@drawable/ic_back_filled"
                     app:tint="@color/on_background" />
 
@@ -55,6 +56,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/imgRestaurantBanner"
                     app:layout_constraintTop_toTopOf="@+id/imgRestaurantBanner"
                     app:maxImageSize="24dp"
+                    app:borderWidth="0dp"
                     app:srcCompat="@drawable/ic_recommendation_filled"
                     app:tint="@color/secondary" />
 
