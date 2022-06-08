@@ -19,13 +19,11 @@
 
         <TextView
             android:id="@+id/tvProfileTitle"
+            style="@style/Theme.Cemil.Toolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:fontFamily="@font/nunito_extrabold"
-            android:text="@string/recommendations_history"
-            android:textColor="?colorOnPrimary"
-            android:textSize="24sp" />
+            android:text="@string/recommendations_history" />
 
     </com.google.android.material.appbar.MaterialToolbar>
 
