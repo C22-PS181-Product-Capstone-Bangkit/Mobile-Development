@@ -5,11 +5,9 @@
     android:id="@+id/cv_home"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
+    android:layout_marginEnd="16dp"
     card_view:cardBackgroundColor="?android:colorBackground"
-    card_view:cardCornerRadius="8dp"
-    card_view:cardElevation="2dp"
-    card_view:cardMaxElevation="2dp">
+    card_view:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

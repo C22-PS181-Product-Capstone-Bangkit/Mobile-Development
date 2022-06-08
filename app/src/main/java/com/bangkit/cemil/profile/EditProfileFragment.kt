@@ -148,28 +148,25 @@ class EditProfileFragment : Fragment() {
 
     }
 
-    private val launcherIntentGallery =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == AppCompatActivity.RESULT_OK) {
-                val selectedImg: Uri = result.data?.data as Uri
-                val myFile = uriToFile(selectedImg, requireContext())
-                getFile = myFile
-                if (getFile != null) {
-                    val file = getFile
-                    Glide.with(requireContext())
-                        .load(file)
-                        .into(binding.imgProfileEdit)
-                    //val file = reduceFileImage(getFile as File)
+    private val launcherIntentGallery = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == AppCompatActivity.RESULT_OK) {
+            val selectedImg: Uri = result.data?.data as Uri
+            val myFile = uriToFile(selectedImg, requireContext())
+            getFile = myFile
+            if (getFile != null) {
+                val file = getFile
+                Glide.with(requireContext())
+                    .load(file)
+                    .into(binding.imgProfileEdit)
+                //val file = reduceFileImage(getFile as File)
 //                val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-                    val requestImageFile = file!!.asRequestBody("image/*".toMediaTypeOrNull())
-                    val imageMultipart: MultipartBody.Part =
-                        MultipartBody.Part.createFormData("file", file.name, requestImageFile)
-                    viewModel.uploadProfilePicture(accessToken.toString(), imageMultipart)
-                } else {
-                    Toast.makeText(context, "Upload image failed.", Toast.LENGTH_SHORT).show()
-                }
+                val requestImageFile = file!!.asRequestBody("image/*".toMediaTypeOrNull())
+                val imageMultipart: MultipartBody.Part =
+                    MultipartBody.Part.createFormData("file", file.name, requestImageFile)
+                viewModel.uploadProfilePicture(accessToken.toString(), imageMultipart)
+            } else {
+                Toast.makeText(context, "Upload image failed.", Toast.LENGTH_SHORT).show()
             }
         }
-
-
+    }
 }

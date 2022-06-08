@@ -10,6 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import com.bangkit.cemil.SettingPreferences
 import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentLogoutDialogBinding
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class LogoutDialogFragment : DialogFragment() {
@@ -50,9 +52,9 @@ class LogoutDialogFragment : DialogFragment() {
             lifecycleScope.launch{
                 pref.saveAuthorization(false)
                 pref.deleteAuthorizationToken()
+                dialogCallback.onDialogLogout()
+                dismiss()
             }
-            dialogCallback.onDialogLogout()
-            dismiss()
         }
 
         binding.tvNegative.setOnClickListener {
