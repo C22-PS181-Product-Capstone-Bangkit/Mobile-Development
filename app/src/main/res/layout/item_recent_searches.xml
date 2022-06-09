@@ -35,8 +35,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_close" />
+        app:layout_constraintVertical_bias="0.0"/>
+<!--        app:srcCompat="@drawable/ic_close" -->
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

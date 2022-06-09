@@ -1,13 +1,11 @@
 package com.bangkit.cemil.profile
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bangkit.cemil.tools.ApiConfig
 import com.bangkit.cemil.tools.model.EditResponse
 import com.bangkit.cemil.tools.model.ProfileResponse
-import com.bangkit.cemil.tools.model.UploadPictureResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call

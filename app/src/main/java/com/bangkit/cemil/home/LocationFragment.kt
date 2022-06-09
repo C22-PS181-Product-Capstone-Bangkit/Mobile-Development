@@ -43,7 +43,7 @@ class LocationFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLocationBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity).apply{
             setSupportActionBar(binding.materialToolbarLocation)
@@ -137,7 +137,7 @@ class LocationFragment : Fragment() {
         binding.rvSearchLocation.adapter = locationAdapter
         locationAdapter.setOnItemClickCallback(object : LocationSearchAdapter.OnItemClickCallback{
             override fun onItemClicked(data: LocationSearchItem) {
-                Toast.makeText(appContext, data.locationDesc.toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText(appContext, data.locationDesc, Toast.LENGTH_SHORT).show()
                 val addresses = Geocoder(requireContext()).getFromLocationName(data.locationDesc, 1)
                 lifecycleScope.launch {
                     pref.saveLocation("${data.locationName}, ${data.locationDesc}")

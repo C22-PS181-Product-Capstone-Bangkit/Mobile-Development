@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.cemil.databinding.ItemRecentSearchesBinding
 
-class RecentSearchAdapter(private val listRecentSearches: List<RecentSearchItem>): RecyclerView.Adapter<RecentSearchAdapter.ViewHolder>() {
+class RecentSearchAdapter(private val listRecentSearches: List<String>): RecyclerView.Adapter<RecentSearchAdapter.ViewHolder>() {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
 
@@ -22,12 +22,15 @@ class RecentSearchAdapter(private val listRecentSearches: List<RecentSearchItem>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val recentSearchItem = listRecentSearches[position]
-        holder.binding.tvProfileSetting.text = recentSearchItem.restaurantName
+        holder.binding.tvProfileSetting.text = recentSearchItem
+        holder.binding.tvProfileSetting.setOnClickListener { onItemClickCallback.onItemClicked(listRecentSearches[holder.adapterPosition]) }
+//        holder.binding.imgRecentSymbol.setOnClickListener { onItemClickCallback.onEraseClicked(listRecentSearches[holder.adapterPosition]) }
     }
 
     override fun getItemCount() = listRecentSearches.size
 
     interface OnItemClickCallback {
         fun onItemClicked(data: String)
+//        fun onEraseClicked(data: String)
     }
 }

@@ -154,10 +154,6 @@ class EditProfileFragment : Fragment() {
                 Glide.with(requireContext())
                     .load(getFile)
                     .into(binding.imgProfileEdit)
-                val requestImageFile = file!!.asRequestBody("image/*".toMediaTypeOrNull())
-                val imageMultipart: MultipartBody.Part =
-                    MultipartBody.Part.createFormData("file", file.name, requestImageFile)
-                viewModel.uploadProfilePicture(accessToken.toString(), imageMultipart)
             } else {
                 Toast.makeText(context, "Upload image failed.", Toast.LENGTH_SHORT).show()
             }

@@ -10,7 +10,8 @@
     card_view:strokeColor="?android:strokeColor"
     card_view:strokeWidth="0.5dp"
     card_view:cardBackgroundColor="?android:colorBackground"
-    card_view:cardCornerRadius="8dp">
+    card_view:cardCornerRadius="8dp"
+    card_view:cardElevation="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

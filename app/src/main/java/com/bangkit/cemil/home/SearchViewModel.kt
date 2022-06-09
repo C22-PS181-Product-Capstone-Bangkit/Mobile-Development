@@ -29,4 +29,20 @@ class SearchViewModel: ViewModel() {
             }
         })
     }
+
+    fun fetchRestosByCategory(category: String){
+        val client = ApiConfig.getApiService().getRestaurantByCategory(category)
+        client.enqueue(object: Callback<List<RestaurantItem>>{
+            override fun onResponse(call: Call<List<RestaurantItem>>, response: Response<List<RestaurantItem>>) {
+                if(response.isSuccessful){
+                    if(response.body() != null){
+                        _listRestos.value = response.body()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<RestaurantItem>>, t: Throwable) {
+            }
+        })
+    }
 }

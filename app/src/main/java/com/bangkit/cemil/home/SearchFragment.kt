@@ -5,6 +5,7 @@ import android.content.Context
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,9 +24,13 @@ import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentSearchBinding
 import com.bangkit.cemil.tools.CategoryAdapter
 import com.bangkit.cemil.tools.CategoryItem
+import com.bangkit.cemil.tools.RecentSearchAdapter
 import com.bangkit.cemil.tools.SearchAdapter
 import com.bangkit.cemil.tools.model.RestaurantItem
 import com.google.android.gms.maps.model.LatLng
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -37,6 +42,9 @@ class SearchFragment : Fragment() {
     private lateinit var mutableList : MutableList<RestaurantItem>
     private var locationAddress: String = ""
     private var latLng : LatLng? = null
+    private var recentSearchList = ArrayList<String>()
+    private val gson = GsonBuilder().create()
+    private lateinit var pref : SettingPreferences
 
     private val listCategories: ArrayList<CategoryItem>
         get() {
@@ -67,17 +75,27 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val pref = SettingPreferences.getInstance(requireContext().dataStore)
+        pref = SettingPreferences.getInstance(requireContext().dataStore)
+        binding.rvRecentSearches.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvSearch.layoutManager = LinearLayoutManager(requireContext())
         lifecycleScope.launch {
             locationAddress = pref.getPreferences()[SettingPreferences.LOCATION_KEY].toString()
             latLng = LatLng(pref.getPreferences()[SettingPreferences.LATITUDE_KEY]?.toDouble() ?: 0.0,
                 pref.getPreferences()[SettingPreferences.LONGITUDE_KEY]?.toDouble() ?: 0.0)
+            val recentSearchesJson = pref.getPreferences()[SettingPreferences.RECENT_SEARCH_KEY] ?: recentSearchList.toString()
+            recentSearchList = recentSearchesJson.fromJson()!!
         }
+
         binding.tvClearAll.setOnClickListener {
             Toast.makeText(context, "Clear all Recent Searches", Toast.LENGTH_SHORT).show()
+            recentSearchList.clear()
+            lifecycleScope.launch{
+                pref.saveRecentSearch(gson.toJson(recentSearchList))
+            }
+            showRecentSearchRecyclerList()
         }
         setUpCategoriesList()
-        binding.rvSearch.layoutManager = LinearLayoutManager(requireContext())
+        showRecentSearchRecyclerList()
         val searchManager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
         binding.etSearch.apply {
             setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
@@ -85,6 +103,11 @@ class SearchFragment : Fragment() {
             setOnQueryTextListener(object: SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     viewModel.searchRestos(query.toString())
+                    recentSearchList.add(query.toString())
+                    val searchJson = gson.toJson(recentSearchList)
+                    lifecycleScope.launch{
+                        pref.saveRecentSearch(searchJson)
+                    }
                     binding.etSearch.clearFocus()
                     return true
                 }
@@ -92,24 +115,32 @@ class SearchFragment : Fragment() {
                     if(query.equals("")){
                         binding.searchResultLayout.visibility = View.GONE
                         binding.searchDefaultLayout.visibility = View.VISIBLE
+                        showRecentSearchRecyclerList()
                     }
                     return true
                 }
             })
         }
         viewModel.listRestos.observe(viewLifecycleOwner){
-            mutableList = it.toMutableList()
-            val results = FloatArray(1)
-            lifecycleScope.launch(Dispatchers.IO){
-                calculateRestaurantDistances(mutableList.listIterator(), results)
-                withContext(Dispatchers.Main){
-                    binding.searchDefaultLayout.visibility = View.GONE
-                    binding.searchResultLayout.visibility = View.VISIBLE
-                    showRecyclerList()
+            if(it != null){
+                mutableList = it.toMutableList()
+                val results = FloatArray(1)
+                lifecycleScope.launch(Dispatchers.IO){
+                    calculateRestaurantDistances(mutableList.listIterator(), results)
+                    withContext(Dispatchers.Main){
+                        binding.searchDefaultLayout.visibility = View.GONE
+                        binding.searchResultLayout.visibility = View.VISIBLE
+                        binding.btnSearchSortRating.isClickable = true
+                        binding.btnSearchSortLocation.isClickable = true
+                        showRecyclerList()
+                    }
                 }
+                if(it.isEmpty()) Toast.makeText(context, "Not found.", Toast.LENGTH_SHORT).show()
             }
         }
         binding.btnSearchSortRating.setOnClickListener {
+            binding.btnSearchSortRating.isClickable = false
+            binding.btnSearchSortLocation.isClickable = true
             lifecycleScope.launch(Dispatchers.IO){
                 mutableList.sortBy { it.rating }
                 mutableList.reverse()
@@ -119,6 +150,8 @@ class SearchFragment : Fragment() {
             }
         }
         binding.btnSearchSortLocation.setOnClickListener {
+            binding.btnSearchSortLocation.isClickable = false
+            binding.btnSearchSortRating.isClickable = true
             lifecycleScope.launch(Dispatchers.IO){
                 mutableList.sortBy { it.distance?.toDouble() }
                 withContext(Dispatchers.Main){
@@ -148,6 +181,11 @@ class SearchFragment : Fragment() {
         }
     }
 
+    private inline fun <reified T : Any> String?.fromJson(): T? = this?.let {
+        val typeToken = object : TypeToken<T>() {}.type
+        gson.fromJson(this, typeToken)
+    }
+
     private fun setUpCategoriesList(){
         val categoriesAdapter = CategoryAdapter(listCategories)
         binding.rvCategories.apply{
@@ -158,7 +196,7 @@ class SearchFragment : Fragment() {
 
         categoriesAdapter.setOnItemClickCallback(object: CategoryAdapter.OnItemClickCallback{
             override fun onItemClicked(data: CategoryItem) {
-                Toast.makeText(context, data.title, Toast.LENGTH_SHORT).show()
+                viewModel.fetchRestosByCategory(data.title)
             }
         })
     }
@@ -173,4 +211,24 @@ class SearchFragment : Fragment() {
             }
         })
     }
+
+    private fun showRecentSearchRecyclerList(){
+        recentSearchList.reverse()
+        val recentSearchAdapter = RecentSearchAdapter(recentSearchList)
+        binding.rvRecentSearches.adapter = recentSearchAdapter
+        recentSearchAdapter.setOnItemClickCallback(object: RecentSearchAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: String) {
+                binding.etSearch.setQuery(data, false)
+            }
+
+//            override fun onEraseClicked(data: String) {
+//                recentSearchList.remove(data)
+//                lifecycleScope.launch{
+//                        pref.saveRecentSearch(gson.toJson(recentSearchList))
+//                }
+//                showRecentSearchRecyclerList()
+//            }
+        })
+    }
+
 }

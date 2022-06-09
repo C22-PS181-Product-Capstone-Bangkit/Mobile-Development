@@ -61,9 +61,9 @@ interface ApiService {
         @Field("oldPassword") oldPassword: String
     ): Call<ChangePasswordResponse>
 
-    @GET("api/v1/restaurant/{restaurantId}")
+    @GET("api/v1/restaurant")
     fun getRestaurantByCategory(
-        @Path("restaurantId") restaurantId: String,
+        @Query("category") category: String,
     ): Call<List<RestaurantItem>>
 
     @GET("api/v1/restaurant")

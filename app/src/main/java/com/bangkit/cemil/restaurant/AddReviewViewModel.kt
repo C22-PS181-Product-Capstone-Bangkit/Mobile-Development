@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.bangkit.cemil.tools.ApiConfig
 import com.bangkit.cemil.tools.model.AddReviewResponse
 import com.bangkit.cemil.tools.model.RestaurantItem
-import com.bangkit.cemil.tools.model.RestaurantReviewItem
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

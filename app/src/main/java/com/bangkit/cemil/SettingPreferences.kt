@@ -67,9 +67,9 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
         }
     }
 
-    suspend fun saveRecentSearch(searchQuerySet: Set<String>){
+    suspend fun saveRecentSearch(recentSearches: String){
         dataStore.edit {
-            it[RECENT_SEARCH_KEY] = searchQuerySet
+            it[RECENT_SEARCH_KEY] = recentSearches
         }
     }
 
@@ -84,7 +84,7 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
         val AUTHORIZATION_TOKEN_KEY = stringPreferencesKey("authorization_token")
         val LATITUDE_KEY = stringPreferencesKey("latitude")
         val LONGITUDE_KEY = stringPreferencesKey("longitude")
-        val RECENT_SEARCH_KEY = stringSetPreferencesKey("recent_searches")
+        val RECENT_SEARCH_KEY = stringPreferencesKey("recent_searches")
 
         fun getInstance(dataStore: DataStore<Preferences>): SettingPreferences {
             return INSTANCE ?: synchronized(this) {
