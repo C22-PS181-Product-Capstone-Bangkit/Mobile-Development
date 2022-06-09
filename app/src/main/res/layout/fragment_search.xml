@@ -160,11 +160,13 @@
                 android:text="@string/sort_by_location"
                 android:textColor="?android:colorBackground"
                 android:textSize="12sp"
+                android:visibility="invisible"
                 app:cornerRadius="32sp"
                 app:layout_constraintEnd_toStartOf="@+id/btnSearchSortRating"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
 
             <Button
                 android:id="@+id/btnSearchSortRating"
@@ -180,11 +182,13 @@
                 android:text="@string/sort_by_ratings"
                 android:textColor="?android:colorBackground"
                 android:textSize="12sp"
+                android:visibility="invisible"
                 app:cornerRadius="32sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/btnSearchSortLocation"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvSearch"

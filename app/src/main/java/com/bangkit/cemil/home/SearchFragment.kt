@@ -5,7 +5,6 @@ import android.content.Context
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -28,7 +27,6 @@ import com.bangkit.cemil.tools.RecentSearchAdapter
 import com.bangkit.cemil.tools.SearchAdapter
 import com.bangkit.cemil.tools.model.RestaurantItem
 import com.google.android.gms.maps.model.LatLng
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
@@ -45,6 +43,7 @@ class SearchFragment : Fragment() {
     private var recentSearchList = ArrayList<String>()
     private val gson = GsonBuilder().create()
     private lateinit var pref : SettingPreferences
+    private var isReversed = false
 
     private val listCategories: ArrayList<CategoryItem>
         get() {
@@ -103,18 +102,24 @@ class SearchFragment : Fragment() {
             setOnQueryTextListener(object: SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     viewModel.searchRestos(query.toString())
+                    reverseBackRecentList()
                     recentSearchList.add(query.toString())
                     val searchJson = gson.toJson(recentSearchList)
                     lifecycleScope.launch{
                         pref.saveRecentSearch(searchJson)
                     }
                     binding.etSearch.clearFocus()
+                    binding.searchDefaultLayout.visibility = View.GONE
+                    binding.searchResultLayout.visibility = View.VISIBLE
                     return true
                 }
                 override fun onQueryTextChange(query: String?): Boolean {
                     if(query.equals("")){
                         binding.searchResultLayout.visibility = View.GONE
                         binding.searchDefaultLayout.visibility = View.VISIBLE
+                        binding.btnSearchSortRating.visibility = View.INVISIBLE
+                        binding.btnSearchSortLocation.visibility = View.INVISIBLE
+                        binding.rvSearch.visibility = View.INVISIBLE
                         showRecentSearchRecyclerList()
                     }
                     return true
@@ -128,8 +133,9 @@ class SearchFragment : Fragment() {
                 lifecycleScope.launch(Dispatchers.IO){
                     calculateRestaurantDistances(mutableList.listIterator(), results)
                     withContext(Dispatchers.Main){
-                        binding.searchDefaultLayout.visibility = View.GONE
-                        binding.searchResultLayout.visibility = View.VISIBLE
+                        binding.btnSearchSortRating.visibility = View.VISIBLE
+                        binding.btnSearchSortLocation.visibility = View.VISIBLE
+                        binding.rvSearch.visibility = View.VISIBLE
                         binding.btnSearchSortRating.isClickable = true
                         binding.btnSearchSortLocation.isClickable = true
                         showRecyclerList()
@@ -193,7 +199,6 @@ class SearchFragment : Fragment() {
             layoutManager = GridLayoutManager(context, 3)
             adapter = categoriesAdapter
         }
-
         categoriesAdapter.setOnItemClickCallback(object: CategoryAdapter.OnItemClickCallback{
             override fun onItemClicked(data: CategoryItem) {
                 viewModel.fetchRestosByCategory(data.title)
@@ -213,22 +218,31 @@ class SearchFragment : Fragment() {
     }
 
     private fun showRecentSearchRecyclerList(){
-        recentSearchList.reverse()
+        if(!isReversed){
+            recentSearchList.reverse()
+            isReversed = true
+        }
         val recentSearchAdapter = RecentSearchAdapter(recentSearchList)
         binding.rvRecentSearches.adapter = recentSearchAdapter
         recentSearchAdapter.setOnItemClickCallback(object: RecentSearchAdapter.OnItemClickCallback{
             override fun onItemClicked(data: String) {
                 binding.etSearch.setQuery(data, false)
             }
-
-//            override fun onEraseClicked(data: String) {
-//                recentSearchList.remove(data)
-//                lifecycleScope.launch{
-//                        pref.saveRecentSearch(gson.toJson(recentSearchList))
-//                }
-//                showRecentSearchRecyclerList()
-//            }
+            override fun onEraseClicked(data: String, position: Int) {
+                recentSearchList.removeAt(position)
+                reverseBackRecentList()
+                lifecycleScope.launch{
+                        pref.saveRecentSearch(gson.toJson(recentSearchList))
+                }
+                showRecentSearchRecyclerList()
+            }
         })
     }
 
+    private fun reverseBackRecentList(){
+        if(isReversed){
+            recentSearchList.reverse()
+            isReversed = false
+        }
+    }
 }

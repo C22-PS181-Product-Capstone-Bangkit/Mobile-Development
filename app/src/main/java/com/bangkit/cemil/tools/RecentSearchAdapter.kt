@@ -24,13 +24,18 @@ class RecentSearchAdapter(private val listRecentSearches: List<String>): Recycle
         val recentSearchItem = listRecentSearches[position]
         holder.binding.tvProfileSetting.text = recentSearchItem
         holder.binding.tvProfileSetting.setOnClickListener { onItemClickCallback.onItemClicked(listRecentSearches[holder.adapterPosition]) }
-//        holder.binding.imgRecentSymbol.setOnClickListener { onItemClickCallback.onEraseClicked(listRecentSearches[holder.adapterPosition]) }
+        holder.binding.imgRecentSymbol.setOnClickListener { onItemClickCallback.onEraseClicked(listRecentSearches[holder.adapterPosition], position) }
     }
 
-    override fun getItemCount() = listRecentSearches.size
+    override fun getItemCount() : Int{
+        if(listRecentSearches.size > 5){
+            return 5
+        }
+        return listRecentSearches.size
+    }
 
     interface OnItemClickCallback {
         fun onItemClicked(data: String)
-//        fun onEraseClicked(data: String)
+        fun onEraseClicked(data: String, position: Int)
     }
 }
