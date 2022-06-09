@@ -1,13 +1,10 @@
 package com.bangkit.cemil.profile
 
-import android.content.ContentResolver
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,21 +18,14 @@ import androidx.lifecycle.lifecycleScope
 import com.bangkit.cemil.SettingPreferences
 import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentEditProfileBinding
-import com.bangkit.cemil.tools.ImageUtils.reduceFileImage
 import com.bangkit.cemil.tools.ImageUtils.uriToFile
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.launch
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
-import java.io.FileOutputStream
-import java.io.InputStream
-import java.io.OutputStream
 
 class EditProfileFragment : Fragment() {
 
@@ -49,7 +39,7 @@ class EditProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentEditProfileBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity).apply {
             setSupportActionBar(binding.materialToolbarEdit)
@@ -130,8 +120,15 @@ class EditProfileFragment : Fragment() {
                 binding.etEditName.error = "Name can't be empty!"
             } else if (email.isBlank()) {
                 binding.etEditEmail.error = "Email can't be empty!"
-            } else if (validityEmail && validityPass) {
-                viewModel.postEditProfile(accessToken.toString(), name, email, phone)
+            } else if (validityEmail && validityPass && getFile != null) {
+                val file = getFile
+                val requestImageFile = file!!.asRequestBody("image/*".toMediaTypeOrNull())
+                val imageMultipart: MultipartBody.Part =
+                    MultipartBody.Part.createFormData("file", file.name, requestImageFile)
+                val nameRequestBody = name.toRequestBody("text/plain".toMediaTypeOrNull())
+                val emailRequestBody = email.toRequestBody("text/plain".toMediaTypeOrNull())
+                val phoneRequestBody = phone.toRequestBody("text/plain".toMediaTypeOrNull())
+                viewModel.postEditProfile(accessToken.toString(), imageMultipart, nameRequestBody, emailRequestBody, phoneRequestBody)
             }
         }
         binding.imgProfileEdit.setOnClickListener {
@@ -154,9 +151,8 @@ class EditProfileFragment : Fragment() {
             val myFile = uriToFile(selectedImg, requireContext())
             getFile = myFile
             if (getFile != null) {
-                val file = getFile
                 Glide.with(requireContext())
-                    .load(file)
+                    .load(getFile)
                     .into(binding.imgProfileEdit)
                 val requestImageFile = file!!.asRequestBody("image/*".toMediaTypeOrNull())
                 val imageMultipart: MultipartBody.Part =
