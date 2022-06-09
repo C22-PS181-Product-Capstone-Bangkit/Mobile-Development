@@ -73,6 +73,12 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
         }
     }
 
+    suspend fun saveRecentlyVisited(recentlyVisited: String){
+        dataStore.edit{
+            it[RECENTLY_VISITED_KEY] = recentlyVisited
+        }
+    }
+
     companion object{
         @Volatile
         private var INSTANCE: SettingPreferences? = null
@@ -85,6 +91,7 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
         val LATITUDE_KEY = stringPreferencesKey("latitude")
         val LONGITUDE_KEY = stringPreferencesKey("longitude")
         val RECENT_SEARCH_KEY = stringPreferencesKey("recent_searches")
+        val RECENTLY_VISITED_KEY = stringPreferencesKey("recently_visited")
 
         fun getInstance(dataStore: DataStore<Preferences>): SettingPreferences {
             return INSTANCE ?: synchronized(this) {

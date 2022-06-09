@@ -17,6 +17,9 @@
             android:id="@+id/action_homeFragment_to_restaurantFragment"
             app:destination="@id/restaurantFragment" />
         <action
+            android:id="@+id/action_homeFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
             android:id="@+id/action_homeFragment_to_preferencesFragment"
             app:destination="@id/preferencesFragment" />
     </fragment>

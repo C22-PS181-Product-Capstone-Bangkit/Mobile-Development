@@ -92,4 +92,10 @@ interface ApiService {
         @Header("Authorization") value: String,
         @Path("likeId") likeId: String,
     ): Call<LikeDeleteResponse>
+
+    @FormUrlEncoded
+    @POST("api/v1/restaurant/list-restaurant")
+    fun fetchRestaurantByListIds(
+        @Field("idRestaurants") idRestaurants: ArrayList<String>,
+    ): Call<List<RestaurantItem>>
 }

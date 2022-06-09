@@ -23,12 +23,12 @@ import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentSearchBinding
 import com.bangkit.cemil.tools.CategoryAdapter
 import com.bangkit.cemil.tools.CategoryItem
+import com.bangkit.cemil.tools.JsonUtils.fromJson
 import com.bangkit.cemil.tools.RecentSearchAdapter
 import com.bangkit.cemil.tools.SearchAdapter
 import com.bangkit.cemil.tools.model.RestaurantItem
 import com.google.android.gms.maps.model.LatLng
 import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -82,9 +82,8 @@ class SearchFragment : Fragment() {
             latLng = LatLng(pref.getPreferences()[SettingPreferences.LATITUDE_KEY]?.toDouble() ?: 0.0,
                 pref.getPreferences()[SettingPreferences.LONGITUDE_KEY]?.toDouble() ?: 0.0)
             val recentSearchesJson = pref.getPreferences()[SettingPreferences.RECENT_SEARCH_KEY] ?: recentSearchList.toString()
-            recentSearchList = recentSearchesJson.fromJson()!!
+            recentSearchList = recentSearchesJson.fromJson(gson)!!
         }
-
         binding.tvClearAll.setOnClickListener {
             Toast.makeText(context, "Clear all Recent Searches", Toast.LENGTH_SHORT).show()
             recentSearchList.clear()
@@ -185,11 +184,6 @@ class SearchFragment : Fragment() {
                 iterator.set(oldValue)
             }catch(e: ConcurrentModificationException){ }
         }
-    }
-
-    private inline fun <reified T : Any> String?.fromJson(): T? = this?.let {
-        val typeToken = object : TypeToken<T>() {}.type
-        gson.fromJson(this, typeToken)
     }
 
     private fun setUpCategoriesList(){
