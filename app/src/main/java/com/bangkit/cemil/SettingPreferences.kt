@@ -1,10 +1,7 @@
 package com.bangkit.cemil
 
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.*
 import kotlinx.coroutines.flow.first
 
 class SettingPreferences private constructor(private val dataStore: DataStore<Preferences>) {
@@ -43,6 +40,12 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
         }
     }
 
+    suspend fun deleteAuthorizationToken(){
+        dataStore.edit {
+            it.remove(AUTHORIZATION_TOKEN_KEY)
+        }
+    }
+
     suspend fun saveLocation(location: String){
         dataStore.edit {
             it[LOCATION_KEY] = location
@@ -56,17 +59,17 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
         }
     }
 
-    suspend fun deleteAuthorizationToken(){
-        dataStore.edit {
-            it.remove(AUTHORIZATION_TOKEN_KEY)
-        }
-    }
-
     suspend fun deleteLocation(){
         dataStore.edit {
             it.remove(LOCATION_KEY)
             it.remove(LATITUDE_KEY)
             it.remove(LONGITUDE_KEY)
+        }
+    }
+
+    suspend fun saveRecentSearch(searchQuerySet: Set<String>){
+        dataStore.edit {
+            it[RECENT_SEARCH_KEY] = searchQuerySet
         }
     }
 
@@ -81,6 +84,7 @@ class SettingPreferences private constructor(private val dataStore: DataStore<Pr
         val AUTHORIZATION_TOKEN_KEY = stringPreferencesKey("authorization_token")
         val LATITUDE_KEY = stringPreferencesKey("latitude")
         val LONGITUDE_KEY = stringPreferencesKey("longitude")
+        val RECENT_SEARCH_KEY = stringSetPreferencesKey("recent_searches")
 
         fun getInstance(dataStore: DataStore<Preferences>): SettingPreferences {
             return INSTANCE ?: synchronized(this) {

@@ -65,9 +65,9 @@ interface ApiService {
         @Path("restaurantId") restaurantId: String,
     ): Call<List<RestaurantItem>>
 
-    @GET("api/v1/restaurant/{restaurantId}")
+    @GET("api/v1/restaurant")
     fun getRestaurantByName(
-        @Path("restaurantId") restaurantId: String,
+        @Query("q") query: String,
     ): Call<List<RestaurantItem>>
 
     @FormUrlEncoded

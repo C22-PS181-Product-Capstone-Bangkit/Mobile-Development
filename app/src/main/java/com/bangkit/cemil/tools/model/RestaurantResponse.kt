@@ -40,6 +40,9 @@ data class RestaurantItem(
 	@field:SerializedName("category")
 	val category: String? = null,
 
+	@field:SerializedName("person")
+	val person: Int? = null,
+
 	@field:SerializedName("countReview")
 	val countReview: Int = 0,
 

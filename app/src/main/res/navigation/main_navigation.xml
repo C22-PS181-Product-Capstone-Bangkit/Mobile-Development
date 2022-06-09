@@ -24,7 +24,11 @@
         android:id="@+id/searchFragment"
         android:name="com.bangkit.cemil.home.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_restaurantFragment"
+            app:destination="@id/restaurantFragment" />
+    </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.bangkit.cemil.history.HistoryFragment"

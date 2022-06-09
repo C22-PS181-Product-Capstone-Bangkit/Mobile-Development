@@ -100,7 +100,7 @@ class HomeFragment : Fragment() {
     private fun calculateRestaurantDistances(iterator: MutableListIterator<RestaurantItem>, results: FloatArray, pref: SettingPreferences) {
         while (iterator.hasNext()) {
             val oldValue = iterator.next()
-            val addresses = Geocoder(requireContext()).getFromLocationName(oldValue.location.toString(), 1)
+            val addresses = Geocoder(requireActivity().applicationContext).getFromLocationName(oldValue.location.toString(), 1)
             if (addresses.size > 0) {
                 val latitude = addresses[0].latitude
                 val longitude = addresses[0].longitude

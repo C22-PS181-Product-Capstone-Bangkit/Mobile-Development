@@ -1,5 +1,9 @@
 package com.bangkit.cemil.home
 
+import android.app.SearchManager
+import android.content.Context
+import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,18 +11,32 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.cemil.R
+import com.bangkit.cemil.SettingPreferences
+import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentSearchBinding
 import com.bangkit.cemil.tools.CategoryAdapter
 import com.bangkit.cemil.tools.CategoryItem
+import com.bangkit.cemil.tools.SearchAdapter
+import com.bangkit.cemil.tools.model.RestaurantItem
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SearchFragment : Fragment() {
 
     private lateinit var binding : FragmentSearchBinding
+    private val viewModel by viewModels<SearchViewModel>()
+    private lateinit var mutableList : MutableList<RestaurantItem>
+    private var locationAddress: String = ""
+    private var latLng : LatLng? = null
 
     private val listCategories: ArrayList<CategoryItem>
         get() {
@@ -49,10 +67,85 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val pref = SettingPreferences.getInstance(requireContext().dataStore)
+        lifecycleScope.launch {
+            locationAddress = pref.getPreferences()[SettingPreferences.LOCATION_KEY].toString()
+            latLng = LatLng(pref.getPreferences()[SettingPreferences.LATITUDE_KEY]?.toDouble() ?: 0.0,
+                pref.getPreferences()[SettingPreferences.LONGITUDE_KEY]?.toDouble() ?: 0.0)
+        }
         binding.tvClearAll.setOnClickListener {
             Toast.makeText(context, "Clear all Recent Searches", Toast.LENGTH_SHORT).show()
         }
         setUpCategoriesList()
+        binding.rvSearch.layoutManager = LinearLayoutManager(requireContext())
+        val searchManager = requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        binding.etSearch.apply {
+            setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+            queryHint = getString(R.string.foods_restaurants_users_reviews_etc)
+            setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    viewModel.searchRestos(query.toString())
+                    binding.etSearch.clearFocus()
+                    return true
+                }
+                override fun onQueryTextChange(query: String?): Boolean {
+                    if(query.equals("")){
+                        binding.searchResultLayout.visibility = View.GONE
+                        binding.searchDefaultLayout.visibility = View.VISIBLE
+                    }
+                    return true
+                }
+            })
+        }
+        viewModel.listRestos.observe(viewLifecycleOwner){
+            mutableList = it.toMutableList()
+            val results = FloatArray(1)
+            lifecycleScope.launch(Dispatchers.IO){
+                calculateRestaurantDistances(mutableList.listIterator(), results)
+                withContext(Dispatchers.Main){
+                    binding.searchDefaultLayout.visibility = View.GONE
+                    binding.searchResultLayout.visibility = View.VISIBLE
+                    showRecyclerList()
+                }
+            }
+        }
+        binding.btnSearchSortRating.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.IO){
+                mutableList.sortBy { it.rating }
+                mutableList.reverse()
+                withContext(Dispatchers.Main){
+                    showRecyclerList()
+                }
+            }
+        }
+        binding.btnSearchSortLocation.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.IO){
+                mutableList.sortBy { it.distance?.toDouble() }
+                withContext(Dispatchers.Main){
+                    showRecyclerList()
+                }
+            }
+        }
+    }
+
+    private fun calculateRestaurantDistances(iterator: MutableListIterator<RestaurantItem>, results: FloatArray) {
+        while (iterator.hasNext()) {
+            try{
+                val oldValue = iterator.next()
+                val addresses = Geocoder(requireActivity().applicationContext).getFromLocationName(oldValue.location.toString(), 1)
+                if (addresses.size > 0) {
+                    val latitude = addresses[0].latitude
+                    val longitude = addresses[0].longitude
+                    if(latLng != null){
+                        Location.distanceBetween(latLng!!.latitude, latLng!!.longitude, latitude, longitude, results)
+                        oldValue.distance = (Math.round((results[0] / 1000) * 10.0) / 10.0).toString()
+                    }else{
+                        Toast.makeText(context, "Can't calculate your distance.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                iterator.set(oldValue)
+            }catch(e: ConcurrentModificationException){ }
+        }
     }
 
     private fun setUpCategoriesList(){
@@ -66,6 +159,17 @@ class SearchFragment : Fragment() {
         categoriesAdapter.setOnItemClickCallback(object: CategoryAdapter.OnItemClickCallback{
             override fun onItemClicked(data: CategoryItem) {
                 Toast.makeText(context, data.title, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun showRecyclerList() {
+        val searchAdapter = SearchAdapter(mutableList)
+        binding.rvSearch.adapter = searchAdapter
+        searchAdapter.setOnItemClickCallback(object: SearchAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: RestaurantItem) {
+                val toRestaurantFragment = SearchFragmentDirections.actionSearchFragmentToRestaurantFragment(data.id.toString())
+                requireView().findNavController().navigate(toRestaurantFragment)
             }
         })
     }
