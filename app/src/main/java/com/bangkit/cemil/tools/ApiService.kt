@@ -36,13 +36,14 @@ interface ApiService {
     @GET("api/v1/restaurant")
     fun getRestaurant(): Call<List<RestaurantItem>>
 
-    @FormUrlEncoded
-    @PUT("api/v1/edit-profile")
+    @Multipart
+    @PUT("api/v1/full-edit")
     fun putEditProfile(
         @Header("Authorization") value: String,
-        @Field("name") name: String,
-        @Field("email") email: String,
-        @Field("phone") phone: String
+        @Part file: MultipartBody.Part,
+        @Part("name") name: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("phone") phone: RequestBody
     ): Call<EditResponse>
 
     @FormUrlEncoded
@@ -91,12 +92,4 @@ interface ApiService {
         @Header("Authorization") value: String,
         @Path("likeId") likeId: String,
     ): Call<LikeDeleteResponse>
-
-    @Multipart
-    @POST("api/v1/upload-pic")
-    fun uploadPicture(
-        @Header("Authorization") value: String,
-        @Part file: MultipartBody.Part
-    ): Call<UploadPictureResponse>
-
 }
