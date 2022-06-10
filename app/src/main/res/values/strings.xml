@@ -197,5 +197,7 @@
     <string name="restaurant_logo">Restaurant Logo</string>
     <string name="price">Price</string>
     <string name="likes">Likes</string>
+    <string name="recently_visited">Recently Visited</string>
+    <string name="decline">Decline</string>
 
 </resources>

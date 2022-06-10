@@ -85,38 +85,11 @@ data class Restaurant(
 
 data class HistoryItem(
 
-	@field:SerializedName("profilePic")
-	val profilePic: String?,
-
-	@field:SerializedName("photoPlaces")
-	val photoPlaces: String? = null,
-
 	@field:SerializedName("createdAt")
 	val createdAt: String? = null,
 
-	@field:SerializedName("name")
-	val name: String,
-
-	@field:SerializedName("id")
-	val id: String?,
-
-	@field:SerializedName("idFriend")
-	val idFriend: String?,
-
-	@field:SerializedName("exp")
-	val exp: Int?,
-
-	@field:SerializedName("iat")
-	val iat: Int,
-
-	@field:SerializedName("email")
-	val email: String,
-
-	@field:SerializedName("rating")
-	val rating: Int? = null,
-
-	@field:SerializedName("title")
-	val title: String? = null,
+	@field:SerializedName("restaurant")
+	val restaurant: Restaurant? = null,
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null
@@ -158,7 +131,7 @@ data class EditResponse(
 	val error: Boolean,
 
 	@field:SerializedName("message")
-	val message: String
+	val message: String?
 
 )
 

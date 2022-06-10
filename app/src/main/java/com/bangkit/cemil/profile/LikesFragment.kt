@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -14,10 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.cemil.SettingPreferences
 import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentLikesBinding
-import com.bangkit.cemil.home.HomeFragmentDirections
-import com.bangkit.cemil.tools.HistoryAdapter
 import com.bangkit.cemil.tools.LikesAdapter
-import com.bangkit.cemil.tools.model.HistoryItem
 import com.bangkit.cemil.tools.model.LikesItem
 import kotlinx.coroutines.launch
 

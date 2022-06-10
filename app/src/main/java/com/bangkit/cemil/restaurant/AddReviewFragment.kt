@@ -69,5 +69,13 @@ class AddReviewFragment : Fragment() {
                 viewModel.postReview(accessToken.toString(), dataRestaurantId, userRating.toDouble(), reviewDescription)
             }
         }
+
+        binding.ratingBar.setOnRatingBarChangeListener { ratingBar, fl, _ ->
+            if(fl < 1.0f){
+                ratingBar.rating = 1.0f
+            }else if(ratingBar.rating == 1.0f){
+                ratingBar.rating = 1.0f
+            }
+        }
     }
 }

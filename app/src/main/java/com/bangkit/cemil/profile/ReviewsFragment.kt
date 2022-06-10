@@ -10,11 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bangkit.cemil.R
 import com.bangkit.cemil.SettingPreferences
 import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentReviewsBinding
-import com.bangkit.cemil.tools.ReviewAdapter
 import com.bangkit.cemil.tools.UserReviewAdapter
 import com.bangkit.cemil.tools.model.ReviewItem
 import kotlinx.coroutines.launch
