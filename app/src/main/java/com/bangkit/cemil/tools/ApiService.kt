@@ -98,4 +98,16 @@ interface ApiService {
     fun fetchRestaurantByListIds(
         @Field("idRestaurants") idRestaurants: ArrayList<String>,
     ): Call<List<RestaurantItem>>
+
+    @GET("api/v1/restaurant/recommendation")
+    fun fetchRecommendations(
+        @Header("Authorization") value: String
+    ): Call<List<RestaurantItem>>
+
+    @FormUrlEncoded
+    @POST("api/v1/history")
+    fun postHistory(
+        @Header("Authorization") value: String,
+        @Field("idRestaurant") idRestaurant: String,
+    ): Call<HistoryResponseItem>
 }

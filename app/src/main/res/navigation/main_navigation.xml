@@ -36,7 +36,11 @@
         android:id="@+id/historyFragment"
         android:name="com.bangkit.cemil.history.HistoryFragment"
         android:label="fragment_history"
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_historyFragment_to_restaurantFragment"
+            app:destination="@id/restaurantFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.bangkit.cemil.profile.ProfileFragment"
@@ -143,7 +147,13 @@
         android:id="@+id/preferencesFragment"
         android:name="com.bangkit.cemil.home.PreferencesFragment"
         android:label="fragment_preferences"
-        tools:layout="@layout/fragment_preferences" />
+        tools:layout="@layout/fragment_preferences" >
+        <action
+            android:id="@+id/action_preferencesFragment_to_recommendRestaurantFragment"
+            app:destination="@id/recommendRestaurantFragment"
+            app:popUpTo="@id/preferencesFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
     <fragment
         android:id="@+id/likesFragment"
         android:name="com.bangkit.cemil.profile.LikesFragment"
@@ -184,5 +194,16 @@
         <action
             android:id="@+id/action_reviewsFragment_to_restaurantFragment"
             app:destination="@id/restaurantFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recommendRestaurantFragment"
+        android:name="com.bangkit.cemil.home.RecommendRestaurantFragment"
+        android:label="fragment_recommend_restaurant"
+        tools:layout="@layout/fragment_recommend_restaurant" >
+        <action
+            android:id="@+id/action_recommendRestaurantFragment_to_restaurantFragment"
+            app:destination="@id/restaurantFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
     </fragment>
 </navigation>

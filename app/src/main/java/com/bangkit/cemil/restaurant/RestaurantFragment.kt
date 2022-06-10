@@ -21,7 +21,6 @@ import com.bangkit.cemil.tools.ReviewAdapter
 import com.bangkit.cemil.tools.model.LikesItem
 import com.bangkit.cemil.tools.model.RestaurantItem
 import com.bangkit.cemil.tools.model.RestaurantReviewItem
-import com.bangkit.cemil.tools.model.ReviewItem
 import com.bumptech.glide.Glide
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.launch

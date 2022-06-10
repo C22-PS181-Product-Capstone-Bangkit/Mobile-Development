@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imgBannerRecommend"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/burger" />
+
+    <TextView
+        android:id="@+id/tvRecommendRestoName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/nunito_bold"
+        android:lines="1"
+        android:textColor="?colorOnBackground"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgBannerRecommend"
+        tools:text="Hai Di Lao - Gandaria City" />
+
+    <TextView
+        android:id="@+id/tvRecommendRestaurantCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/btn_background"
+        android:backgroundTint="?colorPrimaryVariant"
+        android:fontFamily="@font/nunito_medium"
+        android:letterSpacing="0.04"
+        android:paddingStart="10dp"
+        android:paddingTop="3dp"
+        android:paddingEnd="10dp"
+        android:textAlignment="center"
+        android:textColor="@color/background"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/tvRecommendRestoName"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecommendRestoName"
+        tools:text="Chicken" />
+
+    <TextView
+        android:id="@+id/tvRecommendRestaurantCategory2"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/btn_background"
+        android:backgroundTint="?colorPrimaryVariant"
+        android:fontFamily="@font/nunito_medium"
+        android:letterSpacing="0.04"
+        android:paddingStart="10dp"
+        android:paddingTop="3dp"
+        android:paddingEnd="10dp"
+        android:text="@string/restaurant"
+        android:textAlignment="center"
+        android:textColor="@color/background"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/tvRecommendRestaurantCategory"
+        app:layout_constraintStart_toEndOf="@+id/tvRecommendRestaurantCategory"
+        app:layout_constraintTop_toTopOf="@+id/tvRecommendRestaurantCategory"
+        tools:text="Chicken" />
+
+    <TextView
+        android:id="@+id/tvRecommendRestaurantCategory3"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/btn_background"
+        android:backgroundTint="?colorPrimaryVariant"
+        android:fontFamily="@font/nunito_medium"
+        android:letterSpacing="0.04"
+        android:paddingStart="10dp"
+        android:paddingTop="3dp"
+        android:paddingEnd="10dp"
+        android:text="@string/restaurant"
+        android:textAlignment="center"
+        android:textColor="@color/background"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/tvRecommendRestaurantCategory"
+        app:layout_constraintStart_toEndOf="@+id/tvRecommendRestaurantCategory2"
+        app:layout_constraintTop_toTopOf="@+id/tvRecommendRestaurantCategory"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="Chicken" />
+
+    <ImageView
+        android:id="@+id/imgRecommendRestoCostSymbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-8dp"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/restaurant_average_cost"
+        app:layout_constraintStart_toStartOf="@+id/tvRecommendRestaurantCategory"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecommendRestaurantCategory"
+        app:srcCompat="@drawable/ic_costs" />
+
+    <TextView
+        android:id="@+id/tvRecommendRestoCost"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/nunito_regular"
+        android:textColor="?colorOnBackground"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgRecommendRestoCostSymbol"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgRecommendRestoLocationSymbol"
+        app:layout_constraintTop_toTopOf="@+id/imgRecommendRestoCostSymbol"
+        tools:text="Rp25.000,00 / person" />
+
+    <ImageView
+        android:id="@+id/imgRecommendRestoLocationSymbol"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/restaurant_location"
+        app:layout_constraintEnd_toEndOf="@+id/imgRecommendRestoCostSymbol"
+        app:layout_constraintStart_toStartOf="@+id/imgRecommendRestoCostSymbol"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecommendRestoCost"
+        app:srcCompat="@drawable/ic_location" />
+
+    <TextView
+        android:id="@+id/tvRecommendRestoLocation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/nunito_regular"
+        android:maxLines="3"
+        android:textColor="?colorOnBackground"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgRecommendRestoLocationSymbol"
+        app:layout_constraintTop_toTopOf="@+id/imgRecommendRestoLocationSymbol"
+        tools:text="Lt. G, Jl. Sultan Iskandar Muda No.38, RT.10/RW.6, Kby. Lama Utara, Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240" />
+
+    <ImageView
+        android:id="@+id/imgRecommendRestoTimeSymbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/restaurant_open_hours"
+        app:layout_constraintEnd_toEndOf="@+id/imgRecommendRestoLocationSymbol"
+        app:layout_constraintStart_toStartOf="@+id/imgRecommendRestoLocationSymbol"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecommendRestoLocation"
+        app:srcCompat="@drawable/ic_access_hours" />
+
+    <ImageView
+        android:id="@+id/imgRecommendRestoStarSymbol"
+        android:layout_width="22sp"
+        android:layout_height="22sp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/restaurant_open_hours"
+        app:layout_constraintEnd_toEndOf="@+id/imgRecommendRestoTimeSymbol"
+        app:layout_constraintStart_toStartOf="@+id/imgRecommendRestoTimeSymbol"
+        app:layout_constraintTop_toBottomOf="@+id/tvRecommendRestoTime"
+        app:srcCompat="@drawable/ic_star" />
+
+    <TextView
+        android:id="@+id/tvRecommendRestoTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_regular"
+        android:maxLines="2"
+        android:textColor="?colorOnBackground"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgRecommendRestoTimeSymbol"
+        app:layout_constraintStart_toEndOf="@+id/imgRecommendRestoLocationSymbol"
+        app:layout_constraintTop_toTopOf="@+id/imgRecommendRestoTimeSymbol"
+        tools:text="Monday - Sunday (11.00 - 22.00 WIB)" />
+
+    <TextView
+        android:id="@+id/tvRecommendRestoRatings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_regular"
+        android:maxLines="2"
+        android:textColor="?colorOnBackground"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imgRecommendRestoStarSymbol"
+        app:layout_constraintStart_toEndOf="@+id/imgRecommendRestoStarSymbol"
+        app:layout_constraintTop_toTopOf="@+id/imgRecommendRestoStarSymbol"
+        tools:text="4.8 (489+)" />
+
+    <TextView
+        android:id="@+id/tvRecommendRestoDistance"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/nunito_regular"
+        android:maxLines="1"
+        android:textColor="?colorOnBackground"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvRecommendRestoRatings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/tvRecommendRestoRatings"
+        tools:text="4.3 km" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="4dp"
+        android:layout_height="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/circle"
+        app:layout_constraintBottom_toBottomOf="@+id/tvRecommendRestoRatings"
+        app:layout_constraintEnd_toStartOf="@+id/tvRecommendRestoDistance"
+        app:layout_constraintStart_toEndOf="@+id/tvRecommendRestoRatings"
+        app:layout_constraintTop_toTopOf="@+id/tvRecommendRestoRatings" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_decline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#FFFFFF"
+        android:contentDescription="@string/decline"
+        app:borderWidth="0dp"
+        app:fabCustomSize="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fab_recommend"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgRecommendRestoStarSymbol"
+        app:layout_constraintVertical_bias="0.8"
+        app:maxImageSize="48dp"
+        app:srcCompat="@drawable/ic_close__1_"
+        app:tint="@color/on_tertiary_dark" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_recommend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-32dp"
+        android:layout_marginEnd="-32dp"
+        android:backgroundTint="#FFFFFF"
+        android:contentDescription="@string/decline"
+        app:borderWidth="0dp"
+        app:fabCustomSize="64dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_decline"
+        app:layout_constraintEnd_toStartOf="@+id/fab_accept"
+        app:layout_constraintStart_toEndOf="@+id/fab_decline"
+        app:layout_constraintTop_toTopOf="@+id/fab_decline"
+        app:maxImageSize="46dp"
+        app:srcCompat="@drawable/ic_baseline_thumb_up"
+        app:tint="@color/secondary" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="#FFFFFF"
+        android:contentDescription="@string/decline"
+        app:borderWidth="0dp"
+        app:fabCustomSize="64dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_recommend"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/fab_recommend"
+        app:layout_constraintTop_toTopOf="@+id/fab_recommend"
+        app:maxImageSize="48dp"
+        app:srcCompat="@drawable/ic_baseline_check"
+        app:tint="#00BB00" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

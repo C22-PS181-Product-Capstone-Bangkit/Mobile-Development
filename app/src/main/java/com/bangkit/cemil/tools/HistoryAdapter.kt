@@ -5,6 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.cemil.databinding.ItemRowHistoryBinding
 import com.bangkit.cemil.tools.model.HistoryItem
+import com.bumptech.glide.Glide
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.math.abs
 
 class HistoryAdapter(private val historyList: List<HistoryItem>): RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
@@ -23,9 +27,10 @@ class HistoryAdapter(private val historyList: List<HistoryItem>): RecyclerView.A
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val historyRestoItem = historyList[position]
-        holder.binding.tvHistoryRestoName.text = historyRestoItem.name
-        holder.binding.tvHistoryRestoRating.text = historyRestoItem.rating.toString()
-        holder.binding.tvHistoryDate.text = historyRestoItem.createdAt
+        holder.binding.tvHistoryRestoName.text = historyRestoItem.restaurant!!.name
+        holder.binding.tvHistoryRestoRating.text = historyRestoItem.restaurant.rating.toString()
+        holder.binding.tvHistoryDate.text = historyRestoItem.createdAt?.take(10).toString()
+        Glide.with(holder.itemView).load(historyRestoItem.restaurant.profilePic).into(holder.binding.imgHistoryResto)
         holder.binding.btnHistoryReviews.setOnClickListener { onItemClickCallback.onItemClicked(historyList[holder.adapterPosition])}
     }
 

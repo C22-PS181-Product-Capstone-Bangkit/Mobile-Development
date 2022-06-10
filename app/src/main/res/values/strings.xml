@@ -195,5 +195,6 @@
     <string name="cancel">Cancel</string>
     <string name="find_me_restaurant">Find me Restaurant</string>
     <string name="recently_visited">Recently Visited</string>
+    <string name="decline">Decline</string>
 
 </resources>
