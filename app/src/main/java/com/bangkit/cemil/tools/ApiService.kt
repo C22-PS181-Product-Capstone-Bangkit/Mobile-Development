@@ -61,14 +61,14 @@ interface ApiService {
         @Field("oldPassword") oldPassword: String
     ): Call<ChangePasswordResponse>
 
-    @GET("api/v1/restaurant/{restaurantId}")
+    @GET("api/v1/restaurant")
     fun getRestaurantByCategory(
-        @Path("restaurantId") restaurantId: String,
+        @Query("category") category: String,
     ): Call<List<RestaurantItem>>
 
-    @GET("api/v1/restaurant/{restaurantId}")
+    @GET("api/v1/restaurant")
     fun getRestaurantByName(
-        @Path("restaurantId") restaurantId: String,
+        @Query("q") query: String,
     ): Call<List<RestaurantItem>>
 
     @FormUrlEncoded
@@ -92,4 +92,22 @@ interface ApiService {
         @Header("Authorization") value: String,
         @Path("likeId") likeId: String,
     ): Call<LikeDeleteResponse>
+
+    @FormUrlEncoded
+    @POST("api/v1/restaurant/list-restaurant")
+    fun fetchRestaurantByListIds(
+        @Field("idRestaurants") idRestaurants: ArrayList<String>,
+    ): Call<List<RestaurantItem>>
+
+    @GET("api/v1/restaurant/recommendation")
+    fun fetchRecommendations(
+        @Header("Authorization") value: String
+    ): Call<List<RestaurantItem>>
+
+    @FormUrlEncoded
+    @POST("api/v1/history")
+    fun postHistory(
+        @Header("Authorization") value: String,
+        @Field("idRestaurant") idRestaurant: String,
+    ): Call<HistoryResponseItem>
 }

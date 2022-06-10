@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.cemil.SettingPreferences
 import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentHomeBinding
+import com.bangkit.cemil.tools.JsonUtils.fromJson
 import com.bangkit.cemil.tools.RestaurantAdapter
 import com.bangkit.cemil.tools.model.RestaurantItem
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -26,6 +27,7 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.CancellationTokenSource
+import com.google.gson.GsonBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -39,6 +41,9 @@ class HomeFragment : Fragment() {
     private val viewModel by viewModels<HomeViewModel>()
     private var latLng : LatLng? = null
     private val list = ArrayList<RestaurantItem>()
+    private val recentlyVisitedList = ArrayList<RestaurantItem>()
+    private var recentlyVisitedIds = ArrayList<String>()
+    private val gson = GsonBuilder().create()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,15 +61,18 @@ class HomeFragment : Fragment() {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
+        binding.rvRecentlyVisited.apply {
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        }
 
         lifecycleScope.launch {
             locationAddress = pref.getPreferences()[SettingPreferences.LOCATION_KEY].toString()
             latLng = LatLng(pref.getPreferences()[SettingPreferences.LATITUDE_KEY]?.toDouble() ?: 0.0,
                 pref.getPreferences()[SettingPreferences.LONGITUDE_KEY]?.toDouble() ?: 0.0)
+            val recentlyVisitedJson = pref.getPreferences()[SettingPreferences.RECENTLY_VISITED_KEY] ?: recentlyVisitedIds.toString()
+            recentlyVisitedIds = recentlyVisitedJson.fromJson(gson)!!
         }
-
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(view.context)
-
         if (locationAddress != "null") {
             binding.tvCurrentLocation.text = locationAddress
         } else {
@@ -86,6 +94,22 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+        if(recentlyVisitedIds.isNotEmpty()){
+            viewModel.requestRestoFromIds(recentlyVisitedIds)
+        }
+        viewModel.restoRecentlyVisitedData.observe(viewLifecycleOwner){
+            val results = FloatArray(1)
+            val restaurants = it.toMutableList()
+            lifecycleScope.launch(Dispatchers.IO){
+                calculateRestaurantDistances(restaurants.listIterator(), results, pref)
+                recentlyVisitedList.clear()
+                recentlyVisitedList.addAll(restaurants)
+                recentlyVisitedList.reverse()
+                withContext(Dispatchers.Main){
+                    showRecentlyVisitedRecyclerList()
+                }
+            }
+        }
 
         binding.tvCurrentLocationLabel.setOnClickListener {
             navigateToLocationFragment()
@@ -100,19 +124,24 @@ class HomeFragment : Fragment() {
     private fun calculateRestaurantDistances(iterator: MutableListIterator<RestaurantItem>, results: FloatArray, pref: SettingPreferences) {
         while (iterator.hasNext()) {
             val oldValue = iterator.next()
-            val addresses = Geocoder(requireContext()).getFromLocationName(oldValue.location.toString(), 1)
-            if (addresses.size > 0) {
-                val latitude = addresses[0].latitude
-                val longitude = addresses[0].longitude
-                if(latLng == null){
-                    val userAddress = Geocoder(requireContext()).getFromLocationName(locationAddress, 1)
-                    Location.distanceBetween(userAddress[0].latitude, userAddress[0].longitude, latitude, longitude, results)
-                    lifecycleScope.launch{
-                        pref.saveLatitudeLongitude(userAddress[0].latitude.toString(), userAddress[0].longitude.toString())
+            try{
+                val addresses = Geocoder(requireActivity().applicationContext).getFromLocationName(oldValue.location.toString(), 1)
+                if (addresses.size > 0) {
+                    val latitude = addresses[0].latitude
+                    val longitude = addresses[0].longitude
+                    if(latLng == null){
+                        val userAddress = Geocoder(requireContext()).getFromLocationName(locationAddress, 1)
+                        Location.distanceBetween(userAddress[0].latitude, userAddress[0].longitude, latitude, longitude, results)
+                        lifecycleScope.launch{
+                            pref.saveLatitudeLongitude(userAddress[0].latitude.toString(), userAddress[0].longitude.toString())
+                        }
+                    }else{
+                        Location.distanceBetween(latLng!!.latitude, latLng!!.longitude, latitude, longitude, results)
                     }
-                }else{
-                    Location.distanceBetween(latLng!!.latitude, latLng!!.longitude, latitude, longitude, results)
                 }
+            }catch(e: Exception){
+                val toHomeFragment = HomeFragmentDirections.actionHomeFragmentToHomeFragment()
+                requireView().findNavController().navigate(toHomeFragment)
             }
             oldValue.distance = (Math.round((results[0] / 1000) * 10.0) / 10.0).toString()
             iterator.set(oldValue)
@@ -205,6 +234,17 @@ class HomeFragment : Fragment() {
     private fun showRecyclerList(){
         val adapter = RestaurantAdapter(list)
         binding.rvNearbyRestos.adapter = adapter
+        adapter.setOnItemClickCallback(object : RestaurantAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: RestaurantItem) {
+                val toRestaurantFragment = HomeFragmentDirections.actionHomeFragmentToRestaurantFragment(data.id.toString())
+                requireView().findNavController().navigate(toRestaurantFragment)
+            }
+        })
+    }
+
+    private fun showRecentlyVisitedRecyclerList(){
+        val adapter = RestaurantAdapter(recentlyVisitedList)
+        binding.rvRecentlyVisited.adapter = adapter
         adapter.setOnItemClickCallback(object : RestaurantAdapter.OnItemClickCallback{
             override fun onItemClicked(data: RestaurantItem) {
                 val toRestaurantFragment = HomeFragmentDirections.actionHomeFragmentToRestaurantFragment(data.id.toString())

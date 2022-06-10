@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import com.bangkit.cemil.R
 import com.bangkit.cemil.databinding.CategoryChipsBinding
 import com.bangkit.cemil.databinding.FragmentPreferencesBinding
@@ -31,8 +32,12 @@ class PreferencesFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            super.onViewCreated(view, savedInstanceState)
-            setFilterChips()
+        super.onViewCreated(view, savedInstanceState)
+        setFilterChips()
+        binding.tvNextPreferences.setOnClickListener {
+            val toRecommendRestaurantFragment = PreferencesFragmentDirections.actionPreferencesFragmentToRecommendRestaurantFragment()
+            requireView().findNavController().navigate(toRecommendRestaurantFragment)
+        }
     }
 
     private fun setFilterChips(){

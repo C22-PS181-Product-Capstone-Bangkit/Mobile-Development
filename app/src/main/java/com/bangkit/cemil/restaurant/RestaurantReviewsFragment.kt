@@ -9,12 +9,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bangkit.cemil.R
 import com.bangkit.cemil.databinding.FragmentRestaurantReviewsBinding
 import com.bangkit.cemil.tools.ReviewAdapter
 import com.bangkit.cemil.tools.model.RestaurantReviewItem
-import com.bangkit.cemil.tools.model.ReviewItem
-
 
 class RestaurantReviewsFragment : Fragment() {
 

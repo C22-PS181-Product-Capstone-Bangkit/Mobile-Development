@@ -9,32 +9,19 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeViewModel: ViewModel() {
+class SearchViewModel: ViewModel() {
 
-    private val _restoData = MutableLiveData<List<RestaurantItem>>()
-    val restoData : LiveData<List<RestaurantItem>> = _restoData
+    private val _listRestos = MutableLiveData<List<RestaurantItem>>()
+    val listRestos : LiveData<List<RestaurantItem>> = _listRestos
 
-    private val _restoRecentlyVisitedData = MutableLiveData<List<RestaurantItem>>()
-    val restoRecentlyVisitedData : LiveData<List<RestaurantItem>> = _restoRecentlyVisitedData
-
-    fun requestRestoData(){
-        val client = ApiConfig.getApiService().getRestaurant()
-        client.enqueue(object: Callback<List<RestaurantItem>>{
-            override fun onResponse(call: Call<List<RestaurantItem>>, response: Response<List<RestaurantItem>>) {
-                _restoData.value = response.body()
-            }
-
-            override fun onFailure(call: Call<List<RestaurantItem>>, t: Throwable) {
-            }
-        })
-    }
-
-    fun requestRestoFromIds(restoIds : ArrayList<String>){
-        val client = ApiConfig.getApiService().fetchRestaurantByListIds(restoIds)
+    fun searchRestos(searchQuery: String){
+        val client = ApiConfig.getApiService().getRestaurantByName(searchQuery)
         client.enqueue(object: Callback<List<RestaurantItem>>{
             override fun onResponse(call: Call<List<RestaurantItem>>, response: Response<List<RestaurantItem>>) {
                 if(response.isSuccessful){
-                    _restoRecentlyVisitedData.value = response.body()
+                    if(response.body() != null){
+                        _listRestos.value = response.body()
+                    }
                 }
             }
 
@@ -43,4 +30,19 @@ class HomeViewModel: ViewModel() {
         })
     }
 
+    fun fetchRestosByCategory(category: String){
+        val client = ApiConfig.getApiService().getRestaurantByCategory(category)
+        client.enqueue(object: Callback<List<RestaurantItem>>{
+            override fun onResponse(call: Call<List<RestaurantItem>>, response: Response<List<RestaurantItem>>) {
+                if(response.isSuccessful){
+                    if(response.body() != null){
+                        _listRestos.value = response.body()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<RestaurantItem>>, t: Throwable) {
+            }
+        })
+    }
 }

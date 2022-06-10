@@ -5,100 +5,129 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".home.HomeFragment">
-
-        <ImageView
-            android:id="@+id/imgHomeBanner"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/img_banner"
-            android:contentDescription="@string/home_banner"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            tools:context=".home.HomeFragment">
 
-        <TextView
-            android:id="@+id/tvCurrentLocationLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:fontFamily="@font/nunito_medium"
-            android:text="@string/current_location"
-            android:textColor="@color/background"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/tvCurrentLocation"
-            app:layout_constraintVertical_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/imgHomeBanner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/home_banner"
+                android:src="@drawable/img_banner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tvCurrentLocation"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:fontFamily="@font/nunito_bold"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:text="@string/your_location"
-            android:textColor="@color/background"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@id/imgHomeBanner"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tvCurrentLocationLabel"
-            app:layout_constraintTop_toBottomOf="@+id/tvCurrentLocationLabel"
-            app:layout_constraintVertical_bias="0.1"
-            tools:text="Jl. Kebon Sirih No.3, RW.2, Raya, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta" />
+            <TextView
+                android:id="@+id/tvCurrentLocationLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:fontFamily="@font/nunito_medium"
+                android:text="@string/current_location"
+                android:textColor="@color/background"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@id/tvCurrentLocation"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
 
-        <Button
-            android:id="@+id/btnFindMeFood"
-            style="@style/Widget.Material3.Button"
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:fontFamily="@font/nunito_extrabold"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="@string/find_me_restaurant"
-            android:textSize="24sp"
-            app:cornerRadius="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgHomeBanner" />
+            <TextView
+                android:id="@+id/tvCurrentLocation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/nunito_bold"
+                android:maxLines="1"
+                android:text="@string/your_location"
+                android:textColor="@color/background"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/imgHomeBanner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvCurrentLocationLabel"
+                app:layout_constraintTop_toBottomOf="@+id/tvCurrentLocationLabel"
+                app:layout_constraintVertical_bias="0.1"
+                tools:text="Jl. Kebon Sirih No.3, RW.2, Raya, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta" />
 
-        <TextView
-            android:id="@+id/tvNearbyRestos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_bold"
-            android:text="@string/nearby_restos"
-            android:textColor="?colorOnBackground"
-            android:textSize="22sp"
-            android:layout_marginStart="26dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnFindMeFood" />
+            <Button
+                android:id="@+id/btnFindMeFood"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:fontFamily="@font/nunito_extrabold"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/find_me_restaurant"
+                android:textSize="24sp"
+                app:cornerRadius="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgHomeBanner" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvNearbyRestos"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            <TextView
+                android:id="@+id/tvNearbyRestos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/nearby_restos"
+                android:textColor="?colorOnBackground"
+                android:textSize="22sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnFindMeFood" />
 
-            android:clipToPadding="false"
-            android:paddingStart="26dp"
-            android:paddingEnd="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvNearbyRestos"
-            tools:itemCount="5"
-            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_row_home_resto"
-            tools:orientation="horizontal" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvNearbyRestos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:clipToPadding="false"
+                android:paddingStart="26dp"
+                android:paddingEnd="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvNearbyRestos"
+                tools:itemCount="4"
+                tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_row_home_resto"
+                tools:orientation="horizontal" >
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/tvRecentlyVisited"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/recently_visited"
+                android:textColor="?colorOnBackground"
+                android:textSize="22sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvNearbyRestos" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvRecentlyVisited"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:clipToPadding="false"
+                android:paddingStart="26dp"
+                android:paddingEnd="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvRecentlyVisited"
+                tools:itemCount="4"
+                tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_row_home_resto"
+                tools:orientation="horizontal" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

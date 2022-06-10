@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.cemil.SettingPreferences
 import com.bangkit.cemil.dataStore
@@ -70,7 +71,8 @@ class HistoryFragment : Fragment() {
         binding.rvHistory.adapter = adapter
         adapter.setOnItemClickCallback(object : HistoryAdapter.OnItemClickCallback{
             override fun onItemClicked(data: HistoryItem) {
-                Toast.makeText(context, data.toString(), Toast.LENGTH_SHORT).show()
+                val toRestaurantFragment = HistoryFragmentDirections.actionHistoryFragmentToRestaurantFragment(data.restaurant!!.id.toString())
+                requireView().findNavController().navigate(toRestaurantFragment)
             }
         })
     }

@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.bangkit.cemil.tools.ApiConfig
 import com.bangkit.cemil.tools.model.ChangePasswordResponse
-import com.bangkit.cemil.tools.model.LoginResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

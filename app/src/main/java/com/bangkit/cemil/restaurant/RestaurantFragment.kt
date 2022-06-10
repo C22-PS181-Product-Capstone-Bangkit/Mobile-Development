@@ -16,11 +16,13 @@ import com.bangkit.cemil.R
 import com.bangkit.cemil.SettingPreferences
 import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentRestaurantBinding
+import com.bangkit.cemil.tools.JsonUtils.fromJson
 import com.bangkit.cemil.tools.ReviewAdapter
 import com.bangkit.cemil.tools.model.LikesItem
 import com.bangkit.cemil.tools.model.RestaurantItem
 import com.bangkit.cemil.tools.model.RestaurantReviewItem
 import com.bumptech.glide.Glide
+import com.google.gson.GsonBuilder
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.util.*
@@ -34,6 +36,8 @@ class RestaurantFragment : Fragment() {
     private var accessToken : String? = null
     private var likeItem: LikesItem? = null
     private val list = ArrayList<RestaurantReviewItem>()
+    private var recentlyVisitedIds = ArrayList<String>()
+    private val gson = GsonBuilder().create()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,12 +53,24 @@ class RestaurantFragment : Fragment() {
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
         lifecycleScope.launch {
             accessToken = pref.getPreferences()[SettingPreferences.AUTHORIZATION_TOKEN_KEY]
+            val recentlyVisitedJson = pref.getPreferences()[SettingPreferences.RECENTLY_VISITED_KEY] ?: recentlyVisitedIds.toString()
+            recentlyVisitedIds = recentlyVisitedJson.fromJson(gson)!!
+            if(recentlyVisitedIds.any{it == dataRestaurantId}){
+                recentlyVisitedIds.remove(dataRestaurantId)
+            }
+            if(recentlyVisitedIds.size >= 4){
+                recentlyVisitedIds.removeAt(0)
+            }
+            recentlyVisitedIds.add(dataRestaurantId)
+            pref.saveRecentlyVisited(gson.toJson(recentlyVisitedIds))
         }
         if(accessToken == null) binding.fabLike.visibility = View.INVISIBLE else viewModel.fetchProfile(accessToken!!)
 
         viewModel.profileData.observe(viewLifecycleOwner){ profileData ->
             likeItem = profileData.likes?.find{it.restaurant?.id == dataRestaurantId}
             if(likeItem != null) toggleLikeButtonOn() else toggleLikeButtonOff()
+            val alreadyReviewed = profileData.review?.any { it.restaurant?.id == dataRestaurantId }
+            if(alreadyReviewed == true) binding.tvAddReview.visibility = View.GONE
         }
         viewModel.restoLike.observe(viewLifecycleOwner){
             Toast.makeText(context, "Restaurant liked!", Toast.LENGTH_SHORT).show()
