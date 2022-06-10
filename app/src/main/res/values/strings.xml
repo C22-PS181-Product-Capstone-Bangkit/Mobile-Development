@@ -194,5 +194,8 @@
     <string name="write_your_review_here">Write your review here</string>
     <string name="cancel">Cancel</string>
     <string name="find_me_restaurant">Find me Restaurant</string>
+    <string name="restaurant_logo">Restaurant Logo</string>
+    <string name="price">Price</string>
+    <string name="likes">Likes</string>
 
 </resources>

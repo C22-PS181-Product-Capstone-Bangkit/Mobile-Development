@@ -105,6 +105,7 @@
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/ic_language_filled.xml" value="0.2395" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/ic_launcher_background.xml" value="0.206" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.234" />
+        <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/ic_location_filled.xml" value="0.228" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/ic_logo.xml" value="0.176" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/ic_profile_selector.xml" value="0.2395" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/drawable/ic_recommendations_filled.xml" value="0.2395" />
@@ -135,7 +136,9 @@
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_logout_dialog.xml" value="0.264" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_profile.xml" value="0.4" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_profile_unauthorized.xml" value="0.264" />
+        <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_recommendation.xml" value="0.264" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_register.xml" value="0.176" />
+        <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_restaurant.xml" value="0.22592592592592592" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_restaurant_reviews.xml" value="0.22592592592592592" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_search.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/richa/Documents/Bangkit/Project/Cemil/app/src/main/res/layout/fragment_second_landing.xml" value="0.264" />

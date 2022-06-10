@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".home.RecommendationFragment">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/restaurant_logo"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/burger" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#BFFFFFFF"
+        android:contentDescription="@string/back"
+        app:fabCustomSize="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:maxImageSize="24dp"
+        app:srcCompat="@drawable/ic_back_filled"
+        app:tint="@color/on_background" />
+
+    <TextView
+        android:id="@+id/restaurant_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/nunito_bold"
+        android:textColor="?colorOnBackground"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        tools:text="Burger King" />
+
+    <TextView
+        android:id="@+id/tv_restaurant_category_1"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/btn_background"
+        android:backgroundTint="?colorPrimaryVariant"
+        android:fontFamily="@font/nunito_medium"
+        android:paddingStart="12dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="4dp"
+        android:textAlignment="center"
+        android:textColor="@color/background"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/restaurant_name"
+        tools:text="Chicken" />
+
+    <TextView
+        android:id="@+id/tv_restaurant_category_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/btn_background"
+        android:backgroundTint="?colorPrimaryVariant"
+        android:fontFamily="@font/nunito_medium"
+        android:paddingStart="12dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="4dp"
+        android:textAlignment="center"
+        android:textColor="@color/background"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/tv_restaurant_category_1"
+        app:layout_constraintTop_toBottomOf="@id/restaurant_name"
+        tools:text="Western" />
+
+    <ImageView
+        android:id="@+id/icon_price"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/price"
+        android:src="@drawable/ic_price"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_restaurant_category_1" />
+
+    <TextView
+        android:id="@+id/restaurant_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="1.5dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/nunito_regular"
+        android:textColor="?colorOnBackground"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/icon_price"
+        app:layout_constraintTop_toTopOf="@id/icon_price"
+        tools:text="Rp80.000 / 2 person" />
+
+    <ImageView
+        android:id="@+id/icon_likes"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/likes"
+        android:src="@drawable/ic_like_filled"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/icon_price"
+        app:tint="?colorSecondary" />
+
+    <TextView
+        android:id="@+id/restaurant_likes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="1.5dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/nunito_regular"
+        android:textColor="?colorOnBackground"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/icon_likes"
+        app:layout_constraintTop_toTopOf="@id/icon_likes"
+        tools:text="Recommended by 12 Cemil users" />
+
+    <ImageView
+        android:id="@+id/icon_location"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/likes"
+        android:src="@drawable/ic_location_filled"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/icon_likes"
+        app:tint="?colorPrimary" />
+
+    <TextView
+        android:id="@+id/restaurant_location"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="1.5dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/nunito_regular"
+        android:textColor="?colorOnBackground"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/icon_location"
+        app:layout_constraintTop_toTopOf="@id/icon_location"
+        tools:text="Jl. Jalan No 3 Medan" />
+
+    <ImageView
+        android:id="@+id/icon_time"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/likes"
+        android:src="@drawable/ic_access_hours"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/icon_location"
+        app:tint="?colorPrimaryVariant" />
+
+    <TextView
+        android:id="@+id/restaurant_open_hours"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="1.5dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/nunito_regular"
+        android:textColor="?colorOnBackground"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/icon_time"
+        app:layout_constraintTop_toTopOf="@id/icon_time"
+        tools:text="Monday - Sunday (09.00 - 21.00 WIB)" />
+
+    <ImageView
+        android:id="@+id/icon_rating"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/likes"
+        android:src="@drawable/ic_star"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/icon_time" />
+
+    <TextView
+        android:id="@+id/restaurant_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="1.5dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/nunito_regular"
+        android:textColor="?colorOnBackground"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/icon_rating"
+        app:layout_constraintTop_toTopOf="@id/icon_rating"
+        tools:text="4.83 (200)" />
+
+    <View
+        android:id="@+id/dot"
+        android:layout_width="4dp"
+        android:layout_height="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/circle"
+        app:layout_constraintBottom_toBottomOf="@id/icon_rating"
+        app:layout_constraintStart_toEndOf="@id/restaurant_rating"
+        app:layout_constraintTop_toTopOf="@id/icon_rating"
+        app:layout_constraintVertical_bias="0.55" />
+
+    <TextView
+        android:id="@+id/restaurant_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="1.5dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/nunito_regular"
+        android:textColor="?colorOnBackground"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/dot"
+        app:layout_constraintTop_toTopOf="@id/icon_rating"
+        tools:text="5.7 km" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
