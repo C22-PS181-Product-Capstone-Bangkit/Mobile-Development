@@ -141,10 +141,7 @@ class HomeFragment : Fragment() {
                         Location.distanceBetween(latLng!!.latitude, latLng!!.longitude, latitude, longitude, results)
                     }
                 }
-            }catch(e: Exception){
-                val toHomeFragment = HomeFragmentDirections.actionHomeFragmentToHomeFragment()
-                view?.findNavController()?.navigate(toHomeFragment)
-            }
+            }catch(e: Exception){ }
             oldValue.distance = (Math.round((results[0] / 1000) * 10.0) / 10.0).toString()
             iterator.set(oldValue)
         }

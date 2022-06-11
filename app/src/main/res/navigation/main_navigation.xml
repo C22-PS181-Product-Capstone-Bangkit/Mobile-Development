@@ -70,6 +70,9 @@
         <action
             android:id="@+id/action_profileFragment_to_reviewsFragment"
             app:destination="@id/reviewsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
@@ -206,4 +209,9 @@
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false"/>
     </fragment>
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.bangkit.cemil.profile.AboutUsFragment"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_about_us" />
 </navigation>

@@ -1,6 +1,8 @@
 package com.bangkit.cemil.profile
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -180,10 +182,11 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
                         requireView().findNavController().navigate(toAppearanceFragment)
                     }
                     resources.getString(R.string.language) -> {
-                        // Navigate to Change Language Fragment
+                        startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
                     }
                     resources.getString(R.string.about_cemil) -> {
-                        // Navigate to About Cemil Fragment
+                        val toAboutUsFragment = ProfileFragmentDirections.actionProfileFragmentToAboutUsFragment()
+                        requireView().findNavController().navigate(toAboutUsFragment)
                     }
                     resources.getString(R.string.logout) -> {
                         LogoutDialogFragment().let {
