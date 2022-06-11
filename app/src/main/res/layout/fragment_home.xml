@@ -1,66 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/imgHomeBanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/home_banner"
+        android:src="@drawable/img_banner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCurrentLocationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/nunito_medium"
+        android:text="@string/current_location"
+        android:textColor="@color/background"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/tvCurrentLocation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tvCurrentLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/nunito_bold"
+        android:maxLines="1"
+        android:text="@string/your_location"
+        android:textColor="@color/background"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/imgHomeBanner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCurrentLocationLabel"
+        tools:text="Jl. Kebon Sirih No.3, RW.2, Raya, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgHomeBanner">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             tools:context=".home.HomeFragment">
-
-            <ImageView
-                android:id="@+id/imgHomeBanner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/home_banner"
-                android:src="@drawable/img_banner"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvCurrentLocationLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:fontFamily="@font/nunito_medium"
-                android:text="@string/current_location"
-                android:textColor="@color/background"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@id/tvCurrentLocation"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed" />
-
-            <TextView
-                android:id="@+id/tvCurrentLocation"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
-                android:ellipsize="end"
-                android:fontFamily="@font/nunito_bold"
-                android:maxLines="1"
-                android:text="@string/your_location"
-                android:textColor="@color/background"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@id/imgHomeBanner"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tvCurrentLocationLabel"
-                app:layout_constraintTop_toBottomOf="@+id/tvCurrentLocationLabel"
-                app:layout_constraintVertical_bias="0.1"
-                tools:text="Jl. Kebon Sirih No.3, RW.2, Raya, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta" />
 
             <Button
                 android:id="@+id/btnFindMeFood"
                 style="@style/Widget.Material3.Button"
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
                 android:fontFamily="@font/nunito_extrabold"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
@@ -69,13 +78,13 @@
                 app:cornerRadius="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgHomeBanner" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvNearbyRestos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/nunito_bold"
                 android:text="@string/nearby_restos"
@@ -88,16 +97,16 @@
                 android:id="@+id/rvNearbyRestos"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="8dp"
                 android:clipToPadding="false"
-                android:paddingStart="26dp"
-                android:paddingEnd="10dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvNearbyRestos"
                 tools:itemCount="4"
                 tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_row_home_resto"
-                tools:orientation="horizontal" >
+                tools:orientation="horizontal">
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -105,7 +114,7 @@
                 android:id="@+id/tvRecentlyVisited"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="26dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/nunito_bold"
                 android:text="@string/recently_visited"
@@ -118,10 +127,10 @@
                 android:id="@+id/rvRecentlyVisited"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="8dp"
                 android:clipToPadding="false"
-                android:paddingStart="26dp"
-                android:paddingEnd="10dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvRecentlyVisited"
                 tools:itemCount="4"
@@ -130,4 +139,18 @@
                 tools:orientation="horizontal" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/home_loading"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="?colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/nestedScrollView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgHomeBanner" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

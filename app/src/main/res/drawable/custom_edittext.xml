@@ -7,7 +7,7 @@
                 android:width="1dp"
                 android:color="?colorPrimaryVariant" />
             <solid android:color="?colorSurface" />
-            <corners android:radius="32dp" />
+            <corners android:radius="20dp" />
         </shape>
     </item>
 
@@ -17,7 +17,7 @@
                 android:width="1dp"
                 android:color="?colorPrimary" />
             <solid android:color="?colorSurface" />
-            <corners android:radius="32dp" />
+            <corners android:radius="20dp" />
         </shape>
     </item>
 

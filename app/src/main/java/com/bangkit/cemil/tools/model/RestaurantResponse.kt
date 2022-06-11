@@ -23,13 +23,13 @@ data class RestaurantItem(
 	val name: String? = null,
 
 	@field:SerializedName("rating")
-	val rating: String? = null,
+	val rating: String,
 
 	@field:SerializedName("openHour")
 	val openHour: String? = null,
 
 	@field:SerializedName("price")
-	val price: String? = null,
+	val price: String,
 
 	@field:SerializedName("location")
 	val location: String? = null,
@@ -41,7 +41,7 @@ data class RestaurantItem(
 	val category: String? = null,
 
 	@field:SerializedName("person")
-	val person: Int? = null,
+	val person: Int,
 
 	@field:SerializedName("countReview")
 	val countReview: Int = 0,
@@ -52,7 +52,7 @@ data class RestaurantItem(
 	@field:SerializedName("review")
 	val review: List<RestaurantReviewItem>? = null,
 
-	var distance: String? = null
+	var distance: String
 
 )
 

@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var locationAddress: String = ""
     private val viewModel by viewModels<HomeViewModel>()
-    private var latLng : LatLng? = null
+    private lateinit var latLng: LatLng
     private val list = ArrayList<RestaurantItem>()
     private val recentlyVisitedList = ArrayList<RestaurantItem>()
     private var recentlyVisitedIds = ArrayList<String>()
@@ -59,20 +59,43 @@ class HomeFragment : Fragment() {
 
         binding.rvNearbyRestos.apply {
             setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
+
         binding.rvRecentlyVisited.apply {
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
 
         lifecycleScope.launch {
             locationAddress = pref.getPreferences()[SettingPreferences.LOCATION_KEY].toString()
-            latLng = LatLng(pref.getPreferences()[SettingPreferences.LATITUDE_KEY]?.toDouble() ?: 0.0,
-                pref.getPreferences()[SettingPreferences.LONGITUDE_KEY]?.toDouble() ?: 0.0)
-            val recentlyVisitedJson = pref.getPreferences()[SettingPreferences.RECENTLY_VISITED_KEY] ?: recentlyVisitedIds.toString()
+            latLng = LatLng(
+                pref.getPreferences()[SettingPreferences.LATITUDE_KEY]?.toDouble() ?: 0.0,
+                pref.getPreferences()[SettingPreferences.LONGITUDE_KEY]?.toDouble() ?: 0.0
+            )
+            val recentlyVisitedJson = pref.getPreferences()[SettingPreferences.RECENTLY_VISITED_KEY]
+                ?: recentlyVisitedIds.toString()
             recentlyVisitedIds = recentlyVisitedJson.fromJson(gson)!!
         }
+
+        if (!this::latLng.isInitialized) {
+            val userAddress =
+                Geocoder(requireContext()).getFromLocationName(locationAddress, 1)
+            lifecycleScope.launch {
+                pref.saveLatitudeLongitude(
+                    userAddress[0].latitude.toString(),
+                    userAddress[0].longitude.toString()
+                )
+                latLng = LatLng(
+                    userAddress[0].latitude,
+                    userAddress[0].longitude
+                )
+            }
+        }
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(view.context)
+
         if (locationAddress != "null") {
             binding.tvCurrentLocation.text = locationAddress
         } else {
@@ -80,35 +103,41 @@ class HomeFragment : Fragment() {
         }
 
         setLocationTextClickListener()
-        viewModel.requestRestoData()
-        viewModel.restoData.observe(viewLifecycleOwner){ it ->
+
+        viewModel.restoData.observe(viewLifecycleOwner) { it ->
             val results = FloatArray(1)
             val restaurants = it.toMutableList()
-            lifecycleScope.launch(Dispatchers.IO){
-                calculateRestaurantDistances(restaurants.listIterator(), results, pref)
+            lifecycleScope.launch(Dispatchers.IO) {
+                calculateRestaurantDistances(restaurants.listIterator(), results)
                 restaurants.sortBy { it.distance?.toDouble() }
                 list.clear()
                 list.addAll(restaurants)
-                withContext(Dispatchers.Main){
+                withContext(Dispatchers.Main) {
                     showRecyclerList()
                 }
             }
         }
-        if(recentlyVisitedIds.isNotEmpty()){
+
+        if (recentlyVisitedIds.isNotEmpty()) {
             viewModel.requestRestoFromIds(recentlyVisitedIds)
         }
-        viewModel.restoRecentlyVisitedData.observe(viewLifecycleOwner){
+
+        viewModel.restoRecentlyVisitedData.observe(viewLifecycleOwner) {
             val results = FloatArray(1)
             val restaurants = it.toMutableList()
-            lifecycleScope.launch(Dispatchers.IO){
-                calculateRestaurantDistances(restaurants.listIterator(), results, pref)
+            lifecycleScope.launch(Dispatchers.IO) {
+                calculateRestaurantDistances(restaurants.listIterator(), results)
                 recentlyVisitedList.clear()
                 recentlyVisitedList.addAll(restaurants)
                 recentlyVisitedList.reverse()
-                withContext(Dispatchers.Main){
+                withContext(Dispatchers.Main) {
                     showRecentlyVisitedRecyclerList()
                 }
             }
+        }
+
+        viewModel.isLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
         }
 
         binding.tvCurrentLocationLabel.setOnClickListener {
@@ -116,30 +145,57 @@ class HomeFragment : Fragment() {
         }
 
         binding.btnFindMeFood.setOnClickListener {
-            val toPreferencesFragment = HomeFragmentDirections.actionHomeFragmentToPreferencesFragment()
+            val toPreferencesFragment =
+                HomeFragmentDirections.actionHomeFragmentToPreferencesFragment()
             requireView().findNavController().navigate(toPreferencesFragment)
         }
     }
 
-    private fun calculateRestaurantDistances(iterator: MutableListIterator<RestaurantItem>, results: FloatArray, pref: SettingPreferences) {
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.apply {
+                homeLoading.visibility = View.VISIBLE
+                btnFindMeFood.visibility = View.INVISIBLE
+                tvNearbyRestos.visibility = View.INVISIBLE
+                rvNearbyRestos.visibility = View.INVISIBLE
+                tvRecentlyVisited.visibility = View.INVISIBLE
+                rvRecentlyVisited.visibility = View.INVISIBLE
+            }
+        } else {
+            binding.apply {
+                homeLoading.visibility = View.INVISIBLE
+                btnFindMeFood.visibility = View.VISIBLE
+                tvNearbyRestos.visibility = View.VISIBLE
+                rvNearbyRestos.visibility = View.VISIBLE
+                tvRecentlyVisited.visibility = View.VISIBLE
+                rvRecentlyVisited.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun calculateRestaurantDistances(
+        iterator: MutableListIterator<RestaurantItem>,
+        results: FloatArray
+    ) {
         while (iterator.hasNext()) {
             val oldValue = iterator.next()
-            try{
-                val addresses = Geocoder(requireActivity().applicationContext).getFromLocationName(oldValue.location.toString(), 1)
+            try {
+                val addresses = Geocoder(requireActivity().applicationContext).getFromLocationName(
+                    oldValue.location.toString(),
+                    1
+                )
                 if (addresses.size > 0) {
                     val latitude = addresses[0].latitude
                     val longitude = addresses[0].longitude
-                    if(latLng == null){
-                        val userAddress = Geocoder(requireContext()).getFromLocationName(locationAddress, 1)
-                        Location.distanceBetween(userAddress[0].latitude, userAddress[0].longitude, latitude, longitude, results)
-                        lifecycleScope.launch{
-                            pref.saveLatitudeLongitude(userAddress[0].latitude.toString(), userAddress[0].longitude.toString())
-                        }
-                    }else{
-                        Location.distanceBetween(latLng!!.latitude, latLng!!.longitude, latitude, longitude, results)
-                    }
+                    Location.distanceBetween(
+                        latLng.latitude,
+                        latLng.longitude,
+                        latitude,
+                        longitude,
+                        results
+                    )
                 }
-            }catch(e: Exception){
+            } catch (e: Exception) {
                 val toHomeFragment = HomeFragmentDirections.actionHomeFragmentToHomeFragment()
                 requireView().findNavController().navigate(toHomeFragment)
             }
@@ -220,7 +276,7 @@ class HomeFragment : Fragment() {
         requireView().findNavController().navigate(toLocationFragment)
     }
 
-    private fun setLocationTextClickListener(){
+    private fun setLocationTextClickListener() {
         binding.tvCurrentLocation.setOnClickListener {
             val toLocationFragment = HomeFragmentDirections.actionHomeFragmentToLocationFragment()
             requireView().findNavController().navigate(toLocationFragment)
@@ -231,23 +287,25 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun showRecyclerList(){
+    private fun showRecyclerList() {
         val adapter = RestaurantAdapter(list)
         binding.rvNearbyRestos.adapter = adapter
-        adapter.setOnItemClickCallback(object : RestaurantAdapter.OnItemClickCallback{
+        adapter.setOnItemClickCallback(object : RestaurantAdapter.OnItemClickCallback {
             override fun onItemClicked(data: RestaurantItem) {
-                val toRestaurantFragment = HomeFragmentDirections.actionHomeFragmentToRestaurantFragment(data.id.toString())
+                val toRestaurantFragment =
+                    HomeFragmentDirections.actionHomeFragmentToRestaurantFragment(data.id.toString())
                 requireView().findNavController().navigate(toRestaurantFragment)
             }
         })
     }
 
-    private fun showRecentlyVisitedRecyclerList(){
+    private fun showRecentlyVisitedRecyclerList() {
         val adapter = RestaurantAdapter(recentlyVisitedList)
         binding.rvRecentlyVisited.adapter = adapter
-        adapter.setOnItemClickCallback(object : RestaurantAdapter.OnItemClickCallback{
+        adapter.setOnItemClickCallback(object : RestaurantAdapter.OnItemClickCallback {
             override fun onItemClicked(data: RestaurantItem) {
-                val toRestaurantFragment = HomeFragmentDirections.actionHomeFragmentToRestaurantFragment(data.id.toString())
+                val toRestaurantFragment =
+                    HomeFragmentDirections.actionHomeFragmentToRestaurantFragment(data.id.toString())
                 requireView().findNavController().navigate(toRestaurantFragment)
             }
         })

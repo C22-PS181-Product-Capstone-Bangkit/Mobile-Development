@@ -58,6 +58,7 @@ class RecommendAdapter(private val listRestaurant : List<RestaurantItem>, val pr
             tvRecommendRestoLocation.text = restaurantItem.location
             tvRecommendRestoTime.text = restaurantItem.openHour
             tvRecommendRestoRatings.text = restoRatings
+            tvRecommendRestoDistance.text = restaurantItem.distance
             Glide.with(holder.itemView).load(restaurantItem.profilePic).into(imgBannerRecommend)
             imgBannerRecommend.minimumHeight = imgBannerRecommend.width
             fabDecline.setOnClickListener { onItemClickCallback.onDeclineClicked(listRestaurant[holder.adapterPosition], holder.adapterPosition)}

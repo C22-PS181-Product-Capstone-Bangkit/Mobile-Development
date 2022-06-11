@@ -1,5 +1,7 @@
 package com.bangkit.cemil.home
 
+import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,15 +19,17 @@ import com.bangkit.cemil.databinding.FragmentRecommendRestaurantBinding
 import com.bangkit.cemil.tools.RecommendAdapter
 import com.bangkit.cemil.tools.model.ProfileResponse
 import com.bangkit.cemil.tools.model.RestaurantItem
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.launch
 
 class RecommendRestaurantFragment : Fragment() {
 
-    private lateinit var binding : FragmentRecommendRestaurantBinding
+    private lateinit var binding: FragmentRecommendRestaurantBinding
     private val viewModel by viewModels<RecommendRestaurantViewModel>()
-    private var accessToken : String? = ""
+    private var accessToken: String? = ""
     private val list = ArrayList<RestaurantItem>()
-    private lateinit var userData : ProfileResponse
+    private lateinit var latLng: LatLng
+    private lateinit var userData: ProfileResponse
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,41 +43,172 @@ class RecommendRestaurantFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
         lifecycleScope.launch {
-            accessToken = pref.getPreferences()[SettingPreferences.AUTHORIZATION_TOKEN_KEY].toString()
+            accessToken =
+                pref.getPreferences()[SettingPreferences.AUTHORIZATION_TOKEN_KEY].toString()
         }
+
+        val categories = RecommendRestaurantFragmentArgs.fromBundle(arguments as Bundle).categories
+        val prices = RecommendRestaurantFragmentArgs.fromBundle(arguments as Bundle).prices
+        val distance = RecommendRestaurantFragmentArgs.fromBundle(arguments as Bundle).distance
+        val ratings = RecommendRestaurantFragmentArgs.fromBundle(arguments as Bundle).ratings
+
         viewModel.fetchProfile(accessToken.toString())
-        binding.rvRecommendations.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        viewModel.profileData.observe(viewLifecycleOwner){
-            if(it != null){
+        binding.rvRecommendations.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        viewModel.profileData.observe(viewLifecycleOwner) {
+            if (it != null) {
                 userData = it
                 viewModel.fetchRecommendations(accessToken.toString())
-            }else{
+            } else {
                 Toast.makeText(context, "Fetching user profile failed!", Toast.LENGTH_SHORT).show()
             }
         }
-        viewModel.recommendationList.observe(viewLifecycleOwner){
+        viewModel.recommendationList.observe(viewLifecycleOwner) {
             list.clear()
-            list.addAll(it)
+            val filteredList = filterList(it, pref, categories, prices, distance, ratings)
+            list.addAll(filteredList)
             showRecyclerList()
         }
-        viewModel.historyResponse.observe(viewLifecycleOwner){
-            if(it != null){
-                val toRestaurantFragment = RecommendRestaurantFragmentDirections.actionRecommendRestaurantFragmentToRestaurantFragment(it.idRestaurant.toString())
+        viewModel.historyResponse.observe(viewLifecycleOwner) {
+            if (it != null) {
+                val toRestaurantFragment =
+                    RecommendRestaurantFragmentDirections.actionRecommendRestaurantFragmentToRestaurantFragment(
+                        it.idRestaurant.toString()
+                    )
                 requireView().findNavController().navigate(toRestaurantFragment)
             }
         }
-        viewModel.isLoading.observe(viewLifecycleOwner){
+        viewModel.isLoading.observe(viewLifecycleOwner) {
             showLoading(it)
         }
     }
 
-    private fun showRecyclerList(){
+    private fun filterList(
+        restaurantList: List<RestaurantItem>,
+        preferences: SettingPreferences,
+        categories: String,
+        prices: String,
+        distance: String,
+        ratings: String
+    ) : List<RestaurantItem> {
+        val tempList = mutableListOf<RestaurantItem>()
+
+        // Filter by category
+        if (categories.isNotEmpty()) {
+            val categoryList = categories.split(", ").toTypedArray()
+            for (restaurant in restaurantList) {
+                for (category in categoryList) {
+                    if (restaurant.category?.contains(category) == true) {
+                        if (restaurant !in tempList)
+                            tempList.add(restaurant)
+                    }
+                }
+            }
+        }
+
+        // Filter by prices
+        for (restaurant in restaurantList) {
+            val averagePrice = restaurant.price.toDouble() / restaurant.person.toDouble()
+            if (prices.contains("10.000")) {
+                if (averagePrice <= 10000) {
+                    if (restaurant !in tempList)
+                        tempList.add(restaurant)
+                } else {
+                    if (restaurant in tempList)
+                        tempList.remove(restaurant)
+                }
+            } else if (prices.contains("25.000")) {
+                if (averagePrice <= 25000) {
+                    if (restaurant !in tempList)
+                        tempList.add(restaurant)
+                } else {
+                    if (restaurant in tempList)
+                        tempList.remove(restaurant)
+                }
+            } else if (prices.contains("50.000")) {
+                if (averagePrice <= 50000) {
+                    if (restaurant !in tempList)
+                        tempList.add(restaurant)
+                } else {
+                    if (restaurant in tempList)
+                        tempList.remove(restaurant)
+                }
+            } else if (prices.contains("100.000")) {
+                if (averagePrice <= 100000) {
+                    if (restaurant !in tempList)
+                        tempList.add(restaurant)
+                } else {
+                    if (restaurant in tempList)
+                        tempList.remove(restaurant)
+                }
+            }
+        }
+
+        // Filter by distance
+        if (distance.isNotEmpty()) {
+            lifecycleScope.launch {
+                latLng = LatLng(
+                    preferences.getPreferences()[SettingPreferences.LATITUDE_KEY]?.toDouble() ?: 0.0,
+                    preferences.getPreferences()[SettingPreferences.LONGITUDE_KEY]?.toDouble() ?: 0.0
+                )
+            }
+            calculateRestaurantDistances(restaurantList.toMutableList().listIterator(), FloatArray(1))
+            for (restaurant in restaurantList) {
+                if (distance[0] == '0') {
+                    if (restaurant.distance.toDouble() <= 5.0) {
+                        if (restaurant !in tempList)
+                            tempList.add(restaurant)
+                    } else {
+                        if (restaurant in tempList)
+                            tempList.remove(restaurant)
+                    }
+                    continue
+                }
+                if (distance[0] == '5') {
+                    if (restaurant.distance.toDouble() > 5.0 && restaurant.distance.toDouble() <= 10.0) {
+                        if (restaurant !in tempList)
+                            tempList.add(restaurant)
+                    } else {
+                        if (restaurant in tempList)
+                            tempList.remove(restaurant)
+                    }
+                    continue
+                }
+                if (distance[0] == '1') {
+                    if (restaurant.distance.toDouble() > 10.0) {
+                        if (restaurant !in tempList)
+                            tempList.add(restaurant)
+                    } else {
+                        if (restaurant in tempList)
+                            tempList.remove(restaurant)
+                    }
+                    continue
+                }
+            }
+        }
+
+        // Filter by rating
+        if (ratings == "4.0+") {
+            for (restaurant in restaurantList) {
+                if (restaurant.rating.toDouble() >= 4.0) {
+                    if (restaurant !in tempList)
+                        tempList.add(restaurant)
+                } else {
+                    if (restaurant in tempList)
+                        tempList.remove(restaurant)
+                }
+            }
+        }
+        return tempList
+    }
+
+    private fun showRecyclerList() {
         val adapter = RecommendAdapter(list, userData)
         binding.rvRecommendations.adapter = adapter
-        binding.rvRecommendations.setOnTouchListener{ _, _ -> true}
-        adapter.setOnItemClickCallback(object: RecommendAdapter.OnItemClickCallback{
+        binding.rvRecommendations.setOnTouchListener { _, _ -> true }
+        adapter.setOnItemClickCallback(object : RecommendAdapter.OnItemClickCallback {
             override fun onDeclineClicked(data: RestaurantItem, position: Int) {
-                binding.rvRecommendations.smoothScrollToPosition(position+1)
+                binding.rvRecommendations.smoothScrollToPosition(position + 1)
             }
 
             override fun onRecommendClicked(data: RestaurantItem, position: Int) {
@@ -93,7 +228,38 @@ class RecommendRestaurantFragment : Fragment() {
         })
     }
 
-    private fun showLoading(isLoading: Boolean){
+    private fun showLoading(isLoading: Boolean) {
         binding.recommendProgressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun calculateRestaurantDistances(
+        iterator: MutableListIterator<RestaurantItem>,
+        results: FloatArray
+    ) {
+        while (iterator.hasNext()) {
+            val oldValue = iterator.next()
+            try {
+                val addresses = Geocoder(requireActivity().applicationContext).getFromLocationName(
+                    oldValue.location.toString(),
+                    1
+                )
+                if (addresses.size > 0) {
+                    val latitude = addresses[0].latitude
+                    val longitude = addresses[0].longitude
+                    Location.distanceBetween(
+                        latLng.latitude,
+                        latLng.longitude,
+                        latitude,
+                        longitude,
+                        results
+                    )
+                }
+            } catch (e: Exception) {
+                val toHomeFragment = HomeFragmentDirections.actionHomeFragmentToHomeFragment()
+                requireView().findNavController().navigate(toHomeFragment)
+            }
+            oldValue.distance = (Math.round((results[0] / 1000) * 10.0) / 10.0).toString()
+            iterator.set(oldValue)
+        }
     }
 }
