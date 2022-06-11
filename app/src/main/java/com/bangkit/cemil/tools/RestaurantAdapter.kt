@@ -9,9 +9,9 @@ import com.bumptech.glide.Glide
 
 class RestaurantAdapter(private val restaurantList: List<RestaurantItem>) : RecyclerView.Adapter<RestaurantAdapter.ViewHolder>() {
 
-    private lateinit var onItemClickCallback: OnItemClickCallback
-
     class ViewHolder(var binding: ItemRowHomeRestoBinding): RecyclerView.ViewHolder(binding.root)
+
+    private lateinit var onItemClickCallback: OnItemClickCallback
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback

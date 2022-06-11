@@ -24,7 +24,7 @@ class HomeViewModel : ViewModel() {
         requestRestoData()
     }
 
-    private fun requestRestoData() {
+    fun requestRestoData() {
         _isLoading.value = true
         val client = ApiConfig.getApiService().getRestaurant()
         client.enqueue(object : Callback<List<RestaurantItem>> {
@@ -58,5 +58,4 @@ class HomeViewModel : ViewModel() {
             }
         })
     }
-
 }

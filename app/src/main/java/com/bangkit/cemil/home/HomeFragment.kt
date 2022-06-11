@@ -56,6 +56,16 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
+        lifecycleScope.launch {
+            locationAddress = pref.getPreferences()[SettingPreferences.LOCATION_KEY].toString()
+            latLng = LatLng(
+                pref.getPreferences()[SettingPreferences.LATITUDE_KEY]?.toDouble() ?: 0.0,
+                pref.getPreferences()[SettingPreferences.LONGITUDE_KEY]?.toDouble() ?: 0.0
+            )
+            val recentlyVisitedJson = pref.getPreferences()[SettingPreferences.RECENTLY_VISITED_KEY]
+                ?: recentlyVisitedIds.toString()
+            recentlyVisitedIds = recentlyVisitedJson.fromJson(gson)!!
+        }
 
         binding.rvNearbyRestos.apply {
             setHasFixedSize(true)
@@ -105,11 +115,16 @@ class HomeFragment : Fragment() {
         setLocationTextClickListener()
 
         viewModel.restoData.observe(viewLifecycleOwner) { it ->
+
+            if (viewModel.restoData.value.isNullOrEmpty()) {
+                viewModel.requestRestoData()
+            }
+
             val results = FloatArray(1)
             val restaurants = it.toMutableList()
             lifecycleScope.launch(Dispatchers.IO) {
                 calculateRestaurantDistances(restaurants.listIterator(), results)
-                restaurants.sortBy { it.distance?.toDouble() }
+                restaurants.sortBy { it.distance.toDouble() }
                 list.clear()
                 list.addAll(restaurants)
                 withContext(Dispatchers.Main) {
@@ -118,196 +133,203 @@ class HomeFragment : Fragment() {
             }
         }
 
-        if (recentlyVisitedIds.isNotEmpty()) {
-            viewModel.requestRestoFromIds(recentlyVisitedIds)
-        }
-
-        viewModel.restoRecentlyVisitedData.observe(viewLifecycleOwner) {
-            val results = FloatArray(1)
-            val restaurants = it.toMutableList()
-            lifecycleScope.launch(Dispatchers.IO) {
-                calculateRestaurantDistances(restaurants.listIterator(), results)
-                recentlyVisitedList.clear()
-                recentlyVisitedList.addAll(restaurants)
-                recentlyVisitedList.reverse()
-                withContext(Dispatchers.Main) {
-                    showRecentlyVisitedRecyclerList()
-                }
+            if (recentlyVisitedIds.isNotEmpty()) {
+                viewModel.requestRestoFromIds(recentlyVisitedIds)
             }
-        }
 
-        viewModel.isLoading.observe(viewLifecycleOwner) {
-            showLoading(it)
-        }
-
-        binding.tvCurrentLocationLabel.setOnClickListener {
-            navigateToLocationFragment()
-        }
-
-        binding.btnFindMeFood.setOnClickListener {
-            val toPreferencesFragment =
-                HomeFragmentDirections.actionHomeFragmentToPreferencesFragment()
-            requireView().findNavController().navigate(toPreferencesFragment)
-        }
-    }
-
-    private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.apply {
-                homeLoading.visibility = View.VISIBLE
-                btnFindMeFood.visibility = View.INVISIBLE
-                tvNearbyRestos.visibility = View.INVISIBLE
-                rvNearbyRestos.visibility = View.INVISIBLE
-                tvRecentlyVisited.visibility = View.INVISIBLE
-                rvRecentlyVisited.visibility = View.INVISIBLE
-            }
-        } else {
-            binding.apply {
-                homeLoading.visibility = View.INVISIBLE
-                btnFindMeFood.visibility = View.VISIBLE
-                tvNearbyRestos.visibility = View.VISIBLE
-                rvNearbyRestos.visibility = View.VISIBLE
-                tvRecentlyVisited.visibility = View.VISIBLE
-                rvRecentlyVisited.visibility = View.VISIBLE
-            }
-        }
-    }
-
-    private fun calculateRestaurantDistances(
-        iterator: MutableListIterator<RestaurantItem>,
-        results: FloatArray
-    ) {
-        while (iterator.hasNext()) {
-            val oldValue = iterator.next()
-            try {
-                val addresses = Geocoder(requireActivity().applicationContext).getFromLocationName(
-                    oldValue.location.toString(),
-                    1
-                )
-                if (addresses.size > 0) {
-                    val latitude = addresses[0].latitude
-                    val longitude = addresses[0].longitude
-                    Location.distanceBetween(
-                        latLng.latitude,
-                        latLng.longitude,
-                        latitude,
-                        longitude,
-                        results
-                    )
-                }
-            } catch (e: Exception) {
-                val toHomeFragment = HomeFragmentDirections.actionHomeFragmentToHomeFragment()
-                requireView().findNavController().navigate(toHomeFragment)
-            }
-            oldValue.distance = (Math.round((results[0] / 1000) * 10.0) / 10.0).toString()
-            iterator.set(oldValue)
-        }
-    }
-
-    private val requestPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-            when {
-                permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> getMyLocation()
-                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> getMyLocation()
-                else -> Toast.makeText(
-                    requireContext(),
-                    "Location permission needed. Try again.",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
-
-    private fun getMyLocation() {
-        if (checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION) && checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)) {
-            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-                if (location != null) {
-                    val addresses = Geocoder(requireContext()).getFromLocation(
-                        location.latitude,
-                        location.longitude,
-                        1
-                    )
-                    val myLocation = addresses[0].getAddressLine(0)
-                    binding.tvCurrentLocation.text = myLocation
-
-                } else {
-                    //If no last location found in cache, attempt to retrieve the Current Location
-                    val tokenSrc = CancellationTokenSource()
-                    fusedLocationClient.getCurrentLocation(
-                        LocationRequest.PRIORITY_HIGH_ACCURACY,
-                        tokenSrc.token
-                    ).addOnSuccessListener { currLocation: Location? ->
-                        if (currLocation != null) {
-                            val addresses = Geocoder(requireContext()).getFromLocation(
-                                currLocation.latitude,
-                                currLocation.longitude,
-                                1
-                            )
-                            val myLocation = addresses[0].getAddressLine(0)
-                            binding.tvCurrentLocation.text = myLocation
-                        } else {
-                            Toast.makeText(
-                                context,
-                                "Cannot retrieve your current location.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
+            viewModel.restoRecentlyVisitedData.observe(viewLifecycleOwner) {
+                val results = FloatArray(1)
+                val restaurants = it.toMutableList()
+                lifecycleScope.launch(Dispatchers.IO) {
+                    calculateRestaurantDistances(restaurants.listIterator(), results)
+                    recentlyVisitedList.clear()
+                    recentlyVisitedList.addAll(restaurants)
+                    recentlyVisitedList.reverse()
+                    withContext(Dispatchers.Main) {
+                        showRecentlyVisitedRecyclerList()
                     }
                 }
             }
-        } else {
-            requestPermissionLauncher.launch(
-                arrayOf(
-                    Manifest.permission.ACCESS_COARSE_LOCATION,
+
+            viewModel.isLoading.observe(viewLifecycleOwner) {
+                showLoading(it)
+            }
+
+            binding.tvCurrentLocationLabel.setOnClickListener {
+                navigateToLocationFragment()
+            }
+
+            binding.btnFindMeFood.setOnClickListener {
+                val toPreferencesFragment =
+                    HomeFragmentDirections.actionHomeFragmentToPreferencesFragment()
+                requireView().findNavController().navigate(toPreferencesFragment)
+            }
+        }
+
+        private fun showLoading(isLoading: Boolean) {
+            if (isLoading) {
+                binding.apply {
+                    homeLoading.visibility = View.VISIBLE
+                    btnFindMeFood.visibility = View.INVISIBLE
+                    tvNearbyRestos.visibility = View.INVISIBLE
+                    rvNearbyRestos.visibility = View.INVISIBLE
+                    tvRecentlyVisited.visibility = View.INVISIBLE
+                    rvRecentlyVisited.visibility = View.INVISIBLE
+                }
+            } else {
+                binding.apply {
+                    homeLoading.visibility = View.INVISIBLE
+                    btnFindMeFood.visibility = View.VISIBLE
+                    tvNearbyRestos.visibility = View.VISIBLE
+                    rvNearbyRestos.visibility = View.VISIBLE
+                    tvRecentlyVisited.visibility = View.VISIBLE
+                    rvRecentlyVisited.visibility = View.VISIBLE
+                }
+            }
+        }
+
+        private fun calculateRestaurantDistances(
+            iterator: MutableListIterator<RestaurantItem>,
+            results: FloatArray
+        ) {
+            while (iterator.hasNext()) {
+                val oldValue = iterator.next()
+                try {
+                    val addresses =
+                        Geocoder(requireActivity().applicationContext).getFromLocationName(
+                            oldValue.location.toString(),
+                            1
+                        )
+                    if (addresses.size > 0) {
+                        val latitude = addresses[0].latitude
+                        val longitude = addresses[0].longitude
+                        Location.distanceBetween(
+                            latLng.latitude,
+                            latLng.longitude,
+                            latitude,
+                            longitude,
+                            results
+                        )
+                    }
+                } catch (e: Exception) {
+
+                }
+                oldValue.distance = (Math.round((results[0] / 1000) * 10.0) / 10.0).toString()
+                iterator.set(oldValue)
+            }
+        }
+
+        private val requestPermissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+                when {
+                    permissions[Manifest.permission.ACCESS_FINE_LOCATION]
+                        ?: false -> getMyLocation()
+                    permissions[Manifest.permission.ACCESS_COARSE_LOCATION]
+                        ?: false -> getMyLocation()
+                    else -> Toast.makeText(
+                        requireContext(),
+                        "Location permission needed. Try again.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+        private fun getMyLocation() {
+            if (checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION) && checkPermission(
                     Manifest.permission.ACCESS_FINE_LOCATION
                 )
-            )
+            ) {
+                fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                    if (location != null) {
+                        val addresses = Geocoder(requireContext()).getFromLocation(
+                            location.latitude,
+                            location.longitude,
+                            1
+                        )
+                        val myLocation = addresses[0].getAddressLine(0)
+                        binding.tvCurrentLocation.text = myLocation
+
+                    } else {
+                        //If no last location found in cache, attempt to retrieve the Current Location
+                        val tokenSrc = CancellationTokenSource()
+                        fusedLocationClient.getCurrentLocation(
+                            LocationRequest.PRIORITY_HIGH_ACCURACY,
+                            tokenSrc.token
+                        ).addOnSuccessListener { currLocation: Location? ->
+                            if (currLocation != null) {
+                                val addresses = Geocoder(requireContext()).getFromLocation(
+                                    currLocation.latitude,
+                                    currLocation.longitude,
+                                    1
+                                )
+                                val myLocation = addresses[0].getAddressLine(0)
+                                binding.tvCurrentLocation.text = myLocation
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "Cannot retrieve your current location.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    }
+                }
+            } else {
+                requestPermissionLauncher.launch(
+                    arrayOf(
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    )
+                )
+            }
         }
-    }
 
-    private fun checkPermission(permission: String): Boolean {
-        return ContextCompat.checkSelfPermission(
-            requireContext(),
-            permission
-        ) == PackageManager.PERMISSION_GRANTED
-    }
+        private fun checkPermission(permission: String): Boolean {
+            return ContextCompat.checkSelfPermission(
+                requireContext(),
+                permission
+            ) == PackageManager.PERMISSION_GRANTED
+        }
 
-    private fun navigateToLocationFragment() {
-        val toLocationFragment = HomeFragmentDirections.actionHomeFragmentToLocationFragment()
-        requireView().findNavController().navigate(toLocationFragment)
-    }
-
-    private fun setLocationTextClickListener() {
-        binding.tvCurrentLocation.setOnClickListener {
+        private fun navigateToLocationFragment() {
             val toLocationFragment = HomeFragmentDirections.actionHomeFragmentToLocationFragment()
             requireView().findNavController().navigate(toLocationFragment)
         }
-        binding.tvCurrentLocationLabel.setOnClickListener {
-            val toLocationFragment = HomeFragmentDirections.actionHomeFragmentToLocationFragment()
-            requireView().findNavController().navigate(toLocationFragment)
+
+        private fun setLocationTextClickListener() {
+            binding.tvCurrentLocation.setOnClickListener {
+                val toLocationFragment =
+                    HomeFragmentDirections.actionHomeFragmentToLocationFragment()
+                requireView().findNavController().navigate(toLocationFragment)
+            }
+            binding.tvCurrentLocationLabel.setOnClickListener {
+                val toLocationFragment =
+                    HomeFragmentDirections.actionHomeFragmentToLocationFragment()
+                requireView().findNavController().navigate(toLocationFragment)
+            }
+        }
+
+        private fun showRecyclerList() {
+            val adapter = RestaurantAdapter(list)
+            binding.rvNearbyRestos.adapter = adapter
+            adapter.setOnItemClickCallback(object : RestaurantAdapter.OnItemClickCallback {
+                override fun onItemClicked(data: RestaurantItem) {
+                    val toRestaurantFragment =
+                        HomeFragmentDirections.actionHomeFragmentToRestaurantFragment(data.id.toString())
+                    requireView().findNavController().navigate(toRestaurantFragment)
+                }
+            })
+        }
+
+        private fun showRecentlyVisitedRecyclerList() {
+            val adapter = RestaurantAdapter(recentlyVisitedList)
+            binding.rvRecentlyVisited.adapter = adapter
+            adapter.setOnItemClickCallback(object : RestaurantAdapter.OnItemClickCallback {
+                override fun onItemClicked(data: RestaurantItem) {
+                    val toRestaurantFragment =
+                        HomeFragmentDirections.actionHomeFragmentToRestaurantFragment(data.id.toString())
+                    requireView().findNavController().navigate(toRestaurantFragment)
+                }
+            })
         }
     }
-
-    private fun showRecyclerList() {
-        val adapter = RestaurantAdapter(list)
-        binding.rvNearbyRestos.adapter = adapter
-        adapter.setOnItemClickCallback(object : RestaurantAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: RestaurantItem) {
-                val toRestaurantFragment =
-                    HomeFragmentDirections.actionHomeFragmentToRestaurantFragment(data.id.toString())
-                requireView().findNavController().navigate(toRestaurantFragment)
-            }
-        })
-    }
-
-    private fun showRecentlyVisitedRecyclerList() {
-        val adapter = RestaurantAdapter(recentlyVisitedList)
-        binding.rvRecentlyVisited.adapter = adapter
-        adapter.setOnItemClickCallback(object : RestaurantAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: RestaurantItem) {
-                val toRestaurantFragment =
-                    HomeFragmentDirections.actionHomeFragmentToRestaurantFragment(data.id.toString())
-                requireView().findNavController().navigate(toRestaurantFragment)
-            }
-        })
-    }
-}
