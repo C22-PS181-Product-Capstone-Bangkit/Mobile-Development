@@ -5,6 +5,7 @@ import android.content.Context
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -38,7 +39,6 @@ class SearchFragment : Fragment() {
     private lateinit var binding : FragmentSearchBinding
     private val viewModel by viewModels<SearchViewModel>()
     private lateinit var mutableList : MutableList<RestaurantItem>
-    private var locationAddress: String = ""
     private var latLng : LatLng? = null
     private var recentSearchList = ArrayList<String>()
     private val gson = GsonBuilder().create()
@@ -78,7 +78,6 @@ class SearchFragment : Fragment() {
         binding.rvRecentSearches.layoutManager = LinearLayoutManager(requireContext())
         binding.rvSearch.layoutManager = LinearLayoutManager(requireContext())
         lifecycleScope.launch {
-            locationAddress = pref.getPreferences()[SettingPreferences.LOCATION_KEY].toString()
             latLng = LatLng(pref.getPreferences()[SettingPreferences.LATITUDE_KEY]?.toDouble() ?: 0.0,
                 pref.getPreferences()[SettingPreferences.LONGITUDE_KEY]?.toDouble() ?: 0.0)
             val recentSearchesJson = pref.getPreferences()[SettingPreferences.RECENT_SEARCH_KEY] ?: recentSearchList.toString()
@@ -91,6 +90,9 @@ class SearchFragment : Fragment() {
                 pref.saveRecentSearch(gson.toJson(recentSearchList))
             }
             showRecentSearchRecyclerList()
+        }
+        viewModel.isLoading.observe(viewLifecycleOwner){
+            showLoading(it)
         }
         setUpCategoriesList()
         showRecentSearchRecyclerList()
@@ -143,27 +145,7 @@ class SearchFragment : Fragment() {
                 if(it.isEmpty()) Toast.makeText(context, "Not found.", Toast.LENGTH_SHORT).show()
             }
         }
-        binding.btnSearchSortRating.setOnClickListener {
-            binding.btnSearchSortRating.isClickable = false
-            binding.btnSearchSortLocation.isClickable = true
-            lifecycleScope.launch(Dispatchers.IO){
-                mutableList.sortBy { it.rating }
-                mutableList.reverse()
-                withContext(Dispatchers.Main){
-                    showRecyclerList()
-                }
-            }
-        }
-        binding.btnSearchSortLocation.setOnClickListener {
-            binding.btnSearchSortLocation.isClickable = false
-            binding.btnSearchSortRating.isClickable = true
-            lifecycleScope.launch(Dispatchers.IO){
-                mutableList.sortBy { it.distance?.toDouble() }
-                withContext(Dispatchers.Main){
-                    showRecyclerList()
-                }
-            }
-        }
+        setButtonListeners()
     }
 
     private fun calculateRestaurantDistances(iterator: MutableListIterator<RestaurantItem>, results: FloatArray) {
@@ -182,7 +164,10 @@ class SearchFragment : Fragment() {
                     }
                 }
                 iterator.set(oldValue)
-            }catch(e: ConcurrentModificationException){ }
+            }catch(e: Exception){
+                binding.searchDefaultLayout.visibility = View.VISIBLE
+                binding.searchResultLayout.visibility = View.GONE
+            }
         }
     }
 
@@ -196,6 +181,8 @@ class SearchFragment : Fragment() {
         categoriesAdapter.setOnItemClickCallback(object: CategoryAdapter.OnItemClickCallback{
             override fun onItemClicked(data: CategoryItem) {
                 viewModel.fetchRestosByCategory(data.title)
+                binding.searchDefaultLayout.visibility = View.GONE
+                binding.searchResultLayout.visibility = View.VISIBLE
             }
         })
     }
@@ -220,7 +207,7 @@ class SearchFragment : Fragment() {
         binding.rvRecentSearches.adapter = recentSearchAdapter
         recentSearchAdapter.setOnItemClickCallback(object: RecentSearchAdapter.OnItemClickCallback{
             override fun onItemClicked(data: String) {
-                binding.etSearch.setQuery(data, false)
+                binding.etSearch.setQuery(data, true)
             }
             override fun onEraseClicked(data: String, position: Int) {
                 recentSearchList.removeAt(position)
@@ -238,5 +225,33 @@ class SearchFragment : Fragment() {
             recentSearchList.reverse()
             isReversed = false
         }
+    }
+
+    private fun setButtonListeners(){
+        binding.btnSearchSortRating.setOnClickListener {
+            binding.btnSearchSortRating.isClickable = false
+            binding.btnSearchSortLocation.isClickable = true
+            lifecycleScope.launch(Dispatchers.IO){
+                mutableList.sortBy { it.rating }
+                mutableList.reverse()
+                withContext(Dispatchers.Main){
+                    showRecyclerList()
+                }
+            }
+        }
+        binding.btnSearchSortLocation.setOnClickListener {
+            binding.btnSearchSortLocation.isClickable = false
+            binding.btnSearchSortRating.isClickable = true
+            lifecycleScope.launch(Dispatchers.IO){
+                mutableList.sortBy { it.distance?.toDouble() }
+                withContext(Dispatchers.Main){
+                    showRecyclerList()
+                }
+            }
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean){
+        binding.searchProgressBar.visibility = if(isLoading) View.VISIBLE else View.GONE
     }
 }

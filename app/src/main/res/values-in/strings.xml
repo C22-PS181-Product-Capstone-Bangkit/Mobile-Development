@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cemil</string>
+    <string name="find_nearby_restaurants_from_your_location">Temukan restoran terdekat dari lokasi anda</string>
+    <string name="next">Next</string>
+    <string name="get_your_best_food_recommendations">Dapatkan rekomendasi makanan terbaik</string>
+    <string name="get_started">Mulai</string>
+    <string name="obtain_latest_reviews_from_the_customers">Peroleh ulasan terbaru dari pelanggan</string>
+    <string name="illustration">Ilustrasi</string>
+    <string name="login">Masuk</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="continue_with_google">Lanjutkan dengan Google</string>
+    <string name="register">Daftar</string>
+    <string name="confirm_password">Konfirmasi Password</string>
+    <string name="name">Nama</string>
+    <string name="forgot_password">Lupa password?</string>
+    <string name="congratulations_your_account_is_created_successfully">Selamat! Akun anda telah berhasil dibuat</string>
+    <string name="continue_registersuccess">Lanjutkan</string>
+    <string name="forgot_your_password">Lupa password anda?</string>
+    <string name="enter_your_email_below_so_we_can">Masukkan email anda dibawah agar kami dapat mengirimkan instruksi untuk reset password.</string>
+    <string name="enter_your_email_here">Masukkan email anda disini</string>
+    <string name="home">Home</string>
+    <string name="search">Pencarian</string>
+    <string name="profile">Profil</string>
+    <string name="history">Sejarah</string>
+    <string name="foods_restaurants_users_reviews_etc">Makanan, restoran, pengguna, ulasan, dan lainnya</string>
+    <string name="current_location">Lokasi Sekarang</string>
+    <string name="your_location">Lokasi Anda</string>
+    <string name="find_me_food">Carikan Makanan!</string>
+    <string name="frequently_visited">Sering Dikunjungi</string>
+    <string name="popular_restos">Restoran Populer</string>
+    <string name="home_banner">Home Banner</string>
+    <string name="restaurant_name">Nama Restoran</string>
+    <string name="x_km_x_ratings">x km x rating</string>
+    <string name="nearby_restos">Resto Terdekat</string>
+    <string name="account">Akun</string>
+    <string name="my_reviews">Ulasan Saya</string>
+    <string name="recommendations">Rekomendasi</string>
+    <string name="appearance">Penampilan</string>
+    <string name="language">Bahasa</string>
+    <string name="about_cemil">Tentang Cemil</string>
+    <string name="logout">Logout</string>
+    <string name="edit_profile">Edit Profil</string>
+    <string name="enter_your_new_name_here">Masukkan nama baru anda disini</string>
+    <string name="enter_your_phone_number_here">Masukkan nomor telepon anda disini</string>
+    <string name="save">Simpan</string>
+    <string name="current_password">Password Sekarang</string>
+    <string name="new_password">Password Baru</string>
+    <string name="enter_your_current_password_here">Masukkan password sekarang anda disini</string>
+    <string name="enter_the_new_password_you_want_here">Masukkan password baru yang diinginkan disini</string>
+    <string name="confirm_your_new_password_here">Konfirmasi password baru disini</string>
+    <string name="are_you_sure_to_logout">Apa anda yakin logout?</string>
+    <string name="dark_mode">Mode Gelap</string>
+    <string name="theme">Tema</string>
+    <string name="dark">Gelap</string>
+    <string name="system_default">Sesuai Sistem</string>
+    <string name="recommendations_history">Sejarah Rekomendasi</string>
+    <string name="join_us_to_explore_more_features_available">Bergabunglah untuk eksplorasi lebih banyak fitur</string>
+    <string name="already_have_account">Sudah memiliki akun?</string>
+    <string name="back">Kembali</string>
+    <string name="login_account">Login Akun</string>
+    <string name="click_here">Klik Disini</string>
+    <string name="sign_in_with_google">Masuk dengan Google</string>
+    <string name="or">atau</string>
+    <string name="i_agree_to">Saya setuju untuk</string>
+    <string name="_13_may_2022">13 Mei 2022</string>
+    <string name="restaurant">Restoran</string>
+    <string name="restaurant_rating">Rating Restoran</string>
+    <string name="sort_by_location">Urut berdasarkan Lokasi</string>
+    <string name="sort_by_ratings">Urut berdasarkan Rating</string>
+    <string name="recent_searches">Pencarian Terkini</string>
+    <string name="categories">Kategori</string>
+    <string name="clear_all">Hapus Semua</string>
+    <string name="pick_location">Pilih Lokasi</string>
+    <string name="retrieve_your_current_location_search_a_location_or_choose_from_maps">Peroleh lokasi sekarang, cari lokasi, atau pilih dari Maps</string>
+    <string name="choose_current_location">Pilih Lokasi Sekarang</string>
+    <string name="google_maps_api_key">AIzaSyDqe3NXc9qiFf82huuP3JgbJmlQDJd_Z1Y</string>
+    <string name="reviews">Ulasan</string>
+    <string name="read_more">Baca Lebih</string>
+    <string name="_0_0">0.0</string>
+    <string name="restaurant_location">Lokasi Restoran</string>
+    <string name="restaurant_open_hours">Jam Buka Restoran</string>
+    <string name="restaurant_average_cost">Perkiraan Harga Restoran</string>
+    <string name="phone_number">Nomor Telepon</string>
+    <string name="preferences">Preferensi</string>
+    <string name="average_price">Harga Rata-rata</string>
+    <string name="open_days">Jam Buka</string>
+    <string name="distance">Jarak</string>
+    <string name="rating">Rating</string>
+    <string name="add_review">Tambah Ulasan</string>
+    <string name="see_all_reviews">Lihat Semua Ulasan</string>
+
+    <string-array name="setting_names">
+        <item>Sejarah</item>
+        <item>Ulasan Saya</item>
+        <item>Rekomendasi</item>
+        <item>Ubah Password</item>
+        <item>Tampilan</item>
+        <item>Bahasa</item>
+        <item>Tentang Cemil</item>
+        <item>Keluar</item>
+    </string-array>
+
+    <integer-array name="setting_icons">
+        <item>@drawable/ic_history_filled</item>
+        <item>@drawable/ic_review_filled</item>
+        <item>@drawable/ic_recommendation_filled</item>
+        <item>@drawable/ic_change_password_filled</item>
+        <item>@drawable/ic_appearance_filled</item>
+        <item>@drawable/ic_language_filled</item>
+        <item>@drawable/ic_about_filled</item>
+        <item>@drawable/ic_logout_filled</item>
+    </integer-array>
+
+    <string-array name="category_titles">
+        <item>Roti dan Kue</item>
+        <item>Sapi</item>
+        <item>Burger</item>
+        <item>Ayam</item>
+        <item>Chinese</item>
+        <item>Kopi</item>
+        <item>Bebek</item>
+        <item>Es Krim</item>
+        <item>Indonesia</item>
+        <item>Jepang</item>
+        <item>Korean</item>
+        <item>Mi</item>
+        <item>Pasta</item>
+        <item>Pizza</item>
+        <item>Babi</item>
+        <item>Nasi</item>
+        <item>Seafood</item>
+        <item>Cemilan</item>
+        <item>Teh</item>
+        <item>Thai</item>
+        <item>Western</item>
+    </string-array>
+
+    <integer-array name="category_photos">
+        <item>@drawable/bakery_and_cake</item>
+        <item>@drawable/beef</item>
+        <item>@drawable/burger</item>
+        <item>@drawable/chicken</item>
+        <item>@drawable/chinese</item>
+        <item>@drawable/coffee</item>
+        <item>@drawable/duck</item>
+        <item>@drawable/ice_cream</item>
+        <item>@drawable/indonesian</item>
+        <item>@drawable/japanese</item>
+        <item>@drawable/korean</item>
+        <item>@drawable/noodles</item>
+        <item>@drawable/pasta</item>
+        <item>@drawable/pizza</item>
+        <item>@drawable/pork</item>
+        <item>@drawable/rice</item>
+        <item>@drawable/seafood</item>
+        <item>@drawable/snacks</item>
+        <item>@drawable/tea</item>
+        <item>@drawable/thai</item>
+        <item>@drawable/western</item>
+    </integer-array>
+
+    <string-array name="average_price">
+        <item>Rp.10.000</item>
+        <item>Rp.25.000</item>
+        <item>Rp.50.000</item>
+        <item>Rp.100.000+</item>
+    </string-array>
+
+    <string-array name="open_days">
+        <item>Senin</item>
+        <item>Selasa</item>
+        <item>Rabu</item>
+        <item>Kamis</item>
+        <item>Jumat</item>
+        <item>Sabtu</item>
+        <item>Minggu</item>
+    </string-array>
+
+    <string-array name="distance">
+        <item>0–5 km</item>
+        <item>5–10 km</item>
+        <item>10+ km</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="how_would_you_rate_this_restaurant">Bagaimana anda akan menilai restoran ini?</string>
+    <string name="write_your_review_here">Tulisan ulasan anda disini</string>
+    <string name="cancel">Batal</string>
+    <string name="find_me_restaurant">Carikan Restoran</string>
+    <string name="recently_visited">Terakhir Dikunjungi</string>
+    <string name="decline">Tolak</string>
+    <string name="create_account">Buat Akun</string>
+    <string name="change_password">Ubah Password</string>
+    <string name="clear_fields">Hapus Isian</string>
+    <string name="light">Terang</string>
+    <string name="cemil_s_terms_and_conditions">Syarat dan Ketentuan Cemil</string>
+    <string name="sign_up_with_google">Daftar dengan Google</string>
+    <string name="cemil_choose_your_meal">Cemil: Choose Your Meal</string>
+    <string name="version_pre_release">Versi: PRE_RELEASE</string>
+
+</resources>

@@ -1,6 +1,8 @@
 package com.bangkit.cemil.profile
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +38,6 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
             val tempList = ArrayList<SettingItem>()
             val settingNames = resources.getStringArray(R.array.setting_names)
             val settingDrawableIds = resources.obtainTypedArray(R.array.setting_icons)
-
             for (index in settingNames.indices) {
                 val settingItem = SettingItem(
                     settingNames[index],
@@ -57,18 +58,16 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
+        (activity as AppCompatActivity).apply {
+            setSupportActionBar(binding.materialToolbar)
+            supportActionBar?.title = null
+//            findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.VISIBLE
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        (activity as AppCompatActivity).apply {
-            setSupportActionBar(binding.materialToolbar)
-            supportActionBar?.title = null
-            findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.VISIBLE
-        }
-
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
         lifecycleScope.launch {
             isAuthorized = pref.getPreferences()[SettingPreferences.AUTHORIZED_KEY] == true
@@ -78,26 +77,19 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
         viewModel.isLoading.observe(viewLifecycleOwner) {
             showLoading(it)
         }
-
         viewModel.profileData.observe(viewLifecycleOwner) { profileData ->
             if (profileData != null) {
                 if (profileData.message == null && profileData.data == null) {
                     binding.tvProfileName.text = profileData.user?.name
                     binding.tvProfileEmail.text = profileData.user?.email
                     if (profileData.user?.profilePic != null) {
-                        Glide.with(requireContext())
-                            .load(profileData.user.profilePic)
-                            .placeholder(R.drawable.bg_shimmer)
-                            .into(binding.imgProfile)
+                        Glide.with(requireContext()).load(profileData.user.profilePic).placeholder(R.drawable.bg_shimmer).into(binding.imgProfile)
                     } else {
-                        Glide.with(requireContext())
-                            .load(R.drawable.img_profile_placeholder)
-                            .into(binding.imgProfile)
+                        Glide.with(requireContext()).load(R.drawable.img_profile_placeholder).into(binding.imgProfile)
                     }
                 }
             }
         }
-
         checkAuthorization()
         setButtonListener()
     }
@@ -190,10 +182,11 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
                         requireView().findNavController().navigate(toAppearanceFragment)
                     }
                     resources.getString(R.string.language) -> {
-                        // Navigate to Change Language Fragment
+                        startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
                     }
                     resources.getString(R.string.about_cemil) -> {
-                        // Navigate to About Cemil Fragment
+                        val toAboutUsFragment = ProfileFragmentDirections.actionProfileFragmentToAboutUsFragment()
+                        requireView().findNavController().navigate(toAboutUsFragment)
                     }
                     resources.getString(R.string.logout) -> {
                         LogoutDialogFragment().let {
