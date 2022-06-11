@@ -56,6 +56,13 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
+        lifecycleScope.launch {
+            locationAddress = pref.getPreferences()[SettingPreferences.LOCATION_KEY].toString()
+            latLng = LatLng(pref.getPreferences()[SettingPreferences.LATITUDE_KEY]?.toDouble() ?: 0.0,
+                pref.getPreferences()[SettingPreferences.LONGITUDE_KEY]?.toDouble() ?: 0.0)
+            val recentlyVisitedJson = pref.getPreferences()[SettingPreferences.RECENTLY_VISITED_KEY] ?: recentlyVisitedIds.toString()
+            recentlyVisitedIds = recentlyVisitedJson.fromJson(gson)!!
+        }
 
         binding.rvNearbyRestos.apply {
             setHasFixedSize(true)
@@ -65,13 +72,6 @@ class HomeFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
 
-        lifecycleScope.launch {
-            locationAddress = pref.getPreferences()[SettingPreferences.LOCATION_KEY].toString()
-            latLng = LatLng(pref.getPreferences()[SettingPreferences.LATITUDE_KEY]?.toDouble() ?: 0.0,
-                pref.getPreferences()[SettingPreferences.LONGITUDE_KEY]?.toDouble() ?: 0.0)
-            val recentlyVisitedJson = pref.getPreferences()[SettingPreferences.RECENTLY_VISITED_KEY] ?: recentlyVisitedIds.toString()
-            recentlyVisitedIds = recentlyVisitedJson.fromJson(gson)!!
-        }
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(view.context)
         if (locationAddress != "null") {
             binding.tvCurrentLocation.text = locationAddress
@@ -80,7 +80,9 @@ class HomeFragment : Fragment() {
         }
 
         setLocationTextClickListener()
-        viewModel.requestRestoData()
+        if(viewModel.restoData.value.isNullOrEmpty()){
+            viewModel.requestRestoData()
+        }
         viewModel.restoData.observe(viewLifecycleOwner){ it ->
             val results = FloatArray(1)
             val restaurants = it.toMutableList()
@@ -141,7 +143,7 @@ class HomeFragment : Fragment() {
                 }
             }catch(e: Exception){
                 val toHomeFragment = HomeFragmentDirections.actionHomeFragmentToHomeFragment()
-                requireView().findNavController().navigate(toHomeFragment)
+                view?.findNavController()?.navigate(toHomeFragment)
             }
             oldValue.distance = (Math.round((results[0] / 1000) * 10.0) / 10.0).toString()
             iterator.set(oldValue)

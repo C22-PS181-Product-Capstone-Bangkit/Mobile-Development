@@ -36,7 +36,6 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
             val tempList = ArrayList<SettingItem>()
             val settingNames = resources.getStringArray(R.array.setting_names)
             val settingDrawableIds = resources.obtainTypedArray(R.array.setting_icons)
-
             for (index in settingNames.indices) {
                 val settingItem = SettingItem(
                     settingNames[index],
@@ -57,18 +56,16 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
+        (activity as AppCompatActivity).apply {
+            setSupportActionBar(binding.materialToolbar)
+            supportActionBar?.title = null
+//            findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.VISIBLE
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        (activity as AppCompatActivity).apply {
-            setSupportActionBar(binding.materialToolbar)
-            supportActionBar?.title = null
-            findViewById<BottomNavigationView>(R.id.bottomNavigationView).visibility = View.VISIBLE
-        }
-
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
         lifecycleScope.launch {
             isAuthorized = pref.getPreferences()[SettingPreferences.AUTHORIZED_KEY] == true
@@ -78,26 +75,19 @@ class ProfileFragment : Fragment(), LogoutDialogFragment.DialogCallback {
         viewModel.isLoading.observe(viewLifecycleOwner) {
             showLoading(it)
         }
-
         viewModel.profileData.observe(viewLifecycleOwner) { profileData ->
             if (profileData != null) {
                 if (profileData.message == null && profileData.data == null) {
                     binding.tvProfileName.text = profileData.user?.name
                     binding.tvProfileEmail.text = profileData.user?.email
                     if (profileData.user?.profilePic != null) {
-                        Glide.with(requireContext())
-                            .load(profileData.user.profilePic)
-                            .placeholder(R.drawable.bg_shimmer)
-                            .into(binding.imgProfile)
+                        Glide.with(requireContext()).load(profileData.user.profilePic).placeholder(R.drawable.bg_shimmer).into(binding.imgProfile)
                     } else {
-                        Glide.with(requireContext())
-                            .load(R.drawable.img_profile_placeholder)
-                            .into(binding.imgProfile)
+                        Glide.with(requireContext()).load(R.drawable.img_profile_placeholder).into(binding.imgProfile)
                     }
                 }
             }
         }
-
         checkAuthorization()
         setButtonListener()
     }
