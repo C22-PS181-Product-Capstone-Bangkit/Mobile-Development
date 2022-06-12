@@ -63,7 +63,6 @@ class PreferencesFragment : Fragment() {
                         binding.chipGroupRatng.findViewById<Chip>(ratingChip)
                     ratings += chip.text.toString()
                 }
-
             }
 
             val toRecommendRestaurantFragment =
@@ -75,7 +74,6 @@ class PreferencesFragment : Fragment() {
                 )
             requireView().findNavController().navigate(toRecommendRestaurantFragment)
         }
-
     }
 
     private fun setFilterChips() {

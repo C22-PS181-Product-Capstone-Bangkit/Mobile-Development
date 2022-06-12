@@ -13,7 +13,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.bangkit.cemil.SettingPreferences
 import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentRecommendRestaurantBinding
@@ -200,7 +199,9 @@ class RecommendRestaurantFragment : Fragment() {
         } else {
             return restaurantList
         }
-        return tempList
+        return if(tempList.isEmpty() && categories.isEmpty() && prices.isEmpty() && distance.isEmpty() && ratings.isEmpty()){
+            restaurantList
+        }else tempList
     }
 
     private fun showRecyclerList() {

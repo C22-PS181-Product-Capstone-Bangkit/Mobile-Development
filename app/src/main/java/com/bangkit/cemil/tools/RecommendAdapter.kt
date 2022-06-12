@@ -30,7 +30,7 @@ class RecommendAdapter(private val listRestaurant : List<RestaurantItem>, privat
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val restaurantItem = listRestaurant[position]
+        val restaurantItem = listRestaurant[position % listRestaurant.size]
         val likeItem = profileData.likes?.any{it.restaurant?.id == restaurantItem.id}
         val restoAverageCost = "${currencyFormat((restaurantItem.price.toInt() / 2).toString())} / person"
         val restoRatings = "${restaurantItem.rating} (${restaurantItem.countReview})"
@@ -59,13 +59,13 @@ class RecommendAdapter(private val listRestaurant : List<RestaurantItem>, privat
             tvRecommendRestoDistance.text = restaurantItem.distance
             Glide.with(holder.itemView).load(restaurantItem.profilePic).into(imgBannerRecommend)
             imgBannerRecommend.minimumHeight = imgBannerRecommend.width
-            fabDecline.setOnClickListener { onItemClickCallback.onDeclineClicked(listRestaurant[holder.adapterPosition], holder.adapterPosition)}
-            fabAccept.setOnClickListener { onItemClickCallback.onAcceptClicked(listRestaurant[holder.adapterPosition], holder.adapterPosition)}
+            fabDecline.setOnClickListener { onItemClickCallback.onDeclineClicked(listRestaurant[holder.adapterPosition % listRestaurant.size], holder.adapterPosition)}
+            fabAccept.setOnClickListener { onItemClickCallback.onAcceptClicked(listRestaurant[holder.adapterPosition % listRestaurant.size], holder.adapterPosition % listRestaurant.size)}
         }
         if(likeItem == true) toggleLikeButtonOn(holder) else toggleLikeButtonOff(holder)
     }
 
-    override fun getItemCount() = listRestaurant.size
+    override fun getItemCount() = Int.MAX_VALUE
 
     private fun currencyFormat(amount: String) : String{
         val rupiahFormatter = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
@@ -74,7 +74,7 @@ class RecommendAdapter(private val listRestaurant : List<RestaurantItem>, privat
     private fun toggleLikeButtonOff(holder: ViewHolder){
         holder.binding.fabRecommend.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(holder.itemView.context, R.color.secondary))
         holder.binding.fabRecommend.setOnClickListener {
-            onItemClickCallback.onRecommendClicked(listRestaurant[holder.adapterPosition], holder.adapterPosition)
+            onItemClickCallback.onRecommendClicked(listRestaurant[holder.adapterPosition % listRestaurant.size], holder.adapterPosition % listRestaurant.size)
             toggleLikeButtonOn(holder)
         }
     }
@@ -82,7 +82,7 @@ class RecommendAdapter(private val listRestaurant : List<RestaurantItem>, privat
     private fun toggleLikeButtonOn(holder: ViewHolder){
         holder.binding.fabRecommend.imageTintList = ColorStateList.valueOf(com.google.android.material.R.attr.strokeColor)
         holder.binding.fabRecommend.setOnClickListener {
-            onItemClickCallback.onRecommendDeleteClicked(listRestaurant[holder.adapterPosition], holder.adapterPosition)
+            onItemClickCallback.onRecommendDeleteClicked(listRestaurant[holder.adapterPosition % listRestaurant.size], holder.adapterPosition % listRestaurant.size)
             toggleLikeButtonOff(holder)
         }
     }
