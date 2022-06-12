@@ -127,8 +127,11 @@ data class LikesItem(
 
 data class EditResponse(
 
+	@field:SerializedName("error")
+	val error: Boolean,
+
 	@field:SerializedName("message")
-	val message: String? = null
+	val message: String?
 
 )
 

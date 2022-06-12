@@ -41,7 +41,7 @@ class EditProfileViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<EditResponse>, t: Throwable) {
-                _editResponse.value = EditResponse(t.message)
+                _editResponse.value = EditResponse(true, t.message)
             }
         })
     }

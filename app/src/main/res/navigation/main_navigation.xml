@@ -208,6 +208,18 @@
             app:destination="@id/restaurantFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false"/>
+        <argument
+            android:name="categories"
+            app:argType="string" />
+        <argument
+            android:name="prices"
+            app:argType="string" />
+        <argument
+            android:name="distance"
+            app:argType="string" />
+        <argument
+            android:name="ratings"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/aboutUsFragment"

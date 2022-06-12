@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 
 class ApiConfig {
     companion object{
-        val BASE_URL = "https://cemil-backend.herokuapp.com"
+        private const val BASE_URL = "https://cemil-backend.herokuapp.com"
         fun getApiService() : ApiService{
             val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             val client = OkHttpClient.Builder()

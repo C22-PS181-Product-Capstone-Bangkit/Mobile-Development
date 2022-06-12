@@ -113,35 +113,10 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="16dp"
+            app:singleSelection="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvAveragePriceLabel">
-
-        </com.google.android.material.chip.ChipGroup>
-
-        <TextView
-            android:id="@+id/tvOpenDaysLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/nunito_bold"
-            android:text="@string/open_days"
-            android:textColor="?colorOnBackground"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chipGroupAveragePrices" />
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroupOpenDays"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvOpenDaysLabel">
 
         </com.google.android.material.chip.ChipGroup>
 
@@ -156,7 +131,7 @@
             android:textColor="?colorOnBackground"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chipGroupOpenDays" />
+            app:layout_constraintTop_toBottomOf="@+id/chipGroupAveragePrices" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroupDistance"

@@ -54,6 +54,11 @@ interface ApiService {
         @Field("password") password: String,
     ): Call<ChangePasswordResponse>
 
+    @GET("/api/v1/restaurant/recommendation")
+    fun getRecommendation(
+        @Header("Authorization") value: String
+    )
+
     @FormUrlEncoded
     @POST("api/v1/upload-profile")
     fun postUploadPhoto(
