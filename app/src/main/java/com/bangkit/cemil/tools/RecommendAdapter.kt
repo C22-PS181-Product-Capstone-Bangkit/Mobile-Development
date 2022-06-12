@@ -1,7 +1,6 @@
 package com.bangkit.cemil.tools
 
 import android.content.res.ColorStateList
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +8,13 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.cemil.R
 import com.bangkit.cemil.databinding.ItemRecommendedRestaurantBinding
-import com.bangkit.cemil.tools.model.LikesItem
 import com.bangkit.cemil.tools.model.ProfileResponse
 import com.bangkit.cemil.tools.model.RestaurantItem
 import com.bumptech.glide.Glide
 import java.text.NumberFormat
 import java.util.*
 
-class RecommendAdapter(private val listRestaurant : List<RestaurantItem>, val profileData : ProfileResponse): RecyclerView.Adapter<RecommendAdapter.ViewHolder>() {
+class RecommendAdapter(private val listRestaurant : List<RestaurantItem>, private val profileData : ProfileResponse): RecyclerView.Adapter<RecommendAdapter.ViewHolder>() {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
 
@@ -34,7 +32,7 @@ class RecommendAdapter(private val listRestaurant : List<RestaurantItem>, val pr
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val restaurantItem = listRestaurant[position % listRestaurant.size]
         val likeItem = profileData.likes?.any{it.restaurant?.id == restaurantItem.id}
-        val restoAverageCost = "${currencyFormat((restaurantItem.price!!.toInt() / 2).toString())} / person"
+        val restoAverageCost = "${currencyFormat((restaurantItem.price.toInt() / 2).toString())} / person"
         val restoRatings = "${restaurantItem.rating} (${restaurantItem.countReview})"
         val categoryAmount = restaurantItem.category?.split(", ")
         if(categoryAmount?.size!! >= 1){
