@@ -3,6 +3,7 @@ package com.bangkit.cemil.home
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -91,60 +92,29 @@ class RecommendRestaurantFragment : Fragment() {
         distance: String,
         ratings: String
     ) : List<RestaurantItem> {
+        val categoryFilteredList = filterCategory(restaurantList, categories)
+        val priceFilteredList = filterPrice(categoryFilteredList, prices)
+        val distanceFilteredList = filterDistance(priceFilteredList, preferences, distance)
+        val ratingFilteredList = filterRating(distanceFilteredList, ratings)
+        return ratingFilteredList
+    }
+
+    private fun filterRating(distanceFilteredList: List<RestaurantItem>, ratings: String): List<RestaurantItem> {
         val tempList = mutableListOf<RestaurantItem>()
-
-        // Filter by category
-        if (categories.isNotEmpty()) {
-            val categoryList = categories.split(", ").toTypedArray()
-            for (restaurant in restaurantList) {
-                for (category in categoryList) {
-                    if (restaurant.category?.contains(category) == true) {
-                        if (restaurant !in tempList)
-                            tempList.add(restaurant)
-                    }
+        if (ratings == "4.0+") {
+            for (restaurant in distanceFilteredList) {
+                if (restaurant.rating.toDouble() >= 4.0) {
+                    tempList.add(restaurant)
                 }
             }
+        } else {
+            return distanceFilteredList
         }
+        return tempList
+    }
 
-        // Filter by prices
-        for (restaurant in restaurantList) {
-            val averagePrice = restaurant.price.toDouble() / restaurant.person.toDouble()
-            if (prices.contains("10.000")) {
-                if (averagePrice <= 10000) {
-                    if (restaurant !in tempList)
-                        tempList.add(restaurant)
-                } else {
-                    if (restaurant in tempList)
-                        tempList.remove(restaurant)
-                }
-            } else if (prices.contains("25.000")) {
-                if (averagePrice <= 25000) {
-                    if (restaurant !in tempList)
-                        tempList.add(restaurant)
-                } else {
-                    if (restaurant in tempList)
-                        tempList.remove(restaurant)
-                }
-            } else if (prices.contains("50.000")) {
-                if (averagePrice <= 50000) {
-                    if (restaurant !in tempList)
-                        tempList.add(restaurant)
-                } else {
-                    if (restaurant in tempList)
-                        tempList.remove(restaurant)
-                }
-            } else if (prices.contains("100.000")) {
-                if (averagePrice <= 100000) {
-                    if (restaurant !in tempList)
-                        tempList.add(restaurant)
-                } else {
-                    if (restaurant in tempList)
-                        tempList.remove(restaurant)
-                }
-            }
-        }
-
-        // Filter by distance
+    private fun filterDistance(priceFilteredList: List<RestaurantItem>, preferences: SettingPreferences, distance: String): List<RestaurantItem> {
+        val tempList = mutableListOf<RestaurantItem>()
         if (distance.isNotEmpty()) {
             lifecycleScope.launch {
                 latLng = LatLng(
@@ -152,52 +122,83 @@ class RecommendRestaurantFragment : Fragment() {
                     preferences.getPreferences()[SettingPreferences.LONGITUDE_KEY]?.toDouble() ?: 0.0
                 )
             }
-            calculateRestaurantDistances(restaurantList.toMutableList().listIterator(), FloatArray(1))
-            for (restaurant in restaurantList) {
+            calculateRestaurantDistances(priceFilteredList.toMutableList().listIterator(), FloatArray(1))
+            for (restaurant in priceFilteredList) {
                 if (distance[0] == '0') {
                     if (restaurant.distance.toDouble() <= 5.0) {
-                        if (restaurant !in tempList)
-                            tempList.add(restaurant)
-                    } else {
-                        if (restaurant in tempList)
-                            tempList.remove(restaurant)
+                        tempList.add(restaurant)
                     }
                     continue
                 }
                 if (distance[0] == '5') {
                     if (restaurant.distance.toDouble() > 5.0 && restaurant.distance.toDouble() <= 10.0) {
-                        if (restaurant !in tempList)
-                            tempList.add(restaurant)
-                    } else {
-                        if (restaurant in tempList)
-                            tempList.remove(restaurant)
+                        tempList.add(restaurant)
                     }
                     continue
                 }
                 if (distance[0] == '1') {
                     if (restaurant.distance.toDouble() > 10.0) {
-                        if (restaurant !in tempList)
-                            tempList.add(restaurant)
-                    } else {
-                        if (restaurant in tempList)
-                            tempList.remove(restaurant)
+                        tempList.add(restaurant)
                     }
                     continue
                 }
             }
+        } else {
+            return priceFilteredList
         }
+        return tempList
+    }
 
-        // Filter by rating
-        if (ratings == "4.0+") {
-            for (restaurant in restaurantList) {
-                if (restaurant.rating.toDouble() >= 4.0) {
-                    if (restaurant !in tempList)
+    private fun filterPrice(categoryFilteredList: List<RestaurantItem>, prices: String): List<RestaurantItem> {
+        val tempList = mutableListOf<RestaurantItem>()
+        if (prices.isNotEmpty()) {
+            for (restaurant in categoryFilteredList) {
+                val averagePrice = restaurant.price.toDouble() / restaurant.person.toDouble()
+                if (prices.contains("10.000")) {
+                    if (averagePrice <= 10000) {
                         tempList.add(restaurant)
-                } else {
-                    if (restaurant in tempList)
-                        tempList.remove(restaurant)
+                    }
+                } else if (prices.contains("25.000")) {
+                    if (averagePrice <= 25000) {
+                        tempList.add(restaurant)
+                    }
+                } else if (prices.contains("50.000")) {
+                    if (averagePrice <= 50000) {
+                        tempList.add(restaurant)
+                    }
+                } else if (prices.contains("100.000")) {
+                    if (averagePrice <= 100000) {
+                        tempList.add(restaurant)
+                    }
                 }
             }
+        } else {
+            return categoryFilteredList
+        }
+        return tempList
+    }
+
+    private fun filterCategory(restaurantList: List<RestaurantItem>, categories: String) : List<RestaurantItem>{
+        val tempList = mutableListOf<RestaurantItem>()
+        if (categories.isNotEmpty()) {
+            if (categories.contains(", ")) {
+                val categoryList = categories.split(", ").toTypedArray()
+                for (restaurant in restaurantList) {
+                    for (category in categoryList) {
+                        if (restaurant.category?.contains(category) == true) {
+                            tempList.add(restaurant)
+                        }
+                    }
+                }
+            } else {
+                for (restaurant in restaurantList) {
+                    if (restaurant.category?.contains(categories) == true) {
+                        tempList.add(restaurant)
+                    }
+                }
+            }
+        } else {
+            return restaurantList
         }
         return tempList
     }
@@ -255,8 +256,7 @@ class RecommendRestaurantFragment : Fragment() {
                     )
                 }
             } catch (e: Exception) {
-                val toHomeFragment = HomeFragmentDirections.actionHomeFragmentToHomeFragment()
-                requireView().findNavController().navigate(toHomeFragment)
+                oldValue.distance = 0.0.toString()
             }
             oldValue.distance = (Math.round((results[0] / 1000) * 10.0) / 10.0).toString()
             iterator.set(oldValue)

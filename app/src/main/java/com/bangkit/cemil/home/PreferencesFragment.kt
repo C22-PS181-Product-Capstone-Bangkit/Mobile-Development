@@ -58,9 +58,12 @@ class PreferencesFragment : Fragment() {
             }
 
             if (binding.chipGroupRatng.checkedChipIds.isNotEmpty()) {
-                val chip =
-                    binding.chipGroupRatng.findViewById<Chip>(binding.chipGroupRatng.checkedChipId)
-                ratings += chip.text.toString()
+                for (ratingChip in binding.chipGroupRatng.checkedChipIds) {
+                    val chip =
+                        binding.chipGroupRatng.findViewById<Chip>(ratingChip)
+                    ratings += chip.text.toString()
+                }
+
             }
 
             val toRecommendRestaurantFragment =

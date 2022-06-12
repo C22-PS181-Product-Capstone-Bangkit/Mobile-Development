@@ -162,10 +162,10 @@
     </integer-array>
 
     <string-array name="average_price">
-        <item>Rp.10.000</item>
-        <item>Rp.25.000</item>
-        <item>Rp.50.000</item>
-        <item>Rp.100.000+</item>
+        <item>Rp10.000</item>
+        <item>Rp25.000</item>
+        <item>Rp50.000</item>
+        <item>Rp100.000+</item>
     </string-array>
 
     <string-array name="open_days">
@@ -189,6 +189,9 @@
     <string name="write_your_review_here">Tulisan ulasan anda disini</string>
     <string name="cancel">Batal</string>
     <string name="find_me_restaurant">Carikan Restoran</string>
+    <string name="restaurant_logo">Restaurant Logo</string>
+    <string name="price">Price</string>
+    <string name="likes">Likes</string>
     <string name="recently_visited">Terakhir Dikunjungi</string>
     <string name="decline">Tolak</string>
     <string name="create_account">Buat Akun</string>
