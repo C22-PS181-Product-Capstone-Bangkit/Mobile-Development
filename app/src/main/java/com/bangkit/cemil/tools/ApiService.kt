@@ -54,18 +54,6 @@ interface ApiService {
         @Field("password") password: String,
     ): Call<ChangePasswordResponse>
 
-    @GET("/api/v1/restaurant/recommendation")
-    fun getRecommendation(
-        @Header("Authorization") value: String
-    )
-
-    @FormUrlEncoded
-    @POST("api/v1/upload-profile")
-    fun postUploadPhoto(
-        @Header("Authorization") value: String,
-        @Field("oldPassword") oldPassword: String
-    ): Call<ChangePasswordResponse>
-
     @GET("api/v1/restaurant")
     fun getRestaurantByCategory(
         @Query("category") category: String,

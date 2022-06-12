@@ -5,7 +5,6 @@ import android.content.Context
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -243,7 +242,7 @@ class SearchFragment : Fragment() {
             binding.btnSearchSortLocation.isClickable = false
             binding.btnSearchSortRating.isClickable = true
             lifecycleScope.launch(Dispatchers.IO){
-                mutableList.sortBy { it.distance?.toDouble() }
+                mutableList.sortBy { it.distance.toDouble() }
                 withContext(Dispatchers.Main){
                     showRecyclerList()
                 }

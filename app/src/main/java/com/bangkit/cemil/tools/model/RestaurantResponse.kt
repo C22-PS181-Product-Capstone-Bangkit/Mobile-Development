@@ -2,12 +2,6 @@ package com.bangkit.cemil.tools.model
 
 import com.google.gson.annotations.SerializedName
 
-data class RestaurantResponse(
-
-	@field:SerializedName("RestaurantResponse")
-	val restaurantResponse: List<RestaurantItem?>? = null
-)
-
 data class RestaurantItem(
 
 	@field:SerializedName("photoPlaces")

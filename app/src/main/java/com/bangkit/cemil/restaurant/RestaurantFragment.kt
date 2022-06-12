@@ -107,7 +107,7 @@ class RestaurantFragment : Fragment() {
 
     private fun setupRestaurantPageContent(restoDetail: RestaurantItem){
         val restoReviewAmount = "(${restoDetail.countReview})"
-        val restoAverageCost = "${currencyFormat((restoDetail.price!!.toInt() / 2).toString())} / person"
+        val restoAverageCost = "${currencyFormat((restoDetail.price.toInt() / 2).toString())} / person"
         val categoryAmount = restoDetail.category?.split(", ")
         if(categoryAmount?.size!! >= 1){
             binding.tvRestaurantCategory.text = categoryAmount[0]

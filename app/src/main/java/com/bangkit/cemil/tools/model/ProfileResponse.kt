@@ -135,11 +135,5 @@ data class EditResponse(
 
 )
 
-data class UploadPictureResponse(
-
-	@field:SerializedName("user")
-	val user: User? = null
-)
-
 
 

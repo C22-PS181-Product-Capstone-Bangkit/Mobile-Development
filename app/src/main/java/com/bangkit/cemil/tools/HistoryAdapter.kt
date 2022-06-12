@@ -6,9 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.cemil.databinding.ItemRowHistoryBinding
 import com.bangkit.cemil.tools.model.HistoryItem
 import com.bumptech.glide.Glide
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.math.abs
 
 class HistoryAdapter(private val historyList: List<HistoryItem>): RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
