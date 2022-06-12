@@ -58,8 +58,7 @@ class PreferencesFragment : Fragment() {
             }
 
             if (binding.chipGroupRatng.checkedChipIds.isNotEmpty()) {
-                val chip =
-                    binding.chipGroupRatng.findViewById<Chip>(binding.chipGroupRatng.checkedChipId)
+                val chip = binding.chipGroupRatng.findViewById<Chip>(binding.chipGroupRatng.checkedChipIds[0])
                 ratings += chip.text.toString()
             }
 
@@ -72,7 +71,6 @@ class PreferencesFragment : Fragment() {
                 )
             requireView().findNavController().navigate(toRecommendRestaurantFragment)
         }
-
     }
 
     private fun setFilterChips() {

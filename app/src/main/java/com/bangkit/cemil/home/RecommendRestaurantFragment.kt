@@ -3,6 +3,7 @@ package com.bangkit.cemil.home
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.bangkit.cemil.SettingPreferences
 import com.bangkit.cemil.dataStore
 import com.bangkit.cemil.databinding.FragmentRecommendRestaurantBinding
@@ -199,7 +199,9 @@ class RecommendRestaurantFragment : Fragment() {
                 }
             }
         }
-        return tempList
+        return if(tempList.isEmpty() && categories.isEmpty() && prices.isEmpty() && distance.isEmpty() && ratings.isEmpty()){
+            restaurantList
+        }else tempList
     }
 
     private fun showRecyclerList() {
