@@ -1,12 +1,8 @@
 package com.bangkit.cemil.home
 
-import android.content.Context
-import android.util.AttributeSet
-import android.view.MotionEvent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.cemil.tools.ApiConfig
 import com.bangkit.cemil.tools.model.*
 import retrofit2.Call

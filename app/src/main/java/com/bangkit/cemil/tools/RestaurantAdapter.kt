@@ -25,7 +25,7 @@ class RestaurantAdapter(private val restaurantList: List<RestaurantItem>) : Recy
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val restaurantItem = restaurantList[position]
         val restaurantReviews = if(restaurantItem.countReview > 999) "999+" else restaurantItem.countReview
-        val restaurantRating = "${(restaurantItem.rating ?: 0.0).toString()} (${restaurantReviews})"
+        val restaurantRating = "${(restaurantItem.rating)} (${restaurantReviews})"
         val restaurantDistance = "${restaurantItem.distance} km"
         holder.binding.apply {
             tvItemRestoName.text = restaurantItem.name

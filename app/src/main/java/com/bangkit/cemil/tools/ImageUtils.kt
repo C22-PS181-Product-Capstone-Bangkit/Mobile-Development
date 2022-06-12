@@ -2,8 +2,6 @@ package com.bangkit.cemil.tools
 
 import android.content.ContentResolver
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Environment
 import java.io.*
@@ -25,7 +23,7 @@ object ImageUtils {
         return myFile
     }
 
-    fun createCustomTempFile(context: Context): File {
+    private fun createCustomTempFile(context: Context): File {
         val storageDirectory: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(
             SimpleDateFormat("dd-MM-yyyy-H", Locale.US).format(System.currentTimeMillis()), ".jpg", storageDirectory

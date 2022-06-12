@@ -1,6 +1,5 @@
 package com.bangkit.cemil.tools
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +8,6 @@ import com.bangkit.cemil.databinding.ItemRowReviewBinding
 import com.bangkit.cemil.tools.model.RestaurantReviewItem
 import com.bumptech.glide.Glide
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.*
 import kotlin.math.abs
 

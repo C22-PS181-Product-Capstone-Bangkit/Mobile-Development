@@ -2,12 +2,6 @@ package com.bangkit.cemil.tools.model
 
 import com.google.gson.annotations.SerializedName
 
-data class HistoryResponse(
-
-	@field:SerializedName("HistoryResponse")
-	val historyResponse: List<HistoryResponseItem?>? = null
-)
-
 data class HistoryResponseItem(
 
 	@field:SerializedName("idAccount")
