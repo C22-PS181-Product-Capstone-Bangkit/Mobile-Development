@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.bangkit.cemil.SettingPreferences
@@ -27,6 +28,13 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        (activity as AppCompatActivity).apply{
+            setSupportActionBar(binding.materialToolbarRegister)
+            supportActionBar?.setDisplayShowTitleEnabled(false)
+            binding.toolbarNavUp.setOnClickListener {
+                onBackPressed()
+            }
+        }
         return binding.root
     }
 
