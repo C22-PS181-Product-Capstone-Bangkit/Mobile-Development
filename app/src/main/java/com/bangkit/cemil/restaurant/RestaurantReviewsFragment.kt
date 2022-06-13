@@ -51,8 +51,9 @@ class RestaurantReviewsFragment : Fragment() {
         val adapter = ReviewAdapter(list)
         binding.rvRestoReviews.adapter = adapter
         adapter.setOnItemClickCallback(object : ReviewAdapter.OnItemClickCallback{
-            override fun onItemClicked(data: RestaurantReviewItem) {
-                Toast.makeText(context, data.toString(), Toast.LENGTH_SHORT).show()
+            override fun onItemClicked(data: RestaurantReviewItem, holder: ReviewAdapter.ViewHolder) {
+                holder.binding.tvReviewText.ellipsize = null
+                holder.binding.tvReviewText.maxLines = Int.MAX_VALUE
             }
         })
     }

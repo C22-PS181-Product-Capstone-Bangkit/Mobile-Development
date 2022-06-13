@@ -64,7 +64,12 @@ class RestaurantFragment : Fragment() {
             recentlyVisitedIds.add(dataRestaurantId)
             pref.saveRecentlyVisited(gson.toJson(recentlyVisitedIds))
         }
-        if(accessToken == null) binding.fabLike.visibility = View.INVISIBLE else viewModel.fetchProfile(accessToken!!)
+        if(accessToken == null){
+            binding.fabLike.visibility = View.INVISIBLE
+            binding.tvAddReview.visibility = View.INVISIBLE
+        } else {
+            viewModel.fetchProfile(accessToken!!)
+        }
 
         viewModel.profileData.observe(viewLifecycleOwner){ profileData ->
             likeItem = profileData.likes?.find{it.restaurant?.id == dataRestaurantId}
@@ -99,8 +104,9 @@ class RestaurantFragment : Fragment() {
         val adapter = ReviewAdapter(list.take(2))
         binding.rvReviews.adapter = adapter
         adapter.setOnItemClickCallback(object : ReviewAdapter.OnItemClickCallback{
-            override fun onItemClicked(data: RestaurantReviewItem) {
-                Toast.makeText(context, data.toString(), Toast.LENGTH_SHORT).show()
+            override fun onItemClicked(data: RestaurantReviewItem, holder: ReviewAdapter.ViewHolder) {
+                holder.binding.tvReviewText.ellipsize = null
+                holder.binding.tvReviewText.maxLines = Int.MAX_VALUE
             }
         })
     }

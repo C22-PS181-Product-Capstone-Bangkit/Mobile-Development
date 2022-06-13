@@ -42,8 +42,7 @@ class RecommendRestaurantFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val pref = SettingPreferences.getInstance(requireContext().dataStore)
         lifecycleScope.launch {
-            accessToken =
-                pref.getPreferences()[SettingPreferences.AUTHORIZATION_TOKEN_KEY].toString()
+            accessToken = pref.getPreferences()[SettingPreferences.AUTHORIZATION_TOKEN_KEY].toString()
         }
 
         val categories = RecommendRestaurantFragmentArgs.fromBundle(arguments as Bundle).categories
@@ -51,7 +50,10 @@ class RecommendRestaurantFragment : Fragment() {
         val distance = RecommendRestaurantFragmentArgs.fromBundle(arguments as Bundle).distance
         val ratings = RecommendRestaurantFragmentArgs.fromBundle(arguments as Bundle).ratings
 
-        viewModel.fetchProfile(accessToken.toString())
+        if(accessToken == null){
+            Toast.makeText(context, "An account is required to use this feature!", Toast.LENGTH_SHORT).show()
+            requireActivity().onBackPressed()
+        }else viewModel.fetchProfile(accessToken.toString())
         binding.rvRecommendations.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         viewModel.profileData.observe(viewLifecycleOwner) {

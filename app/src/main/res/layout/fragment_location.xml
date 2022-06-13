@@ -156,6 +156,7 @@
                 android:insetBottom="0dp"
                 android:text="@string/choose_current_location"
                 android:textColor="?colorOnSecondary"
+                android:visibility="invisible"
                 app:cornerRadius="32sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
